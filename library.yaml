@@ -1,0 +1,63 @@
+version: "1.0"
+description: "Agent library — generieke layers + skills, scoped per project"
+owner: "Badr"
+
+# Layers = markdown-context die de agent op een bepaalde locatie laadt.
+# scope bepaalt waar de layer actief is (pad-glob).
+# target is waar setup.sh de symlink aanmaakt.
+layers:
+  - name: global
+    description: "Werkstijl, kwaliteit, verificatie, communicatie. Overal actief."
+    source: layers/global.md
+    target: ~/.claude/CLAUDE.md
+    scope: "*"
+
+  - name: repos-shared
+    description: "Git, commits, tests, security — geldt voor alle code-repos."
+    source: layers/repos-shared.md
+    target: ~/repos/CLAUDE.md
+    scope: "~/repos/*"
+
+  - name: whatsapp-bot
+    description: "ZendIQ bot: Node, Supabase, Twilio, publishers, BTW-classifier."
+    source: layers/projects/whatsapp-bot.md
+    target: ~/Whatsapp-bot/CLAUDE.md
+    scope: "~/Whatsapp-bot/*"
+
+# Skills = herbruikbare procedures. type: md voor nu (pure instructies).
+# Bash/Python komen later als een skill daadwerkelijk iets moet uitvoeren.
+skills:
+  - name: plan-feature
+    description: "Van intent naar stappenplan, voor je code aanraakt."
+    source: skills/plan-feature.md
+    target: ~/.claude/skills/plan-feature.md
+    scope: "*"
+    type: md
+
+  - name: systematic-debug
+    description: "Bug reproduceren, hypothese, één ding per keer verifieren."
+    source: skills/systematic-debug.md
+    target: ~/.claude/skills/systematic-debug.md
+    scope: "*"
+    type: md
+
+  - name: code-review
+    description: "Checklist vóór commit of PR."
+    source: skills/code-review.md
+    target: ~/.claude/skills/code-review.md
+    scope: "*"
+    type: md
+
+  - name: verify-before-done
+    description: "Bewijs vóór je 'klaar' claimt."
+    source: skills/verify-before-done.md
+    target: ~/.claude/skills/verify-before-done.md
+    scope: "*"
+    type: md
+
+  - name: commit-netjes
+    description: "Eén doel per commit, conventional message, geen git add ."
+    source: skills/commit-netjes.md
+    target: ~/.claude/skills/commit-netjes.md
+    scope: "*"
+    type: md
