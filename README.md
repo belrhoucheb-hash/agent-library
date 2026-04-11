@@ -11,7 +11,9 @@ patroon, maar geminimaliseerd voor solo-gebruik.
   specifieke locatie. Bijvoorbeeld `global.md` overal, `whatsapp-bot.md`
   alleen binnen `~/Whatsapp-bot/*`.
 - **Skills** = herbruikbare procedures (plan, debug, review…) die
-  overal beschikbaar zijn.
+  overal beschikbaar zijn. Elke skill is een `SKILL.md` met YAML
+  frontmatter (`name`, `description`) in een eigen map — zo pikt
+  Claude Code ze op via het `Skill` tool.
 - **`library.yaml`** = manifest. Single source of truth over wat er
   bestaat en waar de symlinks heen wijzen.
 - **`setup.sh`** = leest de manifest, maakt de symlinks. Geen
@@ -30,11 +32,11 @@ agent-library/
 │   └── projects/
 │       └── whatsapp-bot.md   # ZendIQ-specifieke context
 └── skills/
-    ├── plan-feature.md
-    ├── systematic-debug.md
-    ├── code-review.md
-    ├── verify-before-done.md
-    └── commit-netjes.md
+    ├── plan-feature/SKILL.md
+    ├── systematic-debug/SKILL.md
+    ├── code-review/SKILL.md
+    ├── verify-before-done/SKILL.md
+    └── commit-netjes/SKILL.md
 ```
 
 ## Installatie
@@ -48,13 +50,31 @@ bash setup.sh
 Disaster recovery: bovenstaande twee commando's op een nieuwe machine
 herstellen je volledige setup.
 
-## Nieuwe skill of layer toevoegen
+## Nieuwe skill toevoegen
 
-1. Schrijf het markdown-bestand in `skills/` of `layers/`.
-2. Voeg een entry toe in `library.yaml` met `source`, `target`, `scope`.
-3. Draai `bash setup.sh` om de symlink aan te maken.
-4. Werk `SKILLS-INDEX.md` bij als het om een skill gaat.
+1. Maak `skills/<naam>/SKILL.md`. Begin met YAML frontmatter:
+   ```markdown
+   ---
+   name: <naam>
+   description: Gebruik wanneer… — korte zin die triggert wanneer Claude
+     de skill moet oppakken.
+   ---
+
+   # Skill: <naam>
+   ...
+   ```
+2. Voeg een entry toe in `library.yaml` met `source: skills/<naam>/SKILL.md`
+   en `target: ~/.claude/skills/<naam>/SKILL.md`.
+3. Draai `bash setup.sh`.
+4. Werk `SKILLS-INDEX.md` bij.
 5. Commit.
+
+## Nieuwe layer toevoegen
+
+1. Schrijf het markdown-bestand in `layers/`.
+2. Voeg een entry toe in `library.yaml` met `source`, `target`, `scope`.
+3. Draai `bash setup.sh`.
+4. Commit.
 
 ## Nieuwe project-layer toevoegen
 

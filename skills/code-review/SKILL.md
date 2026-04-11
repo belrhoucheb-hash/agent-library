@@ -1,3 +1,8 @@
+---
+name: code-review
+description: Gebruik net voor een commit, PR of review-verzoek — checklist langs correctheid, leesbaarheid, simplificatie, security, tests, scope.
+---
+
 # Skill: code-review
 
 Checklist om langs te lopen vóór een commit, merge, of PR — je eigen

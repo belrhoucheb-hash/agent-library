@@ -1,3 +1,8 @@
+---
+name: commit-netjes
+description: Gebruik bij elke `git commit` — één doel per commit, expliciete staging (geen `git add .`), conventional message gefocust op waarom.
+---
+
 # Skill: commit-netjes
 
 Gebruik dit bij elke commit. Een commit is een reviewbare eenheid, geen

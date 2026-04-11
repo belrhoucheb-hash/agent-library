@@ -29,35 +29,35 @@ layers:
 skills:
   - name: plan-feature
     description: "Van intent naar stappenplan, voor je code aanraakt."
-    source: skills/plan-feature.md
-    target: ~/.claude/skills/plan-feature.md
+    source: skills/plan-feature/SKILL.md
+    target: ~/.claude/skills/plan-feature/SKILL.md
     scope: "*"
     type: md
 
   - name: systematic-debug
     description: "Bug reproduceren, hypothese, één ding per keer verifieren."
-    source: skills/systematic-debug.md
-    target: ~/.claude/skills/systematic-debug.md
+    source: skills/systematic-debug/SKILL.md
+    target: ~/.claude/skills/systematic-debug/SKILL.md
     scope: "*"
     type: md
 
   - name: code-review
     description: "Checklist vóór commit of PR."
-    source: skills/code-review.md
-    target: ~/.claude/skills/code-review.md
+    source: skills/code-review/SKILL.md
+    target: ~/.claude/skills/code-review/SKILL.md
     scope: "*"
     type: md
 
   - name: verify-before-done
     description: "Bewijs vóór je 'klaar' claimt."
-    source: skills/verify-before-done.md
-    target: ~/.claude/skills/verify-before-done.md
+    source: skills/verify-before-done/SKILL.md
+    target: ~/.claude/skills/verify-before-done/SKILL.md
     scope: "*"
     type: md
 
   - name: commit-netjes
     description: "Eén doel per commit, conventional message, geen git add ."
-    source: skills/commit-netjes.md
-    target: ~/.claude/skills/commit-netjes.md
+    source: skills/commit-netjes/SKILL.md
+    target: ~/.claude/skills/commit-netjes/SKILL.md
     scope: "*"
     type: md

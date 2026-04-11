@@ -1,3 +1,8 @@
+---
+name: verify-before-done
+description: Gebruik vóór je "klaar", "werkt" of "fixed" claimt of een commit/PR afrondt — bewijs vóór beweringen, draai de check, toon de output.
+---
+
 # Skill: verify-before-done
 
 Gebruik dit voor je "klaar", "werkt", "fixed" of "gedeployed" zegt.

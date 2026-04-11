@@ -1,3 +1,8 @@
+---
+name: plan-feature
+description: Gebruik vóór elke niet-triviale wijziging (feature, refactor, bugfix met onduidelijke oorzaak), vóór je code aanraakt — intent, context, plan, akkoord, dan pas uitvoeren.
+---
+
 # Skill: plan-feature
 
 Gebruik dit voor elke niet-triviale wijziging: nieuwe feature, grotere

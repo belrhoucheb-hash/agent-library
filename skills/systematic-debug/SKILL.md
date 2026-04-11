@@ -1,3 +1,8 @@
+---
+name: systematic-debug
+description: Gebruik bij elke bug, test-failure of onverwacht gedrag, vóór je een fix voorstelt — reproduceer, observeer, één hypothese per keer.
+---
+
 # Skill: systematic-debug
 
 Gebruik dit bij elke bug, test-failure of onverwacht gedrag — voor je
