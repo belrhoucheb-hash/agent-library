@@ -45,77 +45,52 @@ layers:
     scope: "~/Whatsapp-bot/*"
     depends_on: [repos-shared, node-express, supabase, vercel-deploy]
 
-# Skills = herbruikbare procedures. type: md voor nu (pure instructies).
+# Skills = herbruikbare procedures (SKILL.md met frontmatter).
+# Convention-over-config: alleen name, description, source nodig.
+# setup.sh leidt target (~/.claude/skills/<name>/SKILL.md), scope (*),
+# en type (md) automatisch af als ze ontbreken.
+# BEPERKING: descriptions moeten op één regel staan — de bash-parser
+# ondersteunt geen multiline YAML scalars (>, |).
 skills:
   - name: plan-feature
     description: "Van intent naar stappenplan, voor je code aanraakt."
     source: skills/plan-feature/SKILL.md
-    target: ~/.claude/skills/plan-feature/SKILL.md
-    scope: "*"
-    type: md
 
   - name: systematic-debug
     description: "Bug reproduceren, hypothese, één ding per keer verifieren."
     source: skills/systematic-debug/SKILL.md
-    target: ~/.claude/skills/systematic-debug/SKILL.md
-    scope: "*"
-    type: md
 
   - name: code-review
     description: "Checklist vóór commit of PR."
     source: skills/code-review/SKILL.md
-    target: ~/.claude/skills/code-review/SKILL.md
-    scope: "*"
-    type: md
 
   - name: verify-before-done
     description: "Bewijs vóór je 'klaar' claimt."
     source: skills/verify-before-done/SKILL.md
-    target: ~/.claude/skills/verify-before-done/SKILL.md
-    scope: "*"
-    type: md
 
   - name: commit-netjes
     description: "Eén doel per commit, conventional message, geen git add ."
     source: skills/commit-netjes/SKILL.md
-    target: ~/.claude/skills/commit-netjes/SKILL.md
-    scope: "*"
-    type: md
 
   - name: project-bootstrap
     description: "Nieuw project opzetten: repo, config, layer, eerste commit."
     source: skills/project-bootstrap/SKILL.md
-    target: ~/.claude/skills/project-bootstrap/SKILL.md
-    scope: "*"
-    type: md
 
   - name: deploy-checklist
     description: "Pre-deploy checks, deploy, post-deploy verificatie."
     source: skills/deploy-checklist/SKILL.md
-    target: ~/.claude/skills/deploy-checklist/SKILL.md
-    scope: "*"
-    type: md
 
   - name: context-resume
     description: "Werk hervatten: git log, backlog, huidige staat inlezen."
     source: skills/context-resume/SKILL.md
-    target: ~/.claude/skills/context-resume/SKILL.md
-    scope: "*"
-    type: md
 
   - name: research-spike
     description: "Timeboxed technologie-evaluatie: vraag, opties, conclusie."
     source: skills/research-spike/SKILL.md
-    target: ~/.claude/skills/research-spike/SKILL.md
-    scope: "*"
-    type: md
 
   - name: incident-response
     description: "Productie-incident: triage, mitigeer, root cause, postmortem."
     source: skills/incident-response/SKILL.md
-    target: ~/.claude/skills/incident-response/SKILL.md
-    scope: "*"
-    type: md
 
 # Hooks = shell-scripts die Claude Code automatisch triggert.
 # settings-template.json bevat de Claude Code configuratie.

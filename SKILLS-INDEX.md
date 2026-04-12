@@ -4,13 +4,13 @@
 
 | Skill | Beschrijving | Bestand |
 |---|---|---|
-| **code-review** | Gebruik net voor een commit, PR of review-verzoek  | [skills/code-review/SKILL.md](skills/code-review/SKILL.md) |
-| **commit-netjes** | Gebruik bij elke `git commit`  | [skills/commit-netjes/SKILL.md](skills/commit-netjes/SKILL.md) |
-| **context-resume** | Gebruik bij het hervatten van werk na een pauze of nieuwe sessie  | [skills/context-resume/SKILL.md](skills/context-resume/SKILL.md) |
-| **deploy-checklist** | Gebruik bij elke deploy naar staging of productie  | [skills/deploy-checklist/SKILL.md](skills/deploy-checklist/SKILL.md) |
-| **incident-response** | Gebruik bij een productie-probleem of onverwachte outage  | [skills/incident-response/SKILL.md](skills/incident-response/SKILL.md) |
-| **plan-feature** | Gebruik vóór elke niet-triviale wijziging (feature, refactor, bugfix met onduidelijke oorzaak), vóór je code aanraakt  | [skills/plan-feature/SKILL.md](skills/plan-feature/SKILL.md) |
-| **project-bootstrap** | Gebruik bij het starten van een nieuw project  | [skills/project-bootstrap/SKILL.md](skills/project-bootstrap/SKILL.md) |
-| **research-spike** | Gebruik bij het evalueren van een technologie, library, of aanpak voordat je commit aan een implementatie  | [skills/research-spike/SKILL.md](skills/research-spike/SKILL.md) |
-| **systematic-debug** | Gebruik bij elke bug, test-failure of onverwacht gedrag, vóór je een fix voorstelt  | [skills/systematic-debug/SKILL.md](skills/systematic-debug/SKILL.md) |
-| **verify-before-done** | Gebruik vóór je "klaar", "werkt" of "fixed" claimt of een commit/PR afrondt  | [skills/verify-before-done/SKILL.md](skills/verify-before-done/SKILL.md) |
+| **code-review** | Gebruik net voor een commit, PR of review-verzoek | [skills/code-review/SKILL.md](skills/code-review/SKILL.md) |
+| **commit-netjes** | Gebruik bij elke `git commit` | [skills/commit-netjes/SKILL.md](skills/commit-netjes/SKILL.md) |
+| **context-resume** | Gebruik bij het hervatten van werk na een pauze of nieuwe sessie | [skills/context-resume/SKILL.md](skills/context-resume/SKILL.md) |
+| **deploy-checklist** | Gebruik bij elke deploy naar staging of productie | [skills/deploy-checklist/SKILL.md](skills/deploy-checklist/SKILL.md) |
+| **incident-response** | Gebruik bij een productie-probleem of onverwachte outage | [skills/incident-response/SKILL.md](skills/incident-response/SKILL.md) |
+| **plan-feature** | Gebruik vóór elke niet-triviale wijziging (feature, refactor, bugfix met onduidelijke oorzaak), vóór je code aanraakt | [skills/plan-feature/SKILL.md](skills/plan-feature/SKILL.md) |
+| **project-bootstrap** | Gebruik bij het starten van een nieuw project | [skills/project-bootstrap/SKILL.md](skills/project-bootstrap/SKILL.md) |
+| **research-spike** | Gebruik bij het evalueren van een technologie, library, of aanpak voordat je commit aan een implementatie | [skills/research-spike/SKILL.md](skills/research-spike/SKILL.md) |
+| **systematic-debug** | Gebruik bij elke bug, test-failure of onverwacht gedrag, vóór je een fix voorstelt | [skills/systematic-debug/SKILL.md](skills/systematic-debug/SKILL.md) |
+| **verify-before-done** | Gebruik vóór je "klaar", "werkt" of "fixed" claimt of een commit/PR afrondt | [skills/verify-before-done/SKILL.md](skills/verify-before-done/SKILL.md) |

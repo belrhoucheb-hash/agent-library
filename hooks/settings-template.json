@@ -8,10 +8,11 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Bash(git commit*)",
+        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
+            "if": "Bash(git commit*)",
             "command": "bash ~/repos/agent-library/hooks/pre-commit-reminder.sh"
           }
         ]

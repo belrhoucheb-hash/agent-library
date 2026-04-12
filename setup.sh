@@ -110,37 +110,50 @@ process_entry() {
 # ─── Stap 1: Parse entries en verwerk ze per blok ───
 # We lezen entry-voor-entry: bij elke "- name:" verwerken we de vorige entry.
 
+current_name=""
 current_source=""
 current_target=""
 current_depends=""
-in_section=false  # true als we in layers: of skills: zitten
+in_section=""  # "layers", "skills", of ""
 
 while IFS= read -r line; do
   trimmed="${line#"${line%%[![:space:]]*}"}"
 
   # Track secties
-  if [[ "$trimmed" == "layers:" || "$trimmed" == "skills:" ]]; then
-    in_section=true
+  if [[ "$trimmed" == "layers:" ]]; then
+    in_section="layers"
+    continue
+  elif [[ "$trimmed" == "skills:" ]]; then
+    in_section="skills"
     continue
   fi
   if [[ "$trimmed" == "hooks:" ]]; then
     # Verwerk laatste entry voor hooks-sectie
     if [[ -n "$current_source" ]]; then
+      if [[ "$in_section" == "skills" && -z "$current_target" && -n "$current_name" ]]; then
+        current_target="~/.claude/skills/$current_name/SKILL.md"
+      fi
       process_entry "$current_source" "$current_target" "$current_depends"
     fi
-    in_section=false
-    current_source="" ; current_target="" ; current_depends=""
+    in_section=""
+    current_name="" ; current_source="" ; current_target="" ; current_depends=""
     continue
   fi
 
-  if ! $in_section; then continue; fi
+  if [[ -z "$in_section" ]]; then continue; fi
 
   # Nieuwe entry begint
   if [[ "$trimmed" == "- name:"* ]]; then
     # Verwerk vorige entry als die bestond
     if [[ -n "$current_source" ]]; then
+      # Convention-over-config: skills zonder target krijgen standaard pad
+      if [[ "$in_section" == "skills" && -z "$current_target" && -n "$current_name" ]]; then
+        current_target="~/.claude/skills/$current_name/SKILL.md"
+      fi
       process_entry "$current_source" "$current_target" "$current_depends"
     fi
+    current_name="${trimmed#*- name:}"
+    current_name="${current_name#"${current_name%%[![:space:]]*}"}"
     current_source="" ; current_target="" ; current_depends=""
     continue
   fi
@@ -162,6 +175,9 @@ done < "$MANIFEST"
 
 # Verwerk allerlaatste entry
 if [[ -n "$current_source" ]]; then
+  if [[ "$in_section" == "skills" && -z "$current_target" && -n "$current_name" ]]; then
+    current_target="~/.claude/skills/$current_name/SKILL.md"
+  fi
   process_entry "$current_source" "$current_target" "$current_depends"
 fi
 
@@ -202,8 +218,9 @@ find "$REPO_DIR/skills" -name "SKILL.md" -type f | sort | while read -r skill_fi
       elif [[ "$line" == description:* ]]; then
         skill_desc="${line#description:}"
         skill_desc="${skill_desc#"${skill_desc%%[![:space:]]*}"}"
-        # Korte versie: eerste komma of dash
+        # Korte versie: knip af bij em-dash, strip trailing whitespace
         skill_desc="${skill_desc%%—*}"
+        skill_desc="${skill_desc%"${skill_desc##*[![:space:]]}"}"
       fi
     fi
   done < "$skill_file"

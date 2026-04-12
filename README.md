@@ -144,9 +144,10 @@ skill leest de backlog bij het hervatten van werk.
    # Skill: <naam>
    ...
    ```
-2. Voeg een entry toe in `library.yaml` onder `skills:`.
+2. Voeg een entry toe in `library.yaml` onder `skills:` (alleen `name`,
+   `description`, `source` — target/scope/type worden automatisch afgeleid).
 3. Draai `bash setup.sh` — SKILLS-INDEX.md wordt automatisch bijgewerkt.
-4. Commit.
+4. Commit (inclusief de gegenereerde SKILLS-INDEX.md).
 
 ## Nieuwe layer toevoegen
 

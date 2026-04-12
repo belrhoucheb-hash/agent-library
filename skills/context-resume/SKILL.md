@@ -35,8 +35,10 @@ opnieuw moet inlezen of context verliest tussen sessies.
    Een gefaalde test? Een TODO in de code?
    ```bash
    git branch -a
-   grep -r "TODO\|FIXME\|HACK" --include="*.js" --include="*.ts" -l
+   grep -rn "TODO\|FIXME\|HACK" --include="*.js" --include="*.ts" \
+     --include="*.py" --include="*.go" --include="*.rb" -l
    ```
+   Pas de `--include` filters aan op de talen van het project.
 
 5. **Samenvatten.** Geef een korte status aan de gebruiker:
    - **Branch:** `feature/x` — 3 commits voor op main

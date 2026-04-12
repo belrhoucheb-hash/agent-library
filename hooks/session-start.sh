@@ -14,8 +14,9 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
   echo "Laatste commit: $LAST_COMMIT"
 fi
 
-# Toon openstaande backlog items als agent-library beschikbaar is
-BACKLOG_DIR="$HOME/repos/agent-library/backlog"
+# Toon openstaande backlog items — resolve relatief aan dit script
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+BACKLOG_DIR="$SCRIPT_DIR/../backlog"
 if [ -d "$BACKLOG_DIR" ]; then
   OPEN_ITEMS=$(grep -r "\- \[ \]" "$BACKLOG_DIR" 2>/dev/null | wc -l | tr -d ' ')
   if [ "$OPEN_ITEMS" -gt 0 ]; then
