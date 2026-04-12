@@ -2,8 +2,13 @@
   "hooks": {
     "SessionStart": [
       {
-        "type": "command",
-        "command": "bash ~/repos/agent-library/hooks/session-start.sh"
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/repos/agent-library/hooks/session-start.sh"
+          }
+        ]
       }
     ],
     "PreToolUse": [
