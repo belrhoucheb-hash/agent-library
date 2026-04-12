@@ -66,7 +66,7 @@ agent-library/
     └── whatsapp-bot.md           # openstaande punten ZendIQ
 ```
 
-## Installatie
+## Installatie (volledig automatisch)
 
 ```bash
 git clone <deze-repo> ~/repos/agent-library
@@ -74,8 +74,29 @@ cd ~/repos/agent-library
 bash setup.sh
 ```
 
+Dat is alles. Geen handmatige stappen. `setup.sh` doet:
+
+1. Linkt `global.md` + `repos-shared.md` → `~/.claude/CLAUDE.md` (overal actief)
+2. Concateneert project-layers met hun stacks → `~/project/CLAUDE.md`
+3. Linkt alle skills → `~/.claude/skills/`
+4. Genereert `SKILLS-INDEX.md`
+5. Installeert hooks in `~/.claude/settings.json` (met backup)
+
 Disaster recovery: bovenstaande twee commando's op een nieuwe machine
 herstellen je volledige setup.
+
+## Dekking: wat krijgt elk project?
+
+| Project type | Wat Claude laadt |
+|---|---|
+| **Elk project, overal** | global + repos-shared (via `~/.claude/CLAUDE.md`) |
+| **Project met eigen layer** | global + repos-shared + stacks + project-specifiek |
+| **Project zonder layer** | global + repos-shared (git, tests, security) |
+
+Je hoeft niet voor elk project een layer aan te maken. De basis
+(werkstijl, git-conventies, security) werkt altijd. Een project-layer
+voeg je alleen toe als er project-specifieke regels zijn (harde
+constraints, stack-keuzes, kritieke modules).
 
 ## Hoe depends_on werkt
 
@@ -113,17 +134,13 @@ gelinkt — ze bestaan alleen als dependency.
 ## Hooks
 
 Hooks zijn shell-scripts in `hooks/` die Claude Code automatisch
-triggert. Na `setup.sh` staan de scripts klaar; de configuratie staat
-in `hooks/settings-template.json`.
+triggert. `setup.sh` installeert ze automatisch in
+`~/.claude/settings.json` (met backup van een bestaand bestand).
 
 | Hook | Trigger | Wat het doet |
 |---|---|---|
 | `session-start.sh` | Begin van sessie | Toont branch, uncommitted changes, backlog items |
 | `pre-commit-reminder.sh` | Bij git commit | Herinnering aan review/verify/commit-netjes checklist |
-
-Om hooks te activeren: merge `hooks/settings-template.json` in
-`~/.claude/settings.json`, of kopieer het als je nog geen
-settings-bestand hebt.
 
 ## Backlog
 

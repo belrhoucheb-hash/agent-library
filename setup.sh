@@ -245,20 +245,28 @@ SETTINGS_FILE="$HOME_DIR/.claude/settings.json"
 TEMPLATE_FILE="$REPO_DIR/hooks/settings-template.json"
 
 if [[ -f "$TEMPLATE_FILE" ]]; then
+  mkdir -p "$(dirname "$SETTINGS_FILE")"
+
   if [[ ! -f "$SETTINGS_FILE" ]]; then
-    mkdir -p "$(dirname "$SETTINGS_FILE")"
+    # Geen bestaand settings-bestand → kopieer template
     cp "$TEMPLATE_FILE" "$SETTINGS_FILE"
     echo "  ✅ settings.json aangemaakt vanuit template"
+  elif grep -q "session-start.sh" "$SETTINGS_FILE" 2>/dev/null; then
+    # Hooks staan er al in
+    echo "  ✅ Hooks staan al in settings.json"
   else
-    echo "  ℹ️  ~/.claude/settings.json bestaat al."
-    echo "     Merge hooks handmatig vanuit: hooks/settings-template.json"
+    # settings.json bestaat maar zonder onze hooks → backup + installeer
+    cp "$SETTINGS_FILE" "${SETTINGS_FILE}.backup"
+    echo "  📋 Backup: ${SETTINGS_FILE}.backup"
+    cp "$TEMPLATE_FILE" "$SETTINGS_FILE"
+    echo "  ✅ settings.json bijgewerkt met hooks (oude versie gebackupt)"
   fi
 fi
 
 echo
-echo "✅ Setup compleet."
+echo "✅ Setup compleet. Geen handmatige stappen nodig."
 echo
-echo "Volgende stappen:"
-echo "  1. Check of CLAUDE.md bestaat in je project-mappen"
-echo "  2. Merge hooks/settings-template.json in ~/.claude/settings.json als nodig"
-echo "  3. Open een Claude Code sessie en verifieer dat de context geladen wordt"
+echo "Verificatie:"
+echo "  - ~/.claude/CLAUDE.md bevat global + repos-shared regels"
+echo "  - ~/.claude/settings.json bevat hooks-configuratie"
+echo "  - Open een Claude Code sessie om te verifiëren"

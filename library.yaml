@@ -14,12 +14,12 @@ layers:
     source: layers/global.md
     target: ~/.claude/CLAUDE.md
     scope: "*"
+    depends_on: [repos-shared]
 
   - name: repos-shared
-    description: "Git, commits, tests, security — geldt voor alle code-repos."
+    description: "Git, commits, tests, security — beschikbaar als dependency."
     source: layers/repos-shared.md
-    target: ~/repos/CLAUDE.md
-    scope: "~/repos/*"
+    scope: "composable"
 
   # --- Stack layers (composable) ---
   - name: node-express
