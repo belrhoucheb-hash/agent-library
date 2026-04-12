@@ -37,6 +37,11 @@ layers:
     source: layers/stacks/vercel-deploy.md
     scope: "composable"
 
+  - name: dart-flutter
+    description: "Dart + Flutter conventies: structuur, state management, build, assets."
+    source: layers/stacks/dart-flutter.md
+    scope: "composable"
+
   # --- Project layers ---
   - name: whatsapp-bot
     description: "ZendIQ bot: Node, Supabase, Twilio, publishers, BTW-classifier."
@@ -44,6 +49,27 @@ layers:
     target: ~/Whatsapp-bot/CLAUDE.md
     scope: "~/Whatsapp-bot/*"
     depends_on: [repos-shared, node-express, supabase, vercel-deploy]
+
+  - name: driveadmin-bot
+    description: "Google Drive admin bot: Node.js."
+    source: layers/projects/driveadmin-bot.md
+    target: ~/driveadmin-bot/CLAUDE.md
+    scope: "~/driveadmin-bot/*"
+    depends_on: [repos-shared, node-express]
+
+  - name: addayn
+    description: "Dart/Flutter applicatie."
+    source: layers/projects/addayn.md
+    target: ~/Addayn/CLAUDE.md
+    scope: "~/Addayn/*"
+    depends_on: [repos-shared, dart-flutter]
+
+  - name: orderflow-suite
+    description: "TypeScript orderflow/trading analyse suite."
+    source: layers/projects/orderflow-suite.md
+    target: ~/orderflow-suite/CLAUDE.md
+    scope: "~/orderflow-suite/*"
+    depends_on: [repos-shared, node-express]
 
 # Skills = herbruikbare procedures (SKILL.md met frontmatter).
 # Convention-over-config: alleen name, description, source nodig.
