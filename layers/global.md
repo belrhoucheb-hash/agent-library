@@ -45,6 +45,13 @@ horen in andere layers.
 - Risicovolle of onomkeerbare acties (force push, rm -rf, drop table,
   berichten naar buiten) eerst expliciet bevestigen, niet stilzwijgend doen.
 
+## Taal
+
+- Documentatie, layers, skills en communicatie: Nederlands.
+- Code, variabelen, functies, commit-messages, PR-titels: Engels.
+- Conventional commit types zijn altijd Engels: `feat`, `fix`, `refactor`, etc.
+- Bij samenwerking met niet-Nederlandstaligen: schakel alles naar Engels.
+
 ## Omgang met onzekerheid
 
 - Als een aanpak niet werkt, stop en heroverweeg. Niet doorduwen met

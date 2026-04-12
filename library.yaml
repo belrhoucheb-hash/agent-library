@@ -1,13 +1,16 @@
-version: "1.0"
-description: "Agent library — generieke layers + skills, scoped per project"
+version: "2.0"
+description: "Agent library — generieke layers, stacks, skills + hooks, scoped per project"
 owner: "Badr"
 
 # Layers = markdown-context die de agent op een bepaalde locatie laadt.
 # scope bepaalt waar de layer actief is (pad-glob).
 # target is waar setup.sh de symlink aanmaakt.
+# depends_on: lijst van andere layers die mee-gelinkt worden (setup.sh
+#   concateneert ze in volgorde vóór de eigen source).
+
 layers:
   - name: global
-    description: "Werkstijl, kwaliteit, verificatie, communicatie. Overal actief."
+    description: "Werkstijl, kwaliteit, verificatie, communicatie, taal. Overal actief."
     source: layers/global.md
     target: ~/.claude/CLAUDE.md
     scope: "*"
@@ -18,14 +21,31 @@ layers:
     target: ~/repos/CLAUDE.md
     scope: "~/repos/*"
 
+  # --- Stack layers (composable) ---
+  - name: node-express
+    description: "Node.js + Express conventies: structuur, error handling, env, deps."
+    source: layers/stacks/node-express.md
+    scope: "composable"
+
+  - name: supabase
+    description: "Supabase conventies: connectie, RLS, migrations, veelgemaakte fouten."
+    source: layers/stacks/supabase.md
+    scope: "composable"
+
+  - name: vercel-deploy
+    description: "Vercel deploy conventies: config, serverless, pre-deploy checklist."
+    source: layers/stacks/vercel-deploy.md
+    scope: "composable"
+
+  # --- Project layers ---
   - name: whatsapp-bot
     description: "ZendIQ bot: Node, Supabase, Twilio, publishers, BTW-classifier."
     source: layers/projects/whatsapp-bot.md
     target: ~/Whatsapp-bot/CLAUDE.md
     scope: "~/Whatsapp-bot/*"
+    depends_on: [repos-shared, node-express, supabase, vercel-deploy]
 
 # Skills = herbruikbare procedures. type: md voor nu (pure instructies).
-# Bash/Python komen later als een skill daadwerkelijk iets moet uitvoeren.
 skills:
   - name: plan-feature
     description: "Van intent naar stappenplan, voor je code aanraakt."
@@ -61,3 +81,53 @@ skills:
     target: ~/.claude/skills/commit-netjes/SKILL.md
     scope: "*"
     type: md
+
+  - name: project-bootstrap
+    description: "Nieuw project opzetten: repo, config, layer, eerste commit."
+    source: skills/project-bootstrap/SKILL.md
+    target: ~/.claude/skills/project-bootstrap/SKILL.md
+    scope: "*"
+    type: md
+
+  - name: deploy-checklist
+    description: "Pre-deploy checks, deploy, post-deploy verificatie."
+    source: skills/deploy-checklist/SKILL.md
+    target: ~/.claude/skills/deploy-checklist/SKILL.md
+    scope: "*"
+    type: md
+
+  - name: context-resume
+    description: "Werk hervatten: git log, backlog, huidige staat inlezen."
+    source: skills/context-resume/SKILL.md
+    target: ~/.claude/skills/context-resume/SKILL.md
+    scope: "*"
+    type: md
+
+  - name: research-spike
+    description: "Timeboxed technologie-evaluatie: vraag, opties, conclusie."
+    source: skills/research-spike/SKILL.md
+    target: ~/.claude/skills/research-spike/SKILL.md
+    scope: "*"
+    type: md
+
+  - name: incident-response
+    description: "Productie-incident: triage, mitigeer, root cause, postmortem."
+    source: skills/incident-response/SKILL.md
+    target: ~/.claude/skills/incident-response/SKILL.md
+    scope: "*"
+    type: md
+
+# Hooks = shell-scripts die Claude Code automatisch triggert.
+# settings-template.json bevat de Claude Code configuratie.
+hooks:
+  - name: session-start
+    description: "Context laden bij start van een sessie."
+    source: hooks/session-start.sh
+
+  - name: pre-commit-reminder
+    description: "Herinnering aan review/verify checklist bij commit."
+    source: hooks/pre-commit-reminder.sh
+
+  - name: settings-template
+    description: "Template voor ~/.claude/settings.json hooks-configuratie."
+    source: hooks/settings-template.json

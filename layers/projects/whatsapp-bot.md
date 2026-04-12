@@ -53,7 +53,10 @@ Bevat ook een marketing-module die ads genereert en via Telegram publiceert.
 - Site deploy: vanuit `zendiq-site/`, `node deploy.js`
 - Lokaal draaien: `node index.js`
 
-## Openstaande punten (uit memory)
+## Openstaande punten
 
-- `subscription_tier` kolom moet nog toegevoegd worden in Supabase.
-  Herinner Badr hieraan wanneer subscription-code geraakt wordt.
+Zie `backlog/whatsapp-bot.md` in de agent-library voor het volledige
+overzicht. Belangrijkste blocker:
+
+- `subscription_tier` kolom in Supabase — nodig zodra subscription-code
+  geraakt wordt.
