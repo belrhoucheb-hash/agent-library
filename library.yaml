@@ -42,6 +42,21 @@ layers:
     source: layers/stacks/dart-flutter.md
     scope: "composable"
 
+  - name: python
+    description: "Python conventies: venv, type hints, pytest, packaging."
+    source: layers/stacks/python.md
+    scope: "composable"
+
+  - name: react
+    description: "React conventies: components, state, performance, testing."
+    source: layers/stacks/react.md
+    scope: "composable"
+
+  - name: go
+    description: "Go conventies: project layout, error handling, concurrency, testing."
+    source: layers/stacks/go.md
+    scope: "composable"
+
   # --- Project layers ---
   - name: whatsapp-bot
     description: "ZendIQ bot: Node, Supabase, Twilio, publishers, BTW-classifier."
