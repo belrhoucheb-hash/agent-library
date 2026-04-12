@@ -140,6 +140,14 @@ skills:
     description: "Productie-incident: triage, mitigeer, root cause, postmortem."
     source: skills/incident-response/SKILL.md
 
+  - name: launch-checklist
+    description: "Project lanceren: landing page, kanalen, copy, timing, post-launch."
+    source: skills/launch-checklist/SKILL.md
+
+  - name: project-status
+    description: "Voortgang bekijken: backlog, git activiteit, milestones, volgende stap."
+    source: skills/project-status/SKILL.md
+
 # Hooks = shell-scripts die Claude Code automatisch triggert.
 # settings-template.json bevat de Claude Code configuratie.
 hooks:
