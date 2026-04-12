@@ -86,6 +86,13 @@ layers:
     scope: "~/orderflow-suite/*"
     depends_on: [repos-shared, node-express]
 
+  - name: driver-acquisition
+    description: "ZendIQ driver acquisition: KvK/Maps scraping, email/voice outreach."
+    source: layers/projects/driver-acquisition.md
+    target: ~/driver-acquisition/CLAUDE.md
+    scope: "~/driver-acquisition/*"
+    depends_on: [repos-shared, node-express, supabase]
+
 # Skills = herbruikbare procedures (SKILL.md met frontmatter).
 # Convention-over-config: alleen name, description, source nodig.
 # setup.sh leidt target (~/.claude/skills/<name>/SKILL.md), scope (*),
