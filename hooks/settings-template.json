@@ -19,6 +19,19 @@
             "type": "command",
             "if": "Bash(git commit*)",
             "command": "bash ~/repos/agent-library/hooks/pre-commit-reminder.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash ~/repos/agent-library/hooks/production-push-gate.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/repos/agent-library/hooks/protect-tests-during-fix.sh"
           }
         ]
       }

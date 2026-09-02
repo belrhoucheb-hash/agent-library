@@ -17,7 +17,11 @@ een fix voorstelt.
 ## Stappen
 
 1. **Reproduceer.** Vind het kleinste commando, invoer of klik-pad dat
-   de bug betrouwbaar oproept. Zonder reproductie geen fix.
+   de bug betrouwbaar oproept. Zonder reproductie geen fix. Leg de
+   reproductie waar mogelijk vast als falende test, en maak daarna
+   `.claude/fix-in-progress` aan in de project-root — zolang die
+   bestaat blokkeert een hook edits aan test-bestanden (fix de code,
+   niet de test).
 2. **Observeer, niet gok.** Kijk naar de echte output: logs, stack
    trace, response body. Niet naar wat je *denkt* dat er gebeurt.
 3. **Stel één hypothese op.** In één zin: "Ik denk dat X gebeurt omdat Y."
@@ -26,7 +30,8 @@ een fix voorstelt.
 5. **Ja → fix de oorzaak.** Nee → hypothese was fout, terug naar 3 met
    nieuwe informatie. Niet stapelen.
 6. **Verifieer de fix.** Draai de reproductie opnieuw. Draai ook een
-   brede test om regressies te vangen.
+   brede test om regressies te vangen. Verwijder daarna
+   `.claude/fix-in-progress`.
 7. **Noteer wat je leerde.** Één zin in de commit-message: *waarom*
    de bug ontstond, niet alleen *wat* je veranderde.
 

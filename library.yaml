@@ -159,6 +159,20 @@ hooks:
     description: "Herinnering aan review/verify checklist bij commit."
     source: hooks/pre-commit-reminder.sh
 
+  - name: protect-tests-during-fix
+    description: "Blokkeert test-edits zolang .claude/fix-in-progress bestaat (fix de code, niet de test)."
+    source: hooks/protect-tests-during-fix.sh
+
+  - name: production-push-gate
+    description: "Blokkeert git push naar main/master in repos met .claude/production-repo marker (CI deployt direct)."
+    source: hooks/production-push-gate.sh
+
   - name: settings-template
     description: "Template voor ~/.claude/settings.json hooks-configuratie."
     source: hooks/settings-template.json
+
+# Agents = subagents met eigen context en tool-limieten (.claude/agents/).
+# setup.sh parseert deze sectie niet; handmatig deployen:
+#   cp agents/verifier.md ~/.claude/agents/verifier.md
+# - verifier: draait app/tests na implementatie en rapporteert bewijs,
+#   met verse context (geen bias richting net geschreven code).
