@@ -4,56 +4,62 @@ Dit document beschrijft welke skills in welke volgorde gebruikt worden
 per type taak. Het is een referentie, geen rigide protocol — gebruik je
 oordeel voor triviale taken.
 
-## Nieuwe feature
+Sinds sept 2026 triggeren de skills vanzelf (allemaal gedeployed) en
+blokkeren hooks wat niet mag; de mens zit op de akkoord-momenten:
+plan goedkeuren, deploy vrijgeven.
+
+## Nieuwe feature (hoofdroute)
 
 ```
-plan-feature → code schrijven → code-review → verify-before-done → commit-netjes
+context-resume → plan-feature → bouwen → /code-review → verifier → commit-netjes
 ```
 
-1. **plan-feature**: intent uitdiepen, context lezen, plan maken, akkoord.
-2. Code schrijven volgens het plan.
-3. **code-review**: checklist langs correctheid, leesbaarheid, security.
-4. **verify-before-done**: bewijs dat het werkt (test, curl, browser).
-5. **commit-netjes**: expliciete staging, conventional message.
+1. **context-resume**: bij hervatten — git log, backlog, staat inlezen.
+   De project-CLAUDE.md laadt vanzelf bij sessiestart in de repo.
+2. **plan-feature**: intent uitdiepen, plan, akkoord. Bij >3 bestanden
+   of meerdere sessies: plan als `plan.md` in de repo (Files/Order/
+   Risks/Proof), het waarom eventueel als `intent.md`.
+3. Bouwen volgens het plan. Wijkt het af → `plan.md` bijwerken in
+   dezelfde commit; de gemergde diff moet matchen met het plan.
+4. **/code-review**: het *ingebouwde* commando (de library-skill
+   code-review is bewust niet gedeployed — het ingebouwde is sterker).
+   Default-niveau volstaat; `high` bij risicovol werk.
+5. **verifier-agent**: "laat de verifier het checken" — verse context
+   draait app/tests plus de twee aangrenzende flows, rapporteert
+   letterlijke output. **verify-before-done** is daarna het laatste
+   slot vóór "klaar".
+6. **commit-netjes**: expliciete staging, conventional message,
+   `plan.md` mee in de commit.
+
+**Kleine wijziging** (diff in één zin te beschrijven): plan overslaan,
+gewoon doen — dan stap 4-6 in lichte vorm.
 
 ## Bugfix
 
 ```
-systematic-debug → fix → verify-before-done → commit-netjes
+systematic-debug (met test-lock) → fix → verify-before-done → commit-netjes
 ```
 
-1. **systematic-debug**: reproduceer, observeer, één hypothese per keer.
-2. Fix de root cause.
-3. **verify-before-done**: reproductie-stappen slagen nu, regressietest.
-4. **commit-netjes**: beschrijf *waarom* de bug ontstond.
+1. **systematic-debug**: reproduceer als falende test, zet
+   `.claude/fix-in-progress` — de hook blokkeert test-edits zolang de
+   marker bestaat (fix de code, niet de test).
+2. Fix de root cause; verifieer; marker weg.
+3. **commit-netjes**: beschrijf *waarom* de bug ontstond.
+4. Kwam de bug uit productie → de reproductie blijft staan als
+   permanente regressietest.
 
-## Deploy
-
-```
-verify-before-done → deploy-checklist
-```
-
-1. **verify-before-done**: alle claims onderbouwd (tests groen, code reviewed).
-2. **deploy-checklist**: pre-deploy checks, deploy, post-deploy verificatie.
-
-## Nieuw project starten
+## Deploy (productie-repos)
 
 ```
-research-spike (optioneel) → project-bootstrap → plan-feature
+verify-before-done → deploy-checklist → akkoord → DEPLOY_OK=1 git push
 ```
 
-1. **research-spike**: als technologie/aanpak nog onbekend is.
-2. **project-bootstrap**: repo, config, layer, eerste commit.
-3. **plan-feature**: eerste feature plannen.
-
-## Werk hervatten na pauze
-
-```
-context-resume → (verder met lopende workflow)
-```
-
-1. **context-resume**: git log, openstaande taken, huidige staat inlezen.
-2. Verder met de workflow waar je gebleven was.
+1. **verify-before-done**: alle claims onderbouwd (tests groen,
+   code reviewed).
+2. **deploy-checklist**: pre-deploy checks, deploy, post-deploy
+   verificatie.
+3. In repos met `.claude/production-repo` blokkeert de hook de push
+   naar main; na expliciet akkoord van Badr: `DEPLOY_OK=1 git push`.
 
 ## Productie-incident
 
@@ -64,6 +70,23 @@ incident-response → systematic-debug → deploy-checklist
 1. **incident-response**: triage, mitigeer, communiceer.
 2. **systematic-debug**: root cause vinden.
 3. **deploy-checklist**: fix deployen.
+4. De les gaat naar "Wat Claude hier fout doet" in de project-layer,
+   of wordt een hook als hij zonder uitzondering moet gelden.
+
+## Nieuw project starten
+
+```
+research-spike (optioneel) → project-bootstrap → plan-feature
+```
+
+1. **research-spike**: als technologie/aanpak nog onbekend is.
+2. **project-bootstrap**: repo, config, project-layer, eerste commit.
+3. **plan-feature**: eerste feature plannen.
+
+## Lanceren / voortgang
+
+- **launch-checklist**: bij livegang of promotie van een project.
+- **project-status**: voortgang bekijken, volgende stap kiezen.
 
 ## Technologie-evaluatie
 
@@ -71,5 +94,13 @@ incident-response → systematic-debug → deploy-checklist
 research-spike → plan-feature (als besluit positief)
 ```
 
-1. **research-spike**: timeboxed onderzoek, opties vergelijken.
-2. **plan-feature**: implementatieplan als je besluit door te gaan.
+## Gewoontes (de loop eromheen)
+
+- **Twee keer dezelfde fout** → correctie in de project-layer
+  ("Wat Claude hier fout doet"), of een hook. Fouten worden één keer
+  gemaakt.
+- **Twee mislukte correcties** → niet doorduwen: `/clear`, betere
+  prompt, opnieuw.
+- **`/clear` tussen ongerelateerde taken** — geen kitchen-sink-sessies.
+- **Meerdere projecten** → aparte sessie per repo; elke sessie laadt
+  zijn eigen layer.
