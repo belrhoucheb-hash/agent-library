@@ -6,7 +6,9 @@ Deze layer is alleen actief binnen `~/Whatsapp-bot/*`.
 
 WhatsApp-bot voor ZendIQ: Node.js backend die bonnetjes van taxichauffeurs
 scant via de Anthropic API, opslaat in Supabase, en een BTW-module bedient.
-Bevat ook een marketing-module die ads genereert en via Telegram publiceert.
+Bevat ook een marketing-module die ads genereert en via Telegram publiceert,
+en sinds aug 2026 de boekhouddienst (drie sloten op elke aangifte,
+leer-lus voor bonnetjes).
 
 ## Stack
 
@@ -14,7 +16,8 @@ Bevat ook een marketing-module die ads genereert en via Telegram publiceert.
 - Supabase — database + auth (service key via env)
 - Twilio — WhatsApp berichten
 - Anthropic API — bon-analyse en ad-generatie
-- Vercel — hosting (zie `vercel.json`)
+- Render — hosting; deploy via CI (push naar main → audit-gate → tests →
+  Render deploy hook + TransIP-SFTP voor de site)
 
 ## Kritieke modules
 
@@ -47,11 +50,26 @@ Bevat ook een marketing-module die ads genereert en via Telegram publiceert.
 - `services/ZendIQ.json` staat in `.gitignore` — gebruik `.example` als template.
 - Secrets altijd via env vars, nooit in code.
 
+### Deploy
+- Dit is een productie-repo (`.claude/production-repo`): push naar main
+  deployt direct via CI. Eerst expliciet akkoord van Badr, dan
+  `DEPLOY_OK=1 git push`.
+
+## Wat Claude hier fout doet
+
+<!-- Twee-keer-fout-regel: zelfde fout twee keer → correctie hier, of
+     een hook als hij zonder uitzondering moet gelden. -->
+
+- Aanbiedingen zonder handler: alles wat de bot aanbiedt (menu's,
+  "typ x") moet een handler hebben, per rol én state — check dit bij
+  elke flow-wijziging.
+
 ## Commando's
 
-- Tests: `node test-full-suite.js`, `node test-chaos-chauffeur.js`
-- Site deploy: vanuit `zendiq-site/`, `node deploy.js`
-- Lokaal draaien: `node index.js`
+- Tests: `npm test` (node --test, unit + integration; integration skipt
+  zonder `SUPABASE_TEST_URL`/`SUPABASE_TEST_KEY`)
+- Site deploy: `npm run deploy:website`
+- Lokaal draaien: `npm run dev` (nodemon) of `npm start`
 
 ## Openstaande punten
 

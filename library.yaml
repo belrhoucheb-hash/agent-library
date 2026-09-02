@@ -59,11 +59,29 @@ layers:
 
   # --- Project layers ---
   - name: whatsapp-bot
-    description: "ZendIQ bot: Node, Supabase, Twilio, publishers, BTW-classifier."
+    description: "ZendIQ bot: Node, Supabase, Twilio, publishers, BTW-classifier, boekhouddienst."
     source: layers/projects/whatsapp-bot.md
     target: ~/Whatsapp-bot/CLAUDE.md
     scope: "~/Whatsapp-bot/*"
-    depends_on: [repos-shared, node-express, supabase, vercel-deploy]
+    depends_on: [repos-shared, node-express, supabase]
+
+  - name: honey-shop
+    description: "By Amina's Honing: statisch prototype naast de Shopify-store."
+    source: layers/projects/honey-shop.md
+    target: ~/repos/honey-shop/CLAUDE.md
+    scope: "~/repos/honey-shop/*"
+
+  - name: koffieshop
+    description: "SMEULWERK: specialty-koffie prototype, DESIGN.md leidend, fase 2 Shopify."
+    source: layers/projects/koffieshop.md
+    target: ~/repos/koffieshop/CLAUDE.md
+    scope: "~/repos/koffieshop/*"
+
+  - name: darija-app
+    description: "Yallah Zaza: Darija-speelapp, audio-injectie build, Badrs eigen stem."
+    source: layers/projects/darija-app.md
+    target: ~/repos/darija-app/CLAUDE.md
+    scope: "~/repos/darija-app/*"
 
   - name: driveadmin-bot
     description: "Google Drive admin bot: Node.js."
