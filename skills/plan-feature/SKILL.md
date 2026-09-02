@@ -20,7 +20,7 @@ refactor, of bugfix met onduidelijke oorzaak.
    vastleggen. Wat moet er kunnen? Wat expliciet niet?
 2. **Context lezen.** Open de relevante bestanden. Begrijp hoe het
    vandaag werkt voor je iets verandert.
-3. **Aanpak kiezen.** Schrijf 2-4 stappen op die samen de oplossing
+3. **Aanpak kiezen.** Schrijf 2-10 stappen op die samen de oplossing
    vormen. Per stap: welk bestand, welke verandering.
 4. **Risico's noemen.** Wat kan breken? Welke tests dekken het?
    Welke niet?
@@ -33,6 +33,28 @@ refactor, of bugfix met onduidelijke oorzaak.
 
 Een kort plan (5-15 regels) met genummerde stappen, niet een essay.
 Eindig met één vraag: "Akkoord?"
+
+## Persistent plan (plan.md)
+
+Bij grotere features — werk dat meerdere sessies beslaat of meer dan
+drie bestanden raakt — schrijf het goedgekeurde plan naar `plan.md` in
+de repo-root en commit het mee met het werk. Vier secties:
+
+```
+# Plan: <naam> (<datum>)
+
+## Files that change
+## Order of work
+## Risks
+## Proof
+```
+
+- **Proof** benoemt vóóraf welk bewijs "klaar" aantoont: welke test,
+  welk commando, welke screenshot.
+- Wijk je tijdens de bouw af, werk `plan.md` bij in dezelfde commit —
+  de gemergde diff moet matchen met het plan.
+- Is het *waarom* nergens vastgelegd, zet dan probleem, gewenste
+  uitkomst, constraints en open vragen in een `intent.md` ernaast.
 
 ## Rode vlaggen
 
