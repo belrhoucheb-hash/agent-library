@@ -23,6 +23,9 @@ horen in andere layers.
   die niemand gevraagd heeft.
 - Security: valideer aan de rand (user input, externe API). Vertrouw
   interne code. Geen secrets in code of logs.
+- Twee keer dezelfde fout gemaakt? Dan wordt de correctie een regel in
+  de project-layer ("Wat Claude hier fout doet") — of een hook, als hij
+  zonder uitzondering moet gelden.
 
 ## Verificatie
 

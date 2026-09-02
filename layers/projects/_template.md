@@ -29,6 +29,14 @@ Deze layer is alleen actief binnen `~/<project-pad>/*`.
 
 1. <!-- Regel -->
 
+## Wat Claude hier fout doet
+
+<!-- Twee-keer-fout-regel: maakt Claude twee keer dezelfde fout in dit
+     project, dan komt de correctie hier te staan. Moet de regel zonder
+     uitzondering gelden, maak er dan een hook van. -->
+
+- <!-- Correctie -->
+
 ## Commando's
 
 - Tests: `<!-- commando -->`
