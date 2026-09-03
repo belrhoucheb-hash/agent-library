@@ -1,0 +1,329 @@
+<title>Zendiq Afdelingen</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #F3F5F2;
+    --surface: #FFFFFF;
+    --surface-2: #E9EDE8;
+    --line: #D3DAD4;
+    --ink: #16211C;
+    --ink-2: #4A574F;
+    --ink-3: #75837A;
+    --accent: #B86E00;
+    --accent-ink: #7A4900;
+    --ok: #1F5E48;
+    --ok-bg: #DCEDE4;
+    --warn: #8A5400;
+    --warn-bg: #F6E7CC;
+    --crit: #A8322F;
+    --crit-bg: #F5DDDB;
+    --info: #2F4E6E;
+    --info-bg: #DCE6F0;
+    --own: #4E4A7A;
+    --own-bg: #E4E2F1;
+    --display: "Sora", "Segoe UI", system-ui, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #121816; --surface: #1A2320; --surface-2: #222D29; --line: #33403A;
+      --ink: #E6EBE7; --ink-2: #B4BFB8; --ink-3: #86938B;
+      --accent: #E8A23A; --accent-ink: #F2C071;
+      --ok: #8FD3B4; --ok-bg: #1C3A2E; --warn: #F0BE6A; --warn-bg: #3E2F14;
+      --crit: #F09A95; --crit-bg: #42201F; --info: #A9C4E0; --info-bg: #1F3042;
+      --own: #C2BDEB; --own-bg: #2C2A47;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #121816; --surface: #1A2320; --surface-2: #222D29; --line: #33403A;
+    --ink: #E6EBE7; --ink-2: #B4BFB8; --ink-3: #86938B;
+    --accent: #E8A23A; --accent-ink: #F2C071;
+    --ok: #8FD3B4; --ok-bg: #1C3A2E; --warn: #F0BE6A; --warn-bg: #3E2F14;
+    --crit: #F09A95; --crit-bg: #42201F; --info: #A9C4E0; --info-bg: #1F3042;
+    --own: #C2BDEB; --own-bg: #2C2A47;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--body); font-size: 15px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-ink); }
+  .page { max-width: 1120px; margin: 0 auto; padding: 40px 28px 80px; }
+  header.top { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; padding-bottom: 20px; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; }
+  h1 { font-family: var(--display); font-weight: 600; font-size: 34px; line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+  .lede { margin: 10px 0 0; max-width: 62ch; color: var(--ink-2); }
+  .stamp { font-family: var(--mono); font-size: 12px; color: var(--ink-3); text-align: right; line-height: 1.7; }
+  .stamp b { color: var(--ink); font-weight: 500; }
+
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 28px 0 44px; }
+  .strip a { background: var(--surface); padding: 12px 14px; text-decoration: none; color: var(--ink); display: grid; gap: 6px; }
+  .strip a:hover, .strip a:focus-visible { background: var(--surface-2); outline: none; }
+  .strip .name { font-family: var(--display); font-weight: 600; font-size: 14px; }
+  .strip .meta { font-size: 12px; color: var(--ink-3); }
+
+  .chip { display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; padding: 2px 8px; border-radius: 3px; white-space: nowrap; }
+  .chip.ok { color: var(--ok); background: var(--ok-bg); }
+  .chip.warn { color: var(--warn); background: var(--warn-bg); }
+  .chip.crit { color: var(--crit); background: var(--crit-bg); }
+  .chip.info { color: var(--info); background: var(--info-bg); }
+  .chip.own { color: var(--own); background: var(--own-bg); }
+
+  h2 { font-family: var(--display); font-weight: 600; font-size: 22px; margin: 48px 0 16px; letter-spacing: -.01em; }
+  h2 small { font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--ink-3); margin-left: 12px; letter-spacing: .05em; }
+
+  section.dept { display: grid; grid-template-columns: 300px 1fr; gap: 32px; padding: 26px 0; border-top: 1px solid var(--line); }
+  section.dept:last-of-type { border-bottom: 1px solid var(--line); }
+  .dept h3 { font-family: var(--display); font-weight: 600; font-size: 19px; margin: 0 0 12px; }
+  .dept h3 .chip { margin-left: 8px; vertical-align: middle; }
+  .facts { display: grid; grid-template-columns: 72px 1fr; gap: 6px 12px; font-size: 14px; }
+  .facts dt { color: var(--ink-3); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding-top: 3px; }
+  .facts dd { margin: 0; color: var(--ink-2); }
+  .facts dd .t { font-family: var(--mono); font-size: 12.5px; color: var(--ink); }
+
+  .skills { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; padding: 0 10px 8px 0; border-bottom: 1px solid var(--line); }
+  td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  td.skill { font-weight: 500; white-space: nowrap; }
+  td.skill small { display: block; font-weight: 400; color: var(--ink-3); font-size: 12px; white-space: normal; }
+  td.date { font-family: var(--mono); font-size: 12.5px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  code { font-family: var(--mono); font-size: 12.5px; background: var(--surface-2); padding: 1px 6px; border-radius: 3px; }
+  .note { font-size: 13px; color: var(--ink-2); margin: 12px 0 0; max-width: 70ch; }
+
+  .log { display: grid; grid-template-columns: 110px 130px 1fr; gap: 0 18px; }
+  .log > div { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .log .d { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .log .what { max-width: 70ch; }
+  .log .what .proof { display: block; color: var(--ink-3); font-size: 13px; margin-top: 2px; }
+
+  .decisions { display: grid; gap: 10px; max-width: 72ch; padding-left: 0; list-style: none; margin: 0; }
+  .decisions li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  .decisions .q { font-family: var(--display); color: var(--accent); font-weight: 600; }
+
+  @media (max-width: 820px) {
+    .strip { grid-template-columns: repeat(2, 1fr); }
+    section.dept { grid-template-columns: 1fr; gap: 18px; }
+    header.top { grid-template-columns: 1fr; }
+    .stamp { text-align: left; }
+    .log { grid-template-columns: 90px 1fr; }
+    .log .what { grid-column: 1 / -1; padding-top: 0; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .strip a { transition: background .15s ease; }
+  }
+</style>
+
+<div class="page">
+  <header class="top">
+    <div>
+      <p class="eyebrow">Bedrijfsoverzicht · levend document</p>
+      <h1>Zendiq Afdelingen</h1>
+      <p class="lede">Acht afdelingen, elk met een doel, een meetlat en een ritme. Per afdeling de beste skill die er is, wat wij hebben, en wanneer we die beoordelen. Onderaan het logboek van wat er gedaan is.</p>
+    </div>
+    <div class="stamp">
+      bijgewerkt <b>3 sep 2026</b><br>
+      bron <b>agent-library/company/zendiq-afdelingen.html</b><br>
+      volgende triage <b>zo 7 sep</b>
+    </div>
+  </header>
+
+  <nav class="strip" aria-label="Afdelingen">
+    <a href="#development"><span class="name">Development</span><span class="meta">superpowers · eigen skills dubbel</span><span><span class="chip warn">opschonen</span></span></a>
+    <a href="#operatie"><span class="name">Operatie</span><span class="meta">eigen code is de skill</span><span><span class="chip own">SOP's schrijven</span></span></a>
+    <a href="#klant"><span class="name">Klant</span><span class="meta">customer-support geïnstalleerd</span><span><span class="chip ok">beoordelen 17 sep</span></span></a>
+    <a href="#groei"><span class="name">Groei</span><span class="meta">SEO sterk, acquisitie niet</span><span><span class="chip info">marketingskills gepland</span></span></a>
+    <a href="#finance"><span class="name">Finance</span><span class="meta">finance-plugin geïnstalleerd</span><span><span class="chip ok">beoordelen 17 sep</span></span></a>
+    <a href="#compliance"><span class="name">Compliance</span><span class="meta">Wwft in code, AVG-skill mist</span><span><span class="chip info">gepland</span></span></a>
+    <a href="#platform"><span class="name">Platform</span><span class="meta">eigen skills, dun</span><span><span class="chip warn">verrijken</span></span></a>
+    <a href="#leren"><span class="name">Leren</span><span class="meta">gereedschap staat, ritueel mist</span><span><span class="chip ok">toereikend</span></span></a>
+  </nav>
+
+  <h2>Afdelingen <small>doel · meetlat · ritme · skills</small></h2>
+
+  <section class="dept" id="development">
+    <div>
+      <h3>Development</h3>
+      <dl class="facts">
+        <dt>doel</dt><dd>Ideeën worden werkende, geteste features.</dd>
+        <dt>meetlat</dt><dd>Doorlooptijd idee naar live; fouten gevonden vóór deploy.</dd>
+        <dt>ritme</dt><dd><span class="t">zo 15 min</span> triage ideeënbus · max 2 tickets per week · elke deploy via checklist</dd>
+      </dl>
+    </div>
+    <div class="skills">
+      <table>
+        <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
+        <tr><td class="skill">superpowers 6.3.0<small>brainstorm, plan, TDD, debug, review, worktrees</small></td><td>claude-plugins-official</td><td><span class="chip ok">geïnstalleerd</span></td><td class="date">in gebruik</td></tr>
+        <tr><td class="skill">plan-feature, systematic-debug, verify-before-done, code-review<small>eigen; 47 tot 64 regels tegenover 95 tot 283 bij superpowers</small></td><td>agent-library</td><td><span class="chip warn">dubbel</span></td><td class="date">opschonen tot huisregels</td></tr>
+        <tr><td class="skill">deploy-checklist, commit-netjes, context-resume, project-status, analyze-flow<small>eigen, uniek</small></td><td>agent-library</td><td><span class="chip own">eigen</span></td><td class="date">houden</td></tr>
+        <tr><td class="skill">webapp-testing<small>Playwright-tests op de dashboard-flows</small></td><td>anthropics/skills</td><td><span class="chip info">optioneel</span></td><td class="date">bij dashboard-werk</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="dept" id="operatie">
+    <div>
+      <h3>Operatie <span class="chip own">de dienst</span></h3>
+      <dl class="facts">
+        <dt>doel</dt><dd>Elke aangifte klopt en is op tijd, met een mens als derde slot.</dd>
+        <dt>meetlat</dt><dd>Geblokkeerde periodes, review-doorlooptijd, correctiepercentage bonnen.</dd>
+        <dt>ritme</dt><dd><span class="t">dagelijks 08:30</span> exception-wachtrij leeg · <span class="t">dag 1 t/m 20</span> na kwartaal review-sprint 30 min per dag</dd>
+      </dl>
+    </div>
+    <div class="skills">
+      <table>
+        <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
+        <tr><td class="skill">filing-gate, exception-engine, drie sloten<small>Nederlandse btw-logica; bestaat nergens als open skill</small></td><td>Whatsapp-bot</td><td><span class="chip own">eigen code</span></td><td class="date">live</td></tr>
+        <tr><td class="skill">review-sprint<small>SOP: wachtrij, volgorde, <code>review ok</code>, wat bij rood</small></td><td>zelf schrijven</td><td><span class="chip crit">te schrijven</span></td><td class="date">vóór 1 okt (Q3)</td></tr>
+        <tr><td class="skill">exception-dag<small>SOP: oranje en rood afhandelen, <code>ex ok</code> met notitie</small></td><td>zelf schrijven</td><td><span class="chip crit">te schrijven</span></td><td class="date">sep</td></tr>
+        <tr><td class="skill">openaccountant, claude-office finance<small>Amerikaans (Schedule C) en generiek: niet bruikbaar voor btw</small></td><td>extern</td><td><span class="chip info">afgewezen</span></td><td class="date">3 sep</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="dept" id="klant">
+    <div>
+      <h3>Klant</h3>
+      <dl class="facts">
+        <dt>doel</dt><dd>Een chauffeur is binnen 48 uur actief en blijft.</dd>
+        <dt>meetlat</dt><dd>Activatie (eerste bon), reactietijd support, churn.</dd>
+        <dt>ritme</dt><dd><span class="t">ma 08:00</span> weekbericht · <span class="t">dagelijks</span> support binnen 4 werkuren</dd>
+      </dl>
+    </div>
+    <div class="skills">
+      <table>
+        <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
+        <tr><td class="skill">customer-support<small>triage, antwoorden, escalatie, KB-artikelen</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip ok">geïnstalleerd 3 sep</span></td><td class="date">17 sep</td></tr>
+        <tr><td class="skill">onboarding, churn-prevention<small>uit marketingskills</small></td><td>coreyhaines31/marketingskills</td><td><span class="chip info">gepland</span></td><td class="date">met Groei</td></tr>
+        <tr><td class="skill">weekbericht, helpdesk-AI, onboarding-drip<small>in de bot</small></td><td>Whatsapp-bot</td><td><span class="chip own">eigen code</span></td><td class="date">live</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="dept" id="groei">
+    <div>
+      <h3>Groei</h3>
+      <dl class="facts">
+        <dt>doel</dt><dd>Nieuwe chauffeurs vinden ons.</dd>
+        <dt>meetlat</dt><dd>Leads per week, conversie naar betalend, kosten per klant.</dd>
+        <dt>ritme</dt><dd><span class="t">ma en do 09:00</span> ads goedkeuren · <span class="t">zo 10:00</span> referral-push</dd>
+      </dl>
+    </div>
+    <div class="skills">
+      <table>
+        <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
+        <tr><td class="skill">claude-seo 2.2.0<small>audit, schema, GEO, local</small></td><td>agricidaniel</td><td><span class="chip ok">geïnstalleerd</span></td><td class="date">in gebruik</td></tr>
+        <tr><td class="skill">concurrentie-analyse, launch-checklist<small>eigen</small></td><td>agent-library</td><td><span class="chip own">eigen</span></td><td class="date">houden</td></tr>
+        <tr><td class="skill">marketingskills<small>60 skills: prospecting, cold-email, referrals, pricing, ads, onboarding · <code>npx skills add coreyhaines31/marketingskills</code> in project-scope</small></td><td>coreyhaines31</td><td><span class="chip info">gepland</span></td><td class="date">bij start acquisitie</td></tr>
+        <tr><td class="skill">marketing, sales<small>Anthropic-plugins</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip info">optioneel</span></td><td class="date">na marketingskills</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="dept" id="finance">
+    <div>
+      <h3>Finance</h3>
+      <dl class="facts">
+        <dt>doel</dt><dd>Geld komt binnen en klopt.</dd>
+        <dt>meetlat</dt><dd>MRR, mislukte betalingen, openstaand na grace.</dd>
+        <dt>ritme</dt><dd><span class="t">1e van de maand 06:00</span> fleet-facturen · <span class="t">dagelijks 09:00 en 10:00</span> grace-herinnering en -verloop</dd>
+      </dl>
+    </div>
+    <div class="skills">
+      <table>
+        <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
+        <tr><td class="skill">finance<small>journaalposten, reconciliatie, afsluiting, varianties</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip ok">geïnstalleerd 3 sep</span></td><td class="date">17 sep</td></tr>
+        <tr><td class="skill">saas-metrics<small>MRR, churn, quick ratio</small></td><td>claude-office-skills</td><td><span class="chip info">optioneel</span></td><td class="date">bij eerste maandcijfers</td></tr>
+        <tr><td class="skill">Mollie, grace-flow, maandfacturen<small>in de bot</small></td><td>Whatsapp-bot</td><td><span class="chip own">eigen code</span></td><td class="date">live</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="dept" id="compliance">
+    <div>
+      <h3>Compliance</h3>
+      <dl class="facts">
+        <dt>doel</dt><dd>Wwft, AVG en bewaarplicht op orde.</dd>
+        <dt>meetlat</dt><dd>Dossiers compleet, bevindingen per kwartaal.</dd>
+        <dt>ritme</dt><dd><span class="t">bij onboarding</span> Wwft-keten · <span class="t">december</span> herbeoordeling en sleutelrotatie</dd>
+      </dl>
+    </div>
+    <div class="skills">
+      <table>
+        <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
+        <tr><td class="skill">wwft-flow, period-snapshots, messages-purge<small>in de bot</small></td><td>Whatsapp-bot</td><td><span class="chip own">eigen code</span></td><td class="date">live</td></tr>
+        <tr><td class="skill">gdpr-dsgvo-expert<small>DPIA, verwerkingsregister, rechten van betrokkenen</small></td><td>alirezarezvani/claude-skills</td><td><span class="chip info">gepland</span></td><td class="date">vóór verwerkersovereenkomsten</td></tr>
+        <tr><td class="skill">legal<small>contracten, NDA-triage</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip info">optioneel</span></td><td class="date">bij eerste contract</td></tr>
+        <tr><td class="skill">Wwft-herbeoordeling<small>SOP; bestaat nergens als skill</small></td><td>zelf schrijven</td><td><span class="chip crit">te schrijven</span></td><td class="date">vóór december</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="dept" id="platform">
+    <div>
+      <h3>Platform</h3>
+      <dl class="facts">
+        <dt>doel</dt><dd>Het draait en herstelt zichzelf.</dd>
+        <dt>meetlat</dt><dd>Uptime, hersteltijd, rode CI-runs.</dd>
+        <dt>ritme</dt><dd><span class="t">elke 2 uur</span> cron-health-check · <span class="t">zo 09:00</span> observability-digest · <span class="t">elke push naar main</span> CI met audit-gate</dd>
+      </dl>
+    </div>
+    <div class="skills">
+      <table>
+        <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
+        <tr><td class="skill">incident-response, deploy-checklist<small>eigen; verrijken met SEV-niveaus, blameless postmortem, 5-whys</small></td><td>agent-library</td><td><span class="chip warn">verrijken</span></td><td class="date">sep</td></tr>
+        <tr><td class="skill">incident-response (wshobson) en Anthropic-variant<small>referentie voor de verrijking</small></td><td>extern</td><td><span class="chip info">referentie</span></td><td class="date">bij verrijking</td></tr>
+        <tr><td class="skill">Sentry for AI<small>je draait al Sentry</small></td><td>getsentry</td><td><span class="chip info">gepland</span></td><td class="date">bij eerste incident</td></tr>
+        <tr><td class="skill">externe uptime-monitor op <code>/health</code><small>geen skill maar een taak: alert naar WhatsApp</small></td><td>taak</td><td><span class="chip crit">open</span></td><td class="date">sep</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="dept" id="leren">
+    <div>
+      <h3>Leren</h3>
+      <dl class="facts">
+        <dt>doel</dt><dd>Elke fout wordt een regel, elke correctie een test, elke vraag een FAQ.</dd>
+        <dt>meetlat</dt><dd>Nieuwe regels per maand, herhaalfouten, correctiepercentage (leerstats).</dd>
+        <dt>ritme</dt><dd><span class="t">zo 15 min</span> digest lezen en één verbeterbesluit · <span class="t">maandelijks</span> leerstats</dd>
+      </dl>
+    </div>
+    <div class="skills">
+      <table>
+        <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
+        <tr><td class="skill">writing-skills<small>uit superpowers</small></td><td>claude-plugins-official</td><td><span class="chip ok">geïnstalleerd</span></td><td class="date">in gebruik</td></tr>
+        <tr><td class="skill">skill-creator<small>Anthropic</small></td><td>anthropics/skills</td><td><span class="chip info">optioneel</span></td><td class="date">bij eerste SOP-skill</td></tr>
+        <tr><td class="skill">memory, agent-library, backlog<small>eigen bewaarplaats</small></td><td>agent-library</td><td><span class="chip own">eigen</span></td><td class="date">in gebruik</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <h2>Logboek <small>nieuwste bovenaan</small></h2>
+  <div class="log">
+    <div class="d">3 sep 2026</div><div><span class="chip ok">Klant</span> <span class="chip ok">Finance</span></div>
+    <div class="what">Marketplace knowledge-work-plugins toegevoegd; customer-support en finance geïnstalleerd (user-scope). Deze pagina aangemaakt.<span class="proof">bewijs: <code>claude plugin list</code> toont beide · beoordeling 17 sep</span></div>
+
+    <div class="d">3 sep 2026</div><div><span class="chip ok">Leren</span></div>
+    <div class="what">Skill-vergelijking per afdeling: Anthropic knowledge-work-plugins, superpowers, marketingskills, SRE-lijsten, finance- en GDPR-packs. Besluit: eigen dubbelingen met superpowers terugbrengen tot huisregels; SOP-skills voor Operatie en Compliance zelf schrijven.</div>
+
+    <div class="d">3 sep 2026</div><div><span class="chip ok">Development</span></div>
+    <div class="what">Live: categorie-tabel met 37 categorieën als enige bron, btw niet meer blind 21 procent, gerichte twijfelvraag ("21, 9 of geen btw?"). Review vond twee weggevallen regex-backslashes; gefixt met regressietest vóór de merge.<span class="proof">bewijs: 1005 tests groen · CI-run 33735882896 groen · health 200, uptime liep door</span></div>
+
+    <div class="d">3 sep 2026</div><div><span class="chip ok">Development</span></div>
+    <div class="what">Ideeënbus: bankafschrift (MT940 of CAMT.053) omkeren naar ontbrekende-bon-detectie, als gerichte WhatsApp-vraag. In backlog met meetlat.<span class="proof">backlog/whatsapp-bot.md</span></div>
+
+    <div class="d">2 sep 2026</div><div><span class="chip ok">Klant</span> <span class="chip ok">Development</span></div>
+    <div class="what">Btw-terug-regel achter elke bon-bevestiging en het nieuwe weekbericht (wat ZendIQ deed, kwartaalteller, nudge bij stille week). Gemerged 3 sep.<span class="proof">bewijs: 969 tests groen op branch; eerste weekbericht ma 7 sep 08:00</span></div>
+  </div>
+
+  <h2>Open besluiten <small>aan Badr</small></h2>
+  <ul class="decisions">
+    <li><span class="q">?</span><span>Auto-aftrek-whitelist verruimen? Nu 13 categorieën (rijkosten, boordcomputer, taxicentrale); Software, Boekhouding en Bankkosten staan op review. Eén woord in de tabel.</span></li>
+    <li><span class="q">?</span><span>Tweede reviewer in de boekhouder-rol, zodat <code>review ok</code> niet van één telefoon afhangt vóór de Q3-sprint begint op 1 oktober.</span></li>
+    <li><span class="q">?</span><span>Externe uptime-monitor: welke dienst en naar welk nummer alarmeren.</span></li>
+    <li><span class="q">?</span><span>Nog te bewijzen door jou: echte foto-bon (btw-regel) en parkeerticket (tariefvraag) in productie.</span></li>
+  </ul>
+</div>
