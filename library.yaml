@@ -97,6 +97,12 @@ layers:
     scope: "~/Addayn/*"
     depends_on: [repos-shared, dart-flutter]
 
+  - name: eaa-leadmachine
+    description: "EAA-webshopdienst: WCAG-scans, rapporten, mailconcepten; nooit auto-mailen."
+    source: layers/projects/eaa-leadmachine.md
+    target: ~/repos/eaa-leadmachine/CLAUDE.md
+    scope: "~/repos/eaa-leadmachine/*"
+
   - name: orderflow-suite
     description: "TypeScript orderflow/trading analyse suite."
     source: layers/projects/orderflow-suite.md
