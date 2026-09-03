@@ -11,6 +11,7 @@
     --ink-3: #75837A;
     --accent: #B86E00;
     --accent-ink: #7A4900;
+    --accent-bg: #F7EBD3;
     --ok: #1F5E48;
     --ok-bg: #DCEDE4;
     --warn: #8A5400;
@@ -29,7 +30,7 @@
     :root:not([data-theme="light"]) {
       --ground: #121816; --surface: #1A2320; --surface-2: #222D29; --line: #33403A;
       --ink: #E6EBE7; --ink-2: #B4BFB8; --ink-3: #86938B;
-      --accent: #E8A23A; --accent-ink: #F2C071;
+      --accent: #E8A23A; --accent-ink: #F2C071; --accent-bg: #3A2C12;
       --ok: #8FD3B4; --ok-bg: #1C3A2E; --warn: #F0BE6A; --warn-bg: #3E2F14;
       --crit: #F09A95; --crit-bg: #42201F; --info: #A9C4E0; --info-bg: #1F3042;
       --own: #C2BDEB; --own-bg: #2C2A47;
@@ -38,7 +39,7 @@
   :root[data-theme="dark"] {
     --ground: #121816; --surface: #1A2320; --surface-2: #222D29; --line: #33403A;
     --ink: #E6EBE7; --ink-2: #B4BFB8; --ink-3: #86938B;
-    --accent: #E8A23A; --accent-ink: #F2C071;
+    --accent: #E8A23A; --accent-ink: #F2C071; --accent-bg: #3A2C12;
     --ok: #8FD3B4; --ok-bg: #1C3A2E; --warn: #F0BE6A; --warn-bg: #3E2F14;
     --crit: #F09A95; --crit-bg: #42201F; --info: #A9C4E0; --info-bg: #1F3042;
     --own: #C2BDEB; --own-bg: #2C2A47;
@@ -58,9 +59,10 @@
   .stamp { font-family: var(--mono); font-size: 12px; color: var(--ink-3); text-align: right; line-height: 1.7; }
   .stamp b { color: var(--ink); font-weight: 500; }
 
-  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 28px 0 44px; }
+  .strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 28px 0 44px; }
   .strip a { background: var(--surface); padding: 12px 14px; text-decoration: none; color: var(--ink); display: grid; gap: 6px; }
   .strip a:hover, .strip a:focus-visible { background: var(--surface-2); outline: none; }
+  .strip a.lead { background: var(--accent-bg); }
   .strip .name { font-family: var(--display); font-weight: 600; font-size: 14px; }
   .strip .meta { font-size: 12px; color: var(--ink-3); }
 
@@ -70,12 +72,33 @@
   .chip.crit { color: var(--crit); background: var(--crit-bg); }
   .chip.info { color: var(--info); background: var(--info-bg); }
   .chip.own { color: var(--own); background: var(--own-bg); }
+  .chip.acc { color: var(--accent-ink); background: var(--accent-bg); }
 
   h2 { font-family: var(--display); font-weight: 600; font-size: 22px; margin: 48px 0 16px; letter-spacing: -.01em; }
   h2 small { font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--ink-3); margin-left: 12px; letter-spacing: .05em; }
 
+  /* Verbeterlus */
+  .loop-wrap { overflow-x: auto; padding-bottom: 6px; }
+  .loop { display: grid; grid-template-columns: repeat(10, minmax(96px, 1fr)); gap: 6px; min-width: 1040px; }
+  .loop .step { background: var(--surface); border: 1px solid var(--line); padding: 10px 10px 8px; position: relative; display: grid; gap: 4px; align-content: start; }
+  .loop .step::after { content: "→"; position: absolute; right: -9px; top: 8px; color: var(--ink-3); font-size: 13px; background: var(--ground); line-height: 1; }
+  .loop .step:last-child::after { content: "↺"; }
+  .loop .step .s { font-family: var(--display); font-weight: 600; font-size: 13px; line-height: 1.2; }
+  .loop .step .who { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: var(--ink-3); text-transform: uppercase; }
+  .loop .step .state { font-size: 11.5px; color: var(--ink-2); }
+  .loop .step.missing { border-style: dashed; }
+  .rule { margin: 16px 0 0; padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--surface); max-width: 72ch; }
+  .rule b { font-family: var(--display); font-weight: 600; }
+
+  /* Nulmeting */
+  .baseline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .baseline div { background: var(--surface); padding: 12px 14px; display: grid; gap: 2px; }
+  .baseline .v { font-family: var(--display); font-weight: 600; font-size: 22px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .baseline .v.crit { color: var(--crit); }
+  .baseline .l { font-size: 12px; color: var(--ink-3); }
+
   section.dept { display: grid; grid-template-columns: 300px 1fr; gap: 32px; padding: 26px 0; border-top: 1px solid var(--line); }
-  section.dept:last-of-type { border-bottom: 1px solid var(--line); }
+  section.dept.last { border-bottom: 1px solid var(--line); }
   .dept h3 { font-family: var(--display); font-weight: 600; font-size: 19px; margin: 0 0 12px; }
   .dept h3 .chip { margin-left: 8px; vertical-align: middle; }
   .facts { display: grid; grid-template-columns: 72px 1fr; gap: 6px 12px; font-size: 14px; }
@@ -91,14 +114,18 @@
   td.skill { font-weight: 500; white-space: nowrap; }
   td.skill small { display: block; font-weight: 400; color: var(--ink-3); font-size: 12px; white-space: normal; }
   td.date { font-family: var(--mono); font-size: 12.5px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  td.num { font-variant-numeric: tabular-nums; }
   code { font-family: var(--mono); font-size: 12.5px; background: var(--surface-2); padding: 1px 6px; border-radius: 3px; }
-  .note { font-size: 13px; color: var(--ink-2); margin: 12px 0 0; max-width: 70ch; }
+  .note { font-size: 13px; color: var(--ink-2); margin: 12px 0 0; max-width: 72ch; }
 
-  .log { display: grid; grid-template-columns: 110px 130px 1fr; gap: 0 18px; }
-  .log > div { padding: 12px 0; border-bottom: 1px solid var(--line); }
-  .log .d { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  .log .what { max-width: 70ch; }
-  .log .what .proof { display: block; color: var(--ink-3); font-size: 13px; margin-top: 2px; }
+  /* Logboek in lus-formaat */
+  .entry { display: grid; grid-template-columns: 110px 1fr; gap: 0 18px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .entry .d { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; display: grid; gap: 6px; align-content: start; }
+  .entry .loopgrid { display: grid; grid-template-columns: 92px 1fr; gap: 4px 12px; font-size: 14px; max-width: 78ch; }
+  .entry .loopgrid dt { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
+  .entry .loopgrid dd { margin: 0; color: var(--ink-2); }
+  .entry .loopgrid dd.open { color: var(--ink-3); font-style: italic; }
+  .entry .loopgrid dd.regel { color: var(--ink); }
 
   .decisions { display: grid; gap: 10px; max-width: 72ch; padding-left: 0; list-style: none; margin: 0; }
   .decisions li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
@@ -106,11 +133,11 @@
 
   @media (max-width: 820px) {
     .strip { grid-template-columns: repeat(2, 1fr); }
+    .baseline { grid-template-columns: repeat(2, 1fr); }
     section.dept { grid-template-columns: 1fr; gap: 18px; }
     header.top { grid-template-columns: 1fr; }
     .stamp { text-align: left; }
-    .log { grid-template-columns: 90px 1fr; }
-    .log .what { grid-column: 1 / -1; padding-top: 0; }
+    .entry { grid-template-columns: 1fr; gap: 8px; }
   }
   @media (prefers-reduced-motion: no-preference) {
     .strip a { transition: background .15s ease; }
@@ -122,16 +149,17 @@
     <div>
       <p class="eyebrow">Bedrijfsoverzicht · levend document</p>
       <h1>Zendiq Afdelingen</h1>
-      <p class="lede">Acht afdelingen, elk met een doel, een meetlat en een ritme. Per afdeling de beste skill die er is, wat wij hebben, en wanneer we die beoordelen. Onderaan het logboek van wat er gedaan is.</p>
+      <p class="lede">Negen afdelingen, elk met een doel, een meetlat en een ritme. Product is de motor: elke week aantoonbaar makkelijker, betrouwbaarder of waardevoller voor chauffeurs. Onderaan het logboek in de vorm probleem, hypothese, wijziging, resultaat, regel.</p>
     </div>
     <div class="stamp">
-      bijgewerkt <b>3 sep 2026</b><br>
+      bijgewerkt <b>3 sep 2026, 12:40</b><br>
       bron <b>agent-library/company/zendiq-afdelingen.html</b><br>
       volgende triage <b>zo 7 sep</b>
     </div>
   </header>
 
   <nav class="strip" aria-label="Afdelingen">
+    <a class="lead" href="#product"><span class="name">Product</span><span class="meta">de verbeterlus; nulmeting gedaan</span><span><span class="chip crit">geen gebruik gemeten</span></span></a>
     <a href="#development"><span class="name">Development</span><span class="meta">superpowers · eigen skills dubbel</span><span><span class="chip warn">opschonen</span></span></a>
     <a href="#operatie"><span class="name">Operatie</span><span class="meta">eigen code is de skill</span><span><span class="chip own">SOP's schrijven</span></span></a>
     <a href="#klant"><span class="name">Klant</span><span class="meta">customer-support geïnstalleerd</span><span><span class="chip ok">beoordelen 17 sep</span></span></a>
@@ -142,14 +170,67 @@
     <a href="#leren"><span class="name">Leren</span><span class="meta">gereedschap staat, ritueel mist</span><span><span class="chip ok">toereikend</span></span></a>
   </nav>
 
+  <h2 id="product">Product <small>de verbeterlus</small></h2>
+  <section class="dept" style="border-top:0; padding-top:0">
+    <div>
+      <dl class="facts">
+        <dt>doel</dt><dd>ZendIQ wordt iedere week aantoonbaar makkelijker, betrouwbaarder of waardevoller voor chauffeurs.</dd>
+        <dt>meetlat</dt><dd>Activatie (eerste bon binnen 48 uur), tijd tot eerste waarde, handmatige correcties, supportvragen per actieve klant, retentie en churn, gebruik van kernfuncties.</dd>
+        <dt>ritme</dt><dd><span class="t">dagelijks</span> signalen verzamelen · <span class="t">zo</span> verbetertriage · <span class="t">max 2</span> experimenten per week · <span class="t">na 7, 14, 30 dagen</span> effectmeting</dd>
+        <dt>regel</dt><dd>Geen feature is klaar na deploy. Hij is klaar nadat gemeten is of hij het gewenste resultaat heeft opgeleverd.</dd>
+      </dl>
+    </div>
+    <div>
+      <div class="loop-wrap">
+        <div class="loop">
+          <div class="step"><span class="s">Klantgedrag</span><span class="who">chauffeur</span><span class="state">bonnen, vragen, afhaken</span></div>
+          <div class="step"><span class="s">Data</span><span class="who">platform</span><span class="state">receipts, corrections, exceptions, audit_log, helpdesk</span></div>
+          <div class="step missing"><span class="s">AI-analyse</span><span class="who">product</span><span class="state">Top 5 problemen per week: gepland</span></div>
+          <div class="step"><span class="s">Verbeteridee</span><span class="who">ideeënbus</span><span class="state">backlog, zondag-triage</span></div>
+          <div class="step"><span class="s">Prioriteit</span><span class="who">product</span><span class="state">impact × gebruikers × zekerheid / inspanning</span></div>
+          <div class="step"><span class="s">Development</span><span class="who">development</span><span class="state">plan met succescriterium</span></div>
+          <div class="step"><span class="s">Test</span><span class="who">development</span><span class="state">suite, review, verifier</span></div>
+          <div class="step"><span class="s">Productie</span><span class="who">platform</span><span class="state">CI, deploy-gate, health</span></div>
+          <div class="step missing"><span class="s">Effectmeting</span><span class="who">product</span><span class="state">7/14/30 dagen: gepland</span></div>
+          <div class="step"><span class="s">Leren</span><span class="who">leren</span><span class="state">regel in memory, skill of test</span></div>
+        </div>
+      </div>
+      <p class="rule"><b>Eerste bevinding van de lus, 3 sep.</b> De nulmeting hieronder laat geen gebruik zien: geen bon sinds 2 mei, geen betalende chauffeur, geen audit-regel sinds 1 juli. Óf productie draait op een andere database dan waar de repo lokaal naar wijst, óf er is niemand die het product gebruikt. In beide gevallen geldt: zonder gebruik zijn er geen signalen, en zonder signalen draait de lus leeg. Dit gaat vóór elke feature.</p>
+    </div>
+  </section>
+
+  <h2>Nulmeting <small>3 sep 2026 · database zwhrguzd… · alleen totalen</small></h2>
+  <div class="baseline">
+    <div><span class="v">57</span><span class="l">chauffeurs in de database, plus 2 fleet owners</span></div>
+    <div><span class="v crit">0</span><span class="l">betalend</span></div>
+    <div><span class="v crit">0</span><span class="l">nieuwe chauffeurs, laatste 8 weken (laatste: 15 mei)</span></div>
+    <div><span class="v crit">0</span><span class="l">bonnen, laatste 8 weken</span></div>
+    <div><span class="v">11</span><span class="l">bonnen ooit: 10 in april, 1 op 2 mei</span></div>
+    <div><span class="v crit">0</span><span class="l">omzet-events uit koppelingen, ooit</span></div>
+    <div><span class="v">1 jul</span><span class="l">laatste regel in audit_log; crons schrijven bij elke run</span></div>
+    <div><span class="v">n.v.t.</span><span class="l">activatie, correctie-%, twijfel beantwoord: geen data</span></div>
+  </div>
+  <p class="note">Meting via de repo-omgeving (<code>.env</code>), alleen aantallen, geen persoonsgegevens. Als Render een andere Supabase gebruikt, is deze meting een dev-database en moet ze opnieuw tegen productie. Dat is besluit 1 hieronder.</p>
+
+  <h2>Experimenten <small>succescriterium vooraf · meetdatum vast</small></h2>
+  <div class="skills">
+    <table>
+      <tr><th>Nr</th><th>Experiment</th><th>Probleem en hypothese</th><th>Succescriterium</th><th>Meten</th><th>Status</th></tr>
+      <tr><td class="num">E0</td><td class="skill">Tien actieve chauffeurs<small>voorgesteld, eigenaar Groei</small></td><td>Geen gebruik, dus geen signalen. Zonder tien chauffeurs die wekelijks bonnen sturen is elk ander experiment onmeetbaar.</td><td>10 chauffeurs met minstens 1 bon per week, 4 weken op rij</td><td class="date">1 okt</td><td><span class="chip crit">besluit nodig</span></td></tr>
+      <tr><td class="num">E1</td><td class="skill">Waarde zichtbaar per bon en per week<small>live 3 sep</small></td><td>Chauffeur voelt waarde twee keer per jaar. Hypothese: geld per bon en per week zichtbaar geeft meer bonnen per actieve chauffeur en minder afhaken.</td><td>≥ 3 bonnen per actieve chauffeur per week, bij ≥ 10 actieve chauffeurs; nulmeting 0</td><td class="date">17 sep · 1 okt</td><td><span class="chip warn">wacht op gebruik</span></td></tr>
+      <tr><td class="num">E2</td><td class="skill">Eerlijke btw en gerichte twijfelvraag<small>live 3 sep</small></td><td>Blanket 21% verborg onleesbare btw. Hypothese: gerichte vraag geeft meer correcte bonnen met minder correcties achteraf.</td><td>≥ 60% van de twijfelvragen binnen 30 min beantwoord · correcties &lt; 5% · aandeel Overig &lt; 10%</td><td class="date">17 sep · 1 okt</td><td><span class="chip warn">wacht op gebruik</span></td></tr>
+      <tr><td class="num">E3</td><td class="skill">Plugins customer-support en finance<small>geïnstalleerd 3 sep</small></td><td>Geen skills voor Klant en Finance. Hypothese: de Anthropic-plugins dekken het meeste.</td><td>In ≥ 3 sessies gebruikt met aantoonbaar resultaat, anders verwijderen</td><td class="date">17 sep</td><td><span class="chip ok">loopt</span></td></tr>
+    </table>
+  </div>
+
   <h2>Afdelingen <small>doel · meetlat · ritme · skills</small></h2>
 
   <section class="dept" id="development">
     <div>
       <h3>Development</h3>
       <dl class="facts">
-        <dt>doel</dt><dd>Ideeën worden werkende, geteste features.</dd>
-        <dt>meetlat</dt><dd>Doorlooptijd idee naar live; fouten gevonden vóór deploy.</dd>
+        <dt>doel</dt><dd>Ideeën worden werkende, geteste features met een succescriterium.</dd>
+        <dt>meetlat</dt><dd>Doorlooptijd idee naar live; fouten gevonden vóór deploy; aandeel features met gehaald criterium.</dd>
         <dt>ritme</dt><dd><span class="t">zo 15 min</span> triage ideeënbus · max 2 tickets per week · elke deploy via checklist</dd>
       </dl>
     </div>
@@ -189,14 +270,14 @@
       <h3>Klant</h3>
       <dl class="facts">
         <dt>doel</dt><dd>Een chauffeur is binnen 48 uur actief en blijft.</dd>
-        <dt>meetlat</dt><dd>Activatie (eerste bon), reactietijd support, churn.</dd>
+        <dt>meetlat</dt><dd>Activatie (eerste bon binnen 48 uur), reactietijd support, churn.</dd>
         <dt>ritme</dt><dd><span class="t">ma 08:00</span> weekbericht · <span class="t">dagelijks</span> support binnen 4 werkuren</dd>
       </dl>
     </div>
     <div class="skills">
       <table>
         <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
-        <tr><td class="skill">customer-support<small>triage, antwoorden, escalatie, KB-artikelen</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip ok">geïnstalleerd 3 sep</span></td><td class="date">17 sep</td></tr>
+        <tr><td class="skill">customer-support<small>triage, antwoorden, escalatie, KB-artikelen</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip ok">geïnstalleerd 3 sep</span></td><td class="date">17 sep (E3)</td></tr>
         <tr><td class="skill">onboarding, churn-prevention<small>uit marketingskills</small></td><td>coreyhaines31/marketingskills</td><td><span class="chip info">gepland</span></td><td class="date">met Groei</td></tr>
         <tr><td class="skill">weekbericht, helpdesk-AI, onboarding-drip<small>in de bot</small></td><td>Whatsapp-bot</td><td><span class="chip own">eigen code</span></td><td class="date">live</td></tr>
       </table>
@@ -207,7 +288,7 @@
     <div>
       <h3>Groei</h3>
       <dl class="facts">
-        <dt>doel</dt><dd>Nieuwe chauffeurs vinden ons.</dd>
+        <dt>doel</dt><dd>Nieuwe chauffeurs vinden ons. Nu eerst: tien actieve (E0).</dd>
         <dt>meetlat</dt><dd>Leads per week, conversie naar betalend, kosten per klant.</dd>
         <dt>ritme</dt><dd><span class="t">ma en do 09:00</span> ads goedkeuren · <span class="t">zo 10:00</span> referral-push</dd>
       </dl>
@@ -217,8 +298,8 @@
         <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
         <tr><td class="skill">claude-seo 2.2.0<small>audit, schema, GEO, local</small></td><td>agricidaniel</td><td><span class="chip ok">geïnstalleerd</span></td><td class="date">in gebruik</td></tr>
         <tr><td class="skill">concurrentie-analyse, launch-checklist<small>eigen</small></td><td>agent-library</td><td><span class="chip own">eigen</span></td><td class="date">houden</td></tr>
-        <tr><td class="skill">marketingskills<small>60 skills: prospecting, cold-email, referrals, pricing, ads, onboarding · <code>npx skills add coreyhaines31/marketingskills</code> in project-scope</small></td><td>coreyhaines31</td><td><span class="chip info">gepland</span></td><td class="date">bij start acquisitie</td></tr>
-        <tr><td class="skill">marketing, sales<small>Anthropic-plugins</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip info">optioneel</span></td><td class="date">na marketingskills</td></tr>
+        <tr><td class="skill">marketingskills<small>60 skills: prospecting, cold-email, referrals, pricing, ads, onboarding · <code>npx skills add coreyhaines31/marketingskills</code> in project-scope</small></td><td>coreyhaines31</td><td><span class="chip info">gepland</span></td><td class="date">bij start E0</td></tr>
+        <tr><td class="skill">acquisitie-pijplijn<small>KvK- en Maps-scraper, outreach; staat in backlog driver-acquisition</small></td><td>zelf bouwen</td><td><span class="chip crit">niet gebouwd</span></td><td class="date">na besluit E0</td></tr>
       </table>
     </div>
   </section>
@@ -228,14 +309,14 @@
       <h3>Finance</h3>
       <dl class="facts">
         <dt>doel</dt><dd>Geld komt binnen en klopt.</dd>
-        <dt>meetlat</dt><dd>MRR, mislukte betalingen, openstaand na grace.</dd>
+        <dt>meetlat</dt><dd>MRR, mislukte betalingen, openstaand na grace. Nulmeting: 0 betalend.</dd>
         <dt>ritme</dt><dd><span class="t">1e van de maand 06:00</span> fleet-facturen · <span class="t">dagelijks 09:00 en 10:00</span> grace-herinnering en -verloop</dd>
       </dl>
     </div>
     <div class="skills">
       <table>
         <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
-        <tr><td class="skill">finance<small>journaalposten, reconciliatie, afsluiting, varianties</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip ok">geïnstalleerd 3 sep</span></td><td class="date">17 sep</td></tr>
+        <tr><td class="skill">finance<small>journaalposten, reconciliatie, afsluiting, varianties</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip ok">geïnstalleerd 3 sep</span></td><td class="date">17 sep (E3)</td></tr>
         <tr><td class="skill">saas-metrics<small>MRR, churn, quick ratio</small></td><td>claude-office-skills</td><td><span class="chip info">optioneel</span></td><td class="date">bij eerste maandcijfers</td></tr>
         <tr><td class="skill">Mollie, grace-flow, maandfacturen<small>in de bot</small></td><td>Whatsapp-bot</td><td><span class="chip own">eigen code</span></td><td class="date">live</td></tr>
       </table>
@@ -274,19 +355,19 @@
     <div class="skills">
       <table>
         <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
+        <tr><td class="skill">welke database is productie<small>audit_log leeg sinds 1 jul in de repo-database, terwijl elke cron-run daar hoort te schrijven</small></td><td>taak</td><td><span class="chip crit">check Render-env</span></td><td class="date">nu</td></tr>
         <tr><td class="skill">incident-response, deploy-checklist<small>eigen; verrijken met SEV-niveaus, blameless postmortem, 5-whys</small></td><td>agent-library</td><td><span class="chip warn">verrijken</span></td><td class="date">sep</td></tr>
-        <tr><td class="skill">incident-response (wshobson) en Anthropic-variant<small>referentie voor de verrijking</small></td><td>extern</td><td><span class="chip info">referentie</span></td><td class="date">bij verrijking</td></tr>
         <tr><td class="skill">Sentry for AI<small>je draait al Sentry</small></td><td>getsentry</td><td><span class="chip info">gepland</span></td><td class="date">bij eerste incident</td></tr>
         <tr><td class="skill">externe uptime-monitor op <code>/health</code><small>geen skill maar een taak: alert naar WhatsApp</small></td><td>taak</td><td><span class="chip crit">open</span></td><td class="date">sep</td></tr>
       </table>
     </div>
   </section>
 
-  <section class="dept" id="leren">
+  <section class="dept last" id="leren">
     <div>
       <h3>Leren</h3>
       <dl class="facts">
-        <dt>doel</dt><dd>Elke fout wordt een regel, elke correctie een test, elke vraag een FAQ.</dd>
+        <dt>doel</dt><dd>Elke fout wordt een regel, elke correctie een test, elke vraag een FAQ, elk experiment een geleerde regel.</dd>
         <dt>meetlat</dt><dd>Nieuwe regels per maand, herhaalfouten, correctiepercentage (leerstats).</dd>
         <dt>ritme</dt><dd><span class="t">zo 15 min</span> digest lezen en één verbeterbesluit · <span class="t">maandelijks</span> leerstats</dd>
       </dl>
@@ -301,29 +382,80 @@
     </div>
   </section>
 
-  <h2>Logboek <small>nieuwste bovenaan</small></h2>
-  <div class="log">
-    <div class="d">3 sep 2026</div><div><span class="chip ok">Klant</span> <span class="chip ok">Finance</span></div>
-    <div class="what">Marketplace knowledge-work-plugins toegevoegd; customer-support en finance geïnstalleerd (user-scope). Deze pagina aangemaakt.<span class="proof">bewijs: <code>claude plugin list</code> toont beide · beoordeling 17 sep</span></div>
+  <h2>Logboek <small>probleem · hypothese · wijziging · resultaat · regel · nieuwste bovenaan</small></h2>
 
-    <div class="d">3 sep 2026</div><div><span class="chip ok">Leren</span></div>
-    <div class="what">Skill-vergelijking per afdeling: Anthropic knowledge-work-plugins, superpowers, marketingskills, SRE-lijsten, finance- en GDPR-packs. Besluit: eigen dubbelingen met superpowers terugbrengen tot huisregels; SOP-skills voor Operatie en Compliance zelf schrijven.</div>
+  <div class="entry">
+    <div class="d">3 sep 2026<span><span class="chip acc">Product</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd>Het logboek bewees technische kwaliteit, niet of het product voor de chauffeur beter werd. Nulmeting gedaan: 11 bonnen ooit, laatste op 2 mei; 0 betalend; 0 nieuwe chauffeurs in 8 weken; audit_log leeg sinds 1 juli.</dd>
+      <dt>hypothese</dt><dd>Óf productie draait op een andere database, óf er is geen gebruik. In beide gevallen ontbreekt de meetbasis voor elk experiment.</dd>
+      <dt>wijziging</dt><dd>Product-afdeling en verbeterlus toegevoegd; experimenten E0 tot E3 met succescriteria; twee Product-tickets in de ideeënbus (signalen-digest Top 5, automatische effectmeting).</dd>
+      <dt>resultaat</dt><dd class="open">open: besluit 1 en 2 hieronder</dd>
+      <dt>regel</dt><dd class="regel">Meet vóór je bouwt. De features van 2 en 3 september hadden ná een nulmeting gepland moeten worden, niet ervoor.</dd>
+    </dl>
+  </div>
 
-    <div class="d">3 sep 2026</div><div><span class="chip ok">Development</span></div>
-    <div class="what">Live: categorie-tabel met 37 categorieën als enige bron, btw niet meer blind 21 procent, gerichte twijfelvraag ("21, 9 of geen btw?"). Review vond twee weggevallen regex-backslashes; gefixt met regressietest vóór de merge.<span class="proof">bewijs: 1005 tests groen · CI-run 33735882896 groen · health 200, uptime liep door</span></div>
+  <div class="entry">
+    <div class="d">3 sep 2026<span><span class="chip ok">Klant</span> <span class="chip ok">Finance</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd>Geen skills voor support en finance.</dd>
+      <dt>hypothese</dt><dd>De Anthropic knowledge-work-plugins dekken het meeste voor beide afdelingen.</dd>
+      <dt>wijziging</dt><dd>Marketplace toegevoegd; customer-support en finance geïnstalleerd (user-scope). Bewijs: <code>claude plugin list</code>.</dd>
+      <dt>resultaat</dt><dd class="open">meten 17 sep (E3)</dd>
+      <dt>regel</dt><dd class="open">volgt na meting</dd>
+    </dl>
+  </div>
 
-    <div class="d">3 sep 2026</div><div><span class="chip ok">Development</span></div>
-    <div class="what">Ideeënbus: bankafschrift (MT940 of CAMT.053) omkeren naar ontbrekende-bon-detectie, als gerichte WhatsApp-vraag. In backlog met meetlat.<span class="proof">backlog/whatsapp-bot.md</span></div>
+  <div class="entry">
+    <div class="d">3 sep 2026<span><span class="chip ok">Leren</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd>Onbekend of de eigen skillset toereikend was per afdeling.</dd>
+      <dt>hypothese</dt><dd>Voor generieke afdelingen bestaan betere skills dan de eigen; voor Nederlandse btw en Wwft bestaat niets.</dd>
+      <dt>wijziging</dt><dd>Vergelijking met Anthropic-plugins, superpowers, marketingskills, SRE-lijsten, finance- en GDPR-packs; per afdeling vastgelegd op deze pagina.</dd>
+      <dt>resultaat</dt><dd>Bevestigd: vier eigen skills dubbelen met superpowers en zijn dunner; Nederlandse btw- en Wwft-skills bestaan nergens open.</dd>
+      <dt>regel</dt><dd class="regel">Eigen skills alleen waar niets bestaat. Anders installeren en er Nederlandse huisregels overheen leggen.</dd>
+    </dl>
+  </div>
 
-    <div class="d">2 sep 2026</div><div><span class="chip ok">Klant</span> <span class="chip ok">Development</span></div>
-    <div class="what">Btw-terug-regel achter elke bon-bevestiging en het nieuwe weekbericht (wat ZendIQ deed, kwartaalteller, nudge bij stille week). Gemerged 3 sep.<span class="proof">bewijs: 969 tests groen op branch; eerste weekbericht ma 7 sep 08:00</span></div>
+  <div class="entry">
+    <div class="d">3 sep 2026<span><span class="chip ok">Development</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd>Blanket 21% btw bij een onleesbare bon verborg fouten; prompt kende twaalf categorieën, validatie negen; chauffeur-specifieke kosten ontbraken.</dd>
+      <dt>hypothese</dt><dd>Eerlijke btw plus een gerichte vraag geeft meer correcte bonnen met minder correcties (E2).</dd>
+      <dt>wijziging</dt><dd>Categorie-tabel met 37 categorieën als enige bron; fallback weg; gerichte twijfelvraag "21, 9 of geen btw?". Review vond twee weggevallen regex-backslashes, gefixt met regressietest. Live 08:57. Bewijs: 1005 tests groen, CI-run 33735882896 groen, health 200.</dd>
+      <dt>resultaat</dt><dd class="open">meten 17 sep en 1 okt, pas mogelijk bij gebruik</dd>
+      <dt>regel</dt><dd class="regel">Technisch: de Bash-tool eet backslashes; unicode-inhoud via Write, regexes na een edit nalezen. Productmatig: volgt na meting.</dd>
+    </dl>
+  </div>
+
+  <div class="entry">
+    <div class="d">3 sep 2026<span><span class="chip ok">Development</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd>Chauffeurs pinnen bij Shell of Q-Park zonder bon te sturen; dat geld blijft liggen.</dd>
+      <dt>hypothese</dt><dd>Een bankafschrift (MT940 of CAMT.053) omkeren naar "pin zonder bon" en dat als gerichte vraag stellen, levert bonnen terug.</dd>
+      <dt>wijziging</dt><dd>In de ideeënbus gezet met meetlat (teruggevonden bonnen per week, btw daarvan). Niet gebouwd.</dd>
+      <dt>resultaat</dt><dd class="open">wacht op triage</dd>
+      <dt>regel</dt><dd class="open">n.v.t.</dd>
+    </dl>
+  </div>
+
+  <div class="entry">
+    <div class="d">2 sep 2026<span><span class="chip ok">Klant</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd>De chauffeur voelt de waarde van ZendIQ twee keer per jaar: bij de aangifte en bij een boete.</dd>
+      <dt>hypothese</dt><dd>Geld per bon en per week zichtbaar maken geeft meer bonnen per actieve chauffeur en minder afhaken (E1).</dd>
+      <dt>wijziging</dt><dd>Btw-terug-regel achter elke bon-bevestiging; weekbericht dat toont wat ZendIQ deed, met kwartaalteller en nudge bij een stille week. Gemerged 3 sep. Bewijs: 969 tests groen op branch; eerste weekbericht ma 7 sep 08:00.</dd>
+      <dt>resultaat</dt><dd class="open">meten 17 sep en 1 okt</dd>
+      <dt>regel</dt><dd class="open">volgt na meting</dd>
+    </dl>
   </div>
 
   <h2>Open besluiten <small>aan Badr</small></h2>
   <ul class="decisions">
-    <li><span class="q">?</span><span>Auto-aftrek-whitelist verruimen? Nu 13 categorieën (rijkosten, boordcomputer, taxicentrale); Software, Boekhouding en Bankkosten staan op review. Eén woord in de tabel.</span></li>
-    <li><span class="q">?</span><span>Tweede reviewer in de boekhouder-rol, zodat <code>review ok</code> niet van één telefoon afhangt vóór de Q3-sprint begint op 1 oktober.</span></li>
-    <li><span class="q">?</span><span>Externe uptime-monitor: welke dienst en naar welk nummer alarmeren.</span></li>
-    <li><span class="q">?</span><span>Nog te bewijzen door jou: echte foto-bon (btw-regel) en parkeerticket (tariefvraag) in productie.</span></li>
+    <li><span class="q">1</span><span>Welke Supabase gebruikt productie op Render? Als het een andere is dan <code>zwhrguzd…</code>, herhaal ik de nulmeting daartegen. Als het dezelfde is, staat de dienst stil sinds mei en schrijven de crons niets.</span></li>
+    <li><span class="q">2</span><span>E0 starten: tien actieve chauffeurs vóór 1 oktober. Via je eigen netwerk, of de acquisitie-pijplijn eerst bouwen. Zonder E0 zijn E1 en E2 onmeetbaar.</span></li>
+    <li><span class="q">3</span><span>Auto-aftrek-whitelist verruimen? Nu 13 categorieën; Software, Boekhouding en Bankkosten staan op review. Eén woord in de tabel.</span></li>
+    <li><span class="q">4</span><span>Tweede reviewer in de boekhouder-rol vóór de Q3-sprint van 1 oktober.</span></li>
+    <li><span class="q">5</span><span>Externe uptime-monitor: welke dienst en naar welk nummer alarmeren.</span></li>
   </ul>
 </div>
