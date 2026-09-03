@@ -152,21 +152,21 @@
       <p class="lede">Negen afdelingen, elk met een doel, een meetlat en een ritme. Product is de motor: elke week aantoonbaar makkelijker, betrouwbaarder of waardevoller voor chauffeurs. Onderaan het logboek in de vorm probleem, hypothese, wijziging, resultaat, regel.</p>
     </div>
     <div class="stamp">
-      bijgewerkt <b>3 sep 2026, 12:40</b><br>
+      bijgewerkt <b>3 sep 2026, 19:10</b><br>
       bron <b>agent-library/company/zendiq-afdelingen.html</b><br>
       volgende triage <b>zo 7 sep</b>
     </div>
   </header>
 
   <nav class="strip" aria-label="Afdelingen">
-    <a class="lead" href="#product"><span class="name">Product</span><span class="meta">de verbeterlus; nulmeting gedaan</span><span><span class="chip crit">geen gebruik gemeten</span></span></a>
+    <a class="lead" href="#product"><span class="name">Product</span><span class="meta">de verbeterlus; nulmeting bevestigd</span><span><span class="chip crit">geen gebruik sinds mei</span></span></a>
     <a href="#development"><span class="name">Development</span><span class="meta">superpowers · eigen skills dubbel</span><span><span class="chip warn">opschonen</span></span></a>
     <a href="#operatie"><span class="name">Operatie</span><span class="meta">eigen code is de skill</span><span><span class="chip own">SOP's schrijven</span></span></a>
     <a href="#klant"><span class="name">Klant</span><span class="meta">customer-support geïnstalleerd</span><span><span class="chip ok">beoordelen 17 sep</span></span></a>
     <a href="#groei"><span class="name">Groei</span><span class="meta">SEO sterk, acquisitie niet</span><span><span class="chip info">marketingskills gepland</span></span></a>
     <a href="#finance"><span class="name">Finance</span><span class="meta">finance-plugin geïnstalleerd</span><span><span class="chip ok">beoordelen 17 sep</span></span></a>
     <a href="#compliance"><span class="name">Compliance</span><span class="meta">Wwft in code, AVG-skill mist</span><span><span class="chip info">gepland</span></span></a>
-    <a href="#platform"><span class="name">Platform</span><span class="meta">eigen skills, dun</span><span><span class="chip warn">verrijken</span></span></a>
+    <a href="#platform"><span class="name">Platform</span><span class="meta">cron-monitoring bleek blind</span><span><span class="chip crit">incident, fix klaar</span></span></a>
     <a href="#leren"><span class="name">Leren</span><span class="meta">gereedschap staat, ritueel mist</span><span><span class="chip ok">toereikend</span></span></a>
   </nav>
 
@@ -195,7 +195,7 @@
           <div class="step"><span class="s">Leren</span><span class="who">leren</span><span class="state">regel in memory, skill of test</span></div>
         </div>
       </div>
-      <p class="rule"><b>Eerste bevinding van de lus, 3 sep.</b> De nulmeting hieronder laat geen gebruik zien: geen bon sinds 2 mei, geen betalende chauffeur, geen audit-regel sinds 1 juli. Óf productie draait op een andere database dan waar de repo lokaal naar wijst, óf er is niemand die het product gebruikt. In beide gevallen geldt: zonder gebruik zijn er geen signalen, en zonder signalen draait de lus leeg. Dit gaat vóór elke feature.</p>
+      <p class="rule"><b>Eerste bevinding van de lus, 3 sep.</b> Badr bevestigde dat dit de productiedatabase is. Dus: geen bon sinds 2 mei, geen betalende chauffeur, niemand die het product gebruikt. Zonder gebruik zijn er geen signalen, en zonder signalen draait de lus leeg. Besluit: E0 via een acquisitie-pijplijn (plan in de maak). Tweede bevinding: de cron-monitoring was sinds 11 april blind, zie Platform.</p>
     </div>
   </section>
 
@@ -210,7 +210,7 @@
     <div><span class="v">1 jul</span><span class="l">laatste regel in audit_log; crons schrijven bij elke run</span></div>
     <div><span class="v">n.v.t.</span><span class="l">activatie, correctie-%, twijfel beantwoord: geen data</span></div>
   </div>
-  <p class="note">Meting via de repo-omgeving (<code>.env</code>), alleen aantallen, geen persoonsgegevens. Als Render een andere Supabase gebruikt, is deze meting een dev-database en moet ze opnieuw tegen productie. Dat is besluit 1 hieronder.</p>
+  <p class="note">Meting via de repo-omgeving (<code>.env</code>), alleen aantallen, geen persoonsgegevens. Badr bevestigde op 3 sep dat <code>zwhrguzd…</code> de productiedatabase is.</p>
 
   <h2>Experimenten <small>succescriterium vooraf · meetdatum vast</small></h2>
   <div class="skills">
@@ -355,7 +355,8 @@
     <div class="skills">
       <table>
         <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
-        <tr><td class="skill">welke database is productie<small>audit_log leeg sinds 1 jul in de repo-database, terwijl elke cron-run daar hoort te schrijven</small></td><td>taak</td><td><span class="chip crit">check Render-env</span></td><td class="date">nu</td></tr>
+        <tr><td class="skill">cron-audit blind sinds 11 april<small>audit_log.phone_number is NOT NULL; runMonitored schreef null, elke insert faalde stil, health-check zag niets. Fix op branch <code>fix/cron-audit-phone-null</code>, 1055 tests groen</small></td><td>Whatsapp-bot</td><td><span class="chip crit">wacht op deploy-akkoord</span></td><td class="date">nu</td></tr>
+        <tr><td class="skill">draaien de crons wel?<small>instantie herstartte tussen 08:57 en 16:35 zonder deploy; mogelijk slaapt Render en vuurt geen cron. Bewijs nodig: komt het statusrapport van 08:00 nog aan?</small></td><td>taak</td><td><span class="chip crit">open vraag aan Badr</span></td><td class="date">nu</td></tr>
         <tr><td class="skill">incident-response, deploy-checklist<small>eigen; verrijken met SEV-niveaus, blameless postmortem, 5-whys</small></td><td>agent-library</td><td><span class="chip warn">verrijken</span></td><td class="date">sep</td></tr>
         <tr><td class="skill">Sentry for AI<small>je draait al Sentry</small></td><td>getsentry</td><td><span class="chip info">gepland</span></td><td class="date">bij eerste incident</td></tr>
         <tr><td class="skill">externe uptime-monitor op <code>/health</code><small>geen skill maar een taak: alert naar WhatsApp</small></td><td>taak</td><td><span class="chip crit">open</span></td><td class="date">sep</td></tr>
@@ -383,6 +384,17 @@
   </section>
 
   <h2>Logboek <small>probleem · hypothese · wijziging · resultaat · regel · nieuwste bovenaan</small></h2>
+
+  <div class="entry">
+    <div class="d">3 sep 2026<span><span class="chip crit">Platform</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd>Nul <code>cron_run_*</code> rijen in productie sinds de monitoring op 11 april werd gebouwd. De health-check die elke twee uur stilgevallen jobs moet melden, had dus nooit iets om op te bouwen.</dd>
+      <dt>hypothese</dt><dd>Twee oorzaken naast elkaar: de audit-insert faalt stil (schema), en mogelijk slaapt de Render-instantie zodat crons niet vuren.</dd>
+      <dt>wijziging</dt><dd>Oorzaak 1 bevestigd: <code>audit_log.phone_number</code> is NOT NULL, cron-events schreven null, <code>writeAuditEvent</code> slikte de fout. Fix met regressietest op branch, niet gedeployed. Oorzaak 2 open: vraag aan Badr of het dagelijkse statusrapport nog aankomt.</dd>
+      <dt>resultaat</dt><dd class="open">wacht op deploy-akkoord en antwoord</dd>
+      <dt>regel</dt><dd class="regel">Monitoring die zijn eigen schrijffouten inslikt is geen monitoring. Een audit-insert die faalt moet minstens één keer hard alarmeren.</dd>
+    </dl>
+  </div>
 
   <div class="entry">
     <div class="d">3 sep 2026<span><span class="chip acc">Product</span></span></div>
@@ -452,8 +464,9 @@
 
   <h2>Open besluiten <small>aan Badr</small></h2>
   <ul class="decisions">
-    <li><span class="q">1</span><span>Welke Supabase gebruikt productie op Render? Als het een andere is dan <code>zwhrguzd…</code>, herhaal ik de nulmeting daartegen. Als het dezelfde is, staat de dienst stil sinds mei en schrijven de crons niets.</span></li>
-    <li><span class="q">2</span><span>E0 starten: tien actieve chauffeurs vóór 1 oktober. Via je eigen netwerk, of de acquisitie-pijplijn eerst bouwen. Zonder E0 zijn E1 en E2 onmeetbaar.</span></li>
+    <li><span class="q">1</span><span>Deploy-akkoord voor de cron-audit-fix (branch <code>fix/cron-audit-phone-null</code>, 1055 tests groen).</span></li>
+    <li><span class="q">2</span><span>Komt het statusrapport van 08:00 en het maandagbericht nog aan op je WhatsApp? En draait Render op het gratis plan? Zo nee en ja: de instantie slaapt en er vuurt geen enkele cron; dan hoort de klok buiten de instantie (uptime-monitor of externe scheduler).</span></li>
+    <li><span class="q">2b</span><span>E0 via acquisitie-pijplijn: besloten op 3 sep. Plan volgt na drie vragen over doelgroep, kanaal en waar het draait.</span></li>
     <li><span class="q">3</span><span>Auto-aftrek-whitelist verruimen? Nu 13 categorieën; Software, Boekhouding en Bankkosten staan op review. Eén woord in de tabel.</span></li>
     <li><span class="q">4</span><span>Tweede reviewer in de boekhouder-rol vóór de Q3-sprint van 1 oktober.</span></li>
     <li><span class="q">5</span><span>Externe uptime-monitor: welke dienst en naar welk nummer alarmeren.</span></li>
