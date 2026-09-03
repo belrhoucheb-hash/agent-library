@@ -14,8 +14,34 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
   echo "Laatste commit: $LAST_COMMIT"
 fi
 
-# Toon openstaande backlog items — resolve relatief aan dit script
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Ritueel van vandaag (company/README.md) — zondag = triage
+case "$(date +%u)" in
+  7) echo ""; echo "Ritueel vandaag: zondag-triage (Product) — daarna afdeling-update" ;;
+  1) echo ""; echo "Ritueel vandaag: maandag — weekbericht en maandagbericht steekproef" ;;
+esac
+
+# Experimenten over hun meetdatum (company/experimenten.md, kolom Meten, datums YYYY-MM-DD)
+EXPERIMENTEN="$SCRIPT_DIR/../company/experimenten.md"
+if [ -f "$EXPERIMENTEN" ]; then
+  TODAY=$(date +%F)
+  OVERDUE=$(grep -E '^\| E[0-9]+ ' "$EXPERIMENTEN" | while IFS='|' read -r _ nr naam _ _ _ meten status _; do
+    for d in $(echo "$meten" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}'); do
+      if [[ "$d" < "$TODAY" || "$d" == "$TODAY" ]] && ! echo "$status" | grep -qiE 'behouden|teruggedraaid|afgerond'; then
+        echo "  $(echo "$nr" | tr -d ' ') $(echo "$naam" | sed 's/^ *//;s/ *$//') — meetdatum $d"
+        break
+      fi
+    done
+  done)
+  if [ -n "$OVERDUE" ]; then
+    echo ""
+    echo "Experimenten over hun meetdatum → effectmeting:"
+    echo "$OVERDUE"
+  fi
+fi
+
+# Toon openstaande backlog items — resolve relatief aan dit script
 BACKLOG_DIR="$SCRIPT_DIR/../backlog"
 if [ -d "$BACKLOG_DIR" ]; then
   OPEN_ITEMS=$(grep -r "\- \[ \]" "$BACKLOG_DIR" 2>/dev/null | wc -l | tr -d ' ')
