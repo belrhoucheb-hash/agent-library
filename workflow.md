@@ -104,3 +104,8 @@ research-spike → plan-feature (als besluit positief)
 - **`/clear` tussen ongerelateerde taken** — geen kitchen-sink-sessies.
 - **Meerdere projecten** → aparte sessie per repo; elke sessie laadt
   zijn eigen layer.
+- **Zondag** → `zondag-triage`: signalen, ranglijst, max twee experimenten
+  met succescriterium en meetdatum. Na elke meetdatum → `effectmeting`.
+- **Na elk afgerond stuk Zendiq-werk** → `afdeling-update`: logboek-regel
+  (probleem → hypothese → wijziging → resultaat → regel), pagina genereren
+  en publiceren. Geen feature is klaar vóór de effectmeting.

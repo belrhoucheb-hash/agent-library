@@ -50,21 +50,37 @@ agent-library/
 ├── skills/
 │   ├── plan-feature/SKILL.md
 │   ├── systematic-debug/SKILL.md
-│   ├── code-review/SKILL.md
 │   ├── verify-before-done/SKILL.md
 │   ├── commit-netjes/SKILL.md
 │   ├── project-bootstrap/SKILL.md
 │   ├── deploy-checklist/SKILL.md
 │   ├── context-resume/SKILL.md
 │   ├── research-spike/SKILL.md
-│   └── incident-response/SKILL.md
+│   ├── incident-response/SKILL.md
+│   ├── zondag-triage/SKILL.md    # Product: wekelijkse triage
+│   ├── effectmeting/SKILL.md     # Product: meten tegen criterium
+│   └── afdeling-update/SKILL.md  # Leren: logboek + pagina
 ├── hooks/
 │   ├── session-start.sh          # context laden bij sessie-start
 │   ├── pre-commit-reminder.sh    # review/verify herinnering
 │   └── settings-template.json    # Claude Code hooks-configuratie
+├── agents/
+│   └── verifier.md               # onafhankelijke verificatie (handmatig deployen)
+├── company/                      # bedrijfsopzet Zendiq: afdelingen, experimenten, logboek
+│   ├── README.md                 # model en rituelen
+│   ├── afdelingen/*.md           # één bestand per afdeling
+│   └── build-page.js             # genereert zendiq-afdelingen.html
 └── backlog/
-    └── whatsapp-bot.md           # openstaande punten ZendIQ
+    └── <project>.md              # openstaande punten + ideeënbus per project
 ```
+
+## Company (bedrijfsopzet Zendiq)
+
+Zendiq wordt gerund als bedrijf met negen afdelingen; `company/` is daarvan
+de bron: doel, meetlat, ritme en skills per afdeling, lopende experimenten
+met succescriterium, nulmeting en logboek. `node company/build-page.js`
+genereert de pagina. Rituelen: `zondag-triage`, `effectmeting`,
+`afdeling-update`. Zie `company/README.md`.
 
 ## Installatie (volledig automatisch)
 
