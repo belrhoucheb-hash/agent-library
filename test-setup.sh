@@ -46,6 +46,8 @@ echo "── depends_on referenties ──"
 # Verzamel alle layer-namen
 layer_names=()
 while IFS= read -r line; do
+
+  line="${line%$'\r'}"
   trimmed="${line#"${line%%[![:space:]]*}"}"
   if [[ "$trimmed" == "- name:"* ]]; then
     name="${trimmed#*- name:}"
@@ -87,6 +89,9 @@ find "$REPO_DIR/skills" -name "SKILL.md" -type f | sort | while read -r skill_fi
   in_fm=false
 
   while IFS= read -r line; do
+
+
+    line="${line%$'\r'}"
     if [[ "$line" == "---" && "$in_fm" == false ]]; then in_fm=true; continue; fi
     if [[ "$line" == "---" && "$in_fm" == true ]]; then break; fi
     if $in_fm; then
@@ -124,11 +129,11 @@ if HOME="$TEMP_HOME" bash "$REPO_DIR/setup.sh" > /dev/null 2>&1; then
   fi
 
   # Tel project CLAUDE.md bestanden
-  project_count=$(find "$TEMP_HOME" -name "CLAUDE.md" ! -path "*/.claude/*" 2>/dev/null | wc -l | tr -d ' ')
+  project_count=$(find "$TEMP_HOME" -name "CLAUDE.md" ! -path "*/.claude/*" 2>/dev/null | wc -l | tr -d ' ' || true)
   pass "$project_count project CLAUDE.md bestanden gegenereerd"
 
   # Tel skills
-  skill_count=$(find "$TEMP_HOME/.claude/skills" -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
+  skill_count=$(find "$TEMP_HOME/.claude/skills" -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ' || true)
   pass "$skill_count skills gelinkt"
 else
   fail "setup.sh crashed"
@@ -158,6 +163,18 @@ if grep -rq "sk-[a-zA-Z0-9]\{20,\}\|AKIA[A-Z0-9]\{16\}\|ghp_[a-zA-Z0-9]\{36\}" \
   fail "Mogelijke secrets gevonden in repo-bestanden"
 else
   pass "Geen secrets gedetecteerd"
+fi
+
+# ─── Test 8: company-pagina in sync met de markdown ───
+echo "── Company ──"
+if command -v node >/dev/null 2>&1; then
+  if node "$REPO_DIR/company/build-page.js" --check >/dev/null 2>&1; then
+    pass "zendiq-afdelingen.html in sync met company/*.md"
+  else
+    fail "zendiq-afdelingen.html loopt achter — draai node company/build-page.js"
+  fi
+else
+  warn "node niet gevonden — company-pagina niet gecontroleerd"
 fi
 
 # ─── Resultaat ───

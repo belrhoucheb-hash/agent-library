@@ -29,6 +29,9 @@ resolve_source() {
   local current_name="" current_source="" in_layers=false
 
   while IFS= read -r line; do
+
+
+    line="${line%$'\r'}"
     local trimmed="${line#"${line%%[![:space:]]*}"}"
     if [[ "$trimmed" == "layers:" ]]; then in_layers=true; continue; fi
     if [[ "$trimmed" == "skills:" || "$trimmed" == "hooks:" ]]; then in_layers=false; fi
@@ -117,6 +120,9 @@ current_depends=""
 in_section=""  # "layers", "skills", of ""
 
 while IFS= read -r line; do
+
+
+  line="${line%$'\r'}"
   trimmed="${line#"${line%%[![:space:]]*}"}"
 
   # Track secties
@@ -205,6 +211,9 @@ find "$REPO_DIR/skills" -name "SKILL.md" -type f | sort | while read -r skill_fi
   in_frontmatter=false
 
   while IFS= read -r line; do
+
+
+    line="${line%$'\r'}"
     if [[ "$line" == "---" && "$in_frontmatter" == false ]]; then
       in_frontmatter=true; continue
     elif [[ "$line" == "---" && "$in_frontmatter" == true ]]; then
