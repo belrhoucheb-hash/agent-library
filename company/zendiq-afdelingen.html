@@ -152,7 +152,7 @@
       <p class="lede">Negen afdelingen, elk met een doel, een meetlat en een ritme. Product is de motor: elke week aantoonbaar makkelijker, betrouwbaarder of waardevoller voor chauffeurs. Onderaan het logboek in de vorm probleem, hypothese, wijziging, resultaat, regel.</p>
     </div>
     <div class="stamp">
-      bijgewerkt <b>3 sep 2026, 19:10</b><br>
+      bijgewerkt <b>3 sep 2026, 19:20</b><br>
       bron <b>agent-library/company/zendiq-afdelingen.html</b><br>
       volgende triage <b>zo 7 sep</b>
     </div>
@@ -355,8 +355,8 @@
     <div class="skills">
       <table>
         <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
-        <tr><td class="skill">cron-audit blind sinds 11 april<small>audit_log.phone_number is NOT NULL; runMonitored schreef null, elke insert faalde stil, health-check zag niets. Fix op branch <code>fix/cron-audit-phone-null</code>, 1055 tests groen</small></td><td>Whatsapp-bot</td><td><span class="chip crit">wacht op deploy-akkoord</span></td><td class="date">nu</td></tr>
-        <tr><td class="skill">draaien de crons wel?<small>instantie herstartte tussen 08:57 en 16:35 zonder deploy; mogelijk slaapt Render en vuurt geen cron. Bewijs nodig: komt het statusrapport van 08:00 nog aan?</small></td><td>taak</td><td><span class="chip crit">open vraag aan Badr</span></td><td class="date">nu</td></tr>
+        <tr><td class="skill">cron-audit blind sinds 11 april<small>audit_log.phone_number is NOT NULL; runMonitored schreef null, elke insert faalde stil, health-check zag niets. Fix op branch <code>fix/cron-audit-phone-null</code>, 1055 tests groen</small></td><td>Whatsapp-bot</td><td><span class="chip ok">gedeployed 19:13</span></td><td class="date">bewezen 19:15</td></tr>
+        <tr><td class="skill">draaien de crons wel?<small>Badr: het statusrapport van 08:00 komt niet aan. De instantie slaapt (gratis Render-plan), dus buiten bezoek vuurt geen cron. Betaald plan pas bij eerste betalende klant; tot dan een gratis externe wekker.</small></td><td>taak</td><td><span class="chip crit">bevestigd: slaapt</span></td><td class="date">wekker kiezen</td></tr>
         <tr><td class="skill">incident-response, deploy-checklist<small>eigen; verrijken met SEV-niveaus, blameless postmortem, 5-whys</small></td><td>agent-library</td><td><span class="chip warn">verrijken</span></td><td class="date">sep</td></tr>
         <tr><td class="skill">Sentry for AI<small>je draait al Sentry</small></td><td>getsentry</td><td><span class="chip info">gepland</span></td><td class="date">bij eerste incident</td></tr>
         <tr><td class="skill">externe uptime-monitor op <code>/health</code><small>geen skill maar een taak: alert naar WhatsApp</small></td><td>taak</td><td><span class="chip crit">open</span></td><td class="date">sep</td></tr>
@@ -391,7 +391,7 @@
       <dt>probleem</dt><dd>Nul <code>cron_run_*</code> rijen in productie sinds de monitoring op 11 april werd gebouwd. De health-check die elke twee uur stilgevallen jobs moet melden, had dus nooit iets om op te bouwen.</dd>
       <dt>hypothese</dt><dd>Twee oorzaken naast elkaar: de audit-insert faalt stil (schema), en mogelijk slaapt de Render-instantie zodat crons niet vuren.</dd>
       <dt>wijziging</dt><dd>Oorzaak 1 bevestigd: <code>audit_log.phone_number</code> is NOT NULL, cron-events schreven null, <code>writeAuditEvent</code> slikte de fout. Fix met regressietest op branch, niet gedeployed. Oorzaak 2 open: vraag aan Badr of het dagelijkse statusrapport nog aankomt.</dd>
-      <dt>resultaat</dt><dd class="open">wacht op deploy-akkoord en antwoord</dd>
+      <dt>resultaat</dt><dd>Gedeployed 19:13 (CI-run 33782914859 groen). Om 19:15 schreef de cron <code>sumup-hint</code> de eerste <code>cron_run_completed</code> ooit in productie: oorzaak 1 opgelost. Oorzaak 2 bevestigd door Badr: geen statusrapport, de instantie slaapt. Wekker nog te kiezen.</dd>
       <dt>regel</dt><dd class="regel">Monitoring die zijn eigen schrijffouten inslikt is geen monitoring. Een audit-insert die faalt moet minstens één keer hard alarmeren.</dd>
     </dl>
   </div>
@@ -464,8 +464,7 @@
 
   <h2>Open besluiten <small>aan Badr</small></h2>
   <ul class="decisions">
-    <li><span class="q">1</span><span>Deploy-akkoord voor de cron-audit-fix (branch <code>fix/cron-audit-phone-null</code>, 1055 tests groen).</span></li>
-    <li><span class="q">2</span><span>Komt het statusrapport van 08:00 en het maandagbericht nog aan op je WhatsApp? En draait Render op het gratis plan? Zo nee en ja: de instantie slaapt en er vuurt geen enkele cron; dan hoort de klok buiten de instantie (uptime-monitor of externe scheduler).</span></li>
+    <li><span class="q">1</span><span>Wekker voor de slapende instantie, gratis tot de eerste betalende klant: een externe pinger (cron-job.org of UptimeRobot, account van Badr) elke 10 minuten op <code>/health</code>, of wake-ups vanuit GitHub Actions vlak vóór elke cron-tijd (privé-repo, telt mee in de 2000 gratis minuten).</span></li>
     <li><span class="q">2b</span><span>E0 via acquisitie-pijplijn: besloten op 3 sep. Plan volgt na drie vragen over doelgroep, kanaal en waar het draait.</span></li>
     <li><span class="q">3</span><span>Auto-aftrek-whitelist verruimen? Nu 13 categorieën; Software, Boekhouding en Bankkosten staan op review. Eén woord in de tabel.</span></li>
     <li><span class="q">4</span><span>Tweede reviewer in de boekhouder-rol vóór de Q3-sprint van 1 oktober.</span></li>
