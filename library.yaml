@@ -132,9 +132,6 @@ skills:
     description: "Bug reproduceren, hypothese, één ding per keer verifieren."
     source: skills/systematic-debug/SKILL.md
 
-  - name: code-review
-    description: "Checklist vóór commit of PR."
-    source: skills/code-review/SKILL.md
 
   - name: verify-before-done
     description: "Bewijs vóór je 'klaar' claimt."
@@ -160,6 +157,25 @@ skills:
     description: "Timeboxed technologie-evaluatie: vraag, opties, conclusie."
     source: skills/research-spike/SKILL.md
 
+  - name: zondag-triage
+    description: "Product: signalen, ranglijst, max twee experimenten met criterium en meetdatum."
+    source: skills/zondag-triage/SKILL.md
+
+  - name: effectmeting
+    description: "Product: experiment meten tegen criterium; behouden, terugdraaien of langer meten."
+    source: skills/effectmeting/SKILL.md
+
+  - name: afdeling-update
+    description: "Leren: logboek-regel, company/*.md bijwerken, pagina genereren en publiceren."
+    source: skills/afdeling-update/SKILL.md
+
+  - name: analyze-flow
+    description: "Webhook-, API- of state-flow stap voor stap expliciet maken vóór een fix."
+    source: skills/analyze-flow/SKILL.md
+
+  - name: concurrentie-analyse
+    description: "Markt en concurrenten begrijpen vóór marketing, pricing of productpagina's."
+    source: skills/concurrentie-analyse/SKILL.md
   - name: incident-response
     description: "Productie-incident: triage, mitigeer, root cause, postmortem."
     source: skills/incident-response/SKILL.md

@@ -4,15 +4,19 @@
 
 | Skill | Beschrijving | Bestand |
 |---|---|---|
-| **code-review** | Gebruik net voor een commit, PR of review-verzoek | [skills/code-review/SKILL.md](skills/code-review/SKILL.md) |
+| **afdeling-update** | Gebruik na elk afgerond stuk Zendiq-werk (feature live, meting, besluit, skill) | [skills/afdeling-update/SKILL.md](skills/afdeling-update/SKILL.md) |
+| **analyze-flow** | Gebruik bij webhook flows, API chains, async processen of state-based flows | [skills/analyze-flow/SKILL.md](skills/analyze-flow/SKILL.md) |
 | **commit-netjes** | Gebruik bij elke `git commit` | [skills/commit-netjes/SKILL.md](skills/commit-netjes/SKILL.md) |
+| **concurrentie-analyse** | Systematische concurrentieanalyse en merkverbetering (observe → analyse → understand → compare → adapt → improve). Gebruik bij "analyseer de concurrentie", "benchmark de markt", "verbeter onze productpagina/branding/ads/pricing", of vóór het maken van nieuwe marketing, designs, campagnes of productpagina's | [skills/concurrentie-analyse/SKILL.md](skills/concurrentie-analyse/SKILL.md) |
 | **context-resume** | Gebruik bij het hervatten van werk na een pauze of nieuwe sessie | [skills/context-resume/SKILL.md](skills/context-resume/SKILL.md) |
 | **deploy-checklist** | Gebruik bij elke deploy naar staging of productie | [skills/deploy-checklist/SKILL.md](skills/deploy-checklist/SKILL.md) |
+| **effectmeting** | Gebruik zodra een experiment in company/experimenten.md over zijn meetdatum is | [skills/effectmeting/SKILL.md](skills/effectmeting/SKILL.md) |
 | **incident-response** | Gebruik bij een productie-probleem of onverwachte outage | [skills/incident-response/SKILL.md](skills/incident-response/SKILL.md) |
 | **launch-checklist** | Gebruik bij het lanceren of promoten van een project | [skills/launch-checklist/SKILL.md](skills/launch-checklist/SKILL.md) |
-| **plan-feature** | Gebruik vóór elke niet-triviale wijziging (feature, refactor, bugfix met onduidelijke oorzaak), vóór je code aanraakt | [skills/plan-feature/SKILL.md](skills/plan-feature/SKILL.md) |
+| **plan-feature** | Gebruik vóór elke niet-triviale wijziging | [skills/plan-feature/SKILL.md](skills/plan-feature/SKILL.md) |
 | **project-bootstrap** | Gebruik bij het starten van een nieuw project | [skills/project-bootstrap/SKILL.md](skills/project-bootstrap/SKILL.md) |
 | **project-status** | Gebruik om de voortgang van een project te bekijken | [skills/project-status/SKILL.md](skills/project-status/SKILL.md) |
 | **research-spike** | Gebruik bij het evalueren van een technologie, library, of aanpak voordat je commit aan een implementatie | [skills/research-spike/SKILL.md](skills/research-spike/SKILL.md) |
-| **systematic-debug** | Gebruik bij elke bug, test-failure of onverwacht gedrag, vóór je een fix voorstelt | [skills/systematic-debug/SKILL.md](skills/systematic-debug/SKILL.md) |
-| **verify-before-done** | Gebruik vóór je "klaar", "werkt" of "fixed" claimt of een commit/PR afrondt | [skills/verify-before-done/SKILL.md](skills/verify-before-done/SKILL.md) |
+| **systematic-debug** | Gebruik bij elke bug of onverwacht gedrag | [skills/systematic-debug/SKILL.md](skills/systematic-debug/SKILL.md) |
+| **verify-before-done** | Gebruik vóór je "klaar", "werkt", "fixed" of "live" zegt | [skills/verify-before-done/SKILL.md](skills/verify-before-done/SKILL.md) |
+| **zondag-triage** | Gebruik elke zondag of als de sessie-start-hook het meldt | [skills/zondag-triage/SKILL.md](skills/zondag-triage/SKILL.md) |

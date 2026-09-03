@@ -1,64 +1,33 @@
 ---
 name: plan-feature
-description: Gebruik vóór elke niet-triviale wijziging (feature, refactor, bugfix met onduidelijke oorzaak), vóór je code aanraakt — intent, context, plan, akkoord, dan pas uitvoeren.
+description: Gebruik vóór elke niet-triviale wijziging — huisregels bovenop superpowers brainstorming en writing-plans: Nederlands plan met succescriterium, akkoord vóór code, plan.md bij groter werk.
 ---
 
 # Skill: plan-feature
 
-Gebruik dit voor elke niet-triviale wijziging: nieuwe feature, grotere
-refactor, of bugfix met onduidelijke oorzaak.
+Het denkwerk doet superpowers (`brainstorming` voor de intent,
+`writing-plans` voor het plan). Dit zijn de huisregels die daar bovenop
+gelden.
 
-## Wanneer
+## Huisregels
 
-- Taak raakt meer dan één bestand of module.
-- Intent is niet 100% helder uit de vraag.
-- Er zijn meerdere redelijke aanpakken.
-
-## Stappen
-
-1. **Intent uitdiepen.** Stel 1-3 korte vragen die scope en succes
-   vastleggen. Wat moet er kunnen? Wat expliciet niet?
-2. **Context lezen.** Open de relevante bestanden. Begrijp hoe het
-   vandaag werkt voor je iets verandert.
-3. **Aanpak kiezen.** Schrijf 2-10 stappen op die samen de oplossing
-   vormen. Per stap: welk bestand, welke verandering.
-4. **Risico's noemen.** Wat kan breken? Welke tests dekken het?
-   Welke niet?
-5. **Bevestiging vragen.** Leg het plan voor. Start pas met code zodra
-   er akkoord is.
-6. **Uitvoeren in de volgorde van het plan.** Bij afwijking: pauzeer,
-   leg uit, vraag akkoord.
-
-## Output
-
-Een kort plan (5-15 regels) met genummerde stappen, niet een essay.
-Eindig met één vraag: "Akkoord?"
-
-## Persistent plan (plan.md)
-
-Bij grotere features — werk dat meerdere sessies beslaat of meer dan
-drie bestanden raakt — schrijf het goedgekeurde plan naar `plan.md` in
-de repo-root en commit het mee met het werk. Vier secties:
-
-```
-# Plan: <naam> (<datum>)
-
-## Files that change
-## Order of work
-## Risks
-## Proof
-```
-
-- **Proof** benoemt vóóraf welk bewijs "klaar" aantoont: welke test,
-  welk commando, welke screenshot.
-- Wijk je tijdens de bouw af, werk `plan.md` bij in dezelfde commit —
-  de gemergde diff moet matchen met het plan.
-- Is het *waarom* nergens vastgelegd, zet dan probleem, gewenste
-  uitkomst, constraints en open vragen in een `intent.md` ernaast.
+1. **Eerst het probleem met een cijfer, dan de hypothese.** Bij Zendiq-werk:
+   welk signaal of welke meting zegt dat dit het probleem is? Geen cijfer,
+   dan eerst meten (`scripts/metrics.js`) of het als idee in de ideeënbus.
+2. **Succescriterium en meetdatum vooraf.** Als getal, van → naar, en
+   wanneer we meten. Zet het experiment in `company/experimenten.md`.
+3. **Plan in het Nederlands, 5 tot 15 regels, genummerd**, per stap bestand
+   en verandering. Eindig met één vraag: "Akkoord?" Geen code vóór akkoord.
+4. **Groter werk (meerdere sessies of meer dan drie bestanden):** schrijf het
+   goedgekeurde plan naar `plan.md` in de repo-root met de secties
+   *Files that change*, *Order of work*, *Risks*, *Proof*. Proof benoemt
+   vooraf welk bewijs "klaar" aantoont. Wijk je af, werk `plan.md` bij in
+   dezelfde commit.
+5. **Feature-branch, één doel per commit** (zie `commit-netjes`), deploy
+   alleen via `deploy-checklist` en met expliciet akkoord.
 
 ## Rode vlaggen
 
-- Je begint met code schrijven voor je de intent helder hebt.
-- Het plan telt meer dan 10 stappen — splits de taak.
-- Je weet niet welke test de verandering zou dekken.
-- De gebruiker heeft niet bevestigd en je bent al aan het typen.
+- Bouwen zonder nulmeting of criterium: "we zien wel of het helpt".
+- Meer dan 10 stappen: splits.
+- Je typt al code en de gebruiker heeft nog niet bevestigd.

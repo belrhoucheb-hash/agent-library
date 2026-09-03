@@ -1,46 +1,33 @@
 ---
 name: verify-before-done
-description: Gebruik vóór je "klaar", "werkt" of "fixed" claimt of een commit/PR afrondt — bewijs vóór beweringen, draai de check, toon de output.
+description: Gebruik vóór je "klaar", "werkt", "fixed" of "live" zegt — bewijs per claim, gedraaid en getoond; bij Zendiq geldt bovendien: pas klaar na effectmeting.
 ---
 
 # Skill: verify-before-done
 
-Gebruik dit voor je "klaar", "werkt", "fixed" of "gedeployed" zegt.
-Bewijs gaat altijd vóór claims.
-
-## Wanneer
-
-- Je staat op het punt een taak als voltooid te markeren.
-- Je gaat commiten of een PR openzetten.
-- Iemand vraagt "is het af?"
+Bewijs gaat vóór claims. Superpowers `verification-before-completion`
+geeft het principe; dit is de bewijstabel die hier geldt.
 
 ## Stappen
 
-1. **Wat is de claim?** Schrijf op wat je beweert: "de bug is weg",
-   "de test slaagt", "de endpoint werkt", "de deploy is live".
-2. **Kies bewijs per claim.** Elke claim heeft een eigen soort bewijs:
+1. **Benoem de claim.** "De bug is weg", "de test slaagt", "de deploy is live".
+2. **Kies het bewijs dat bij de claim past en draai het echt.**
 
    | Claim | Bewijs |
    |---|---|
-   | Bug is weg | Reproductie-stappen → nu slaagt ze |
-   | Test slaagt | Output van `npm test` / `node test-X.js` |
-   | Endpoint werkt | `curl` respons met status en body |
+   | Bug is weg | Reproductie-stappen slagen nu |
+   | Test slaagt | Output van `npm test` |
+   | Endpoint werkt | `curl` met status en body |
    | UI werkt | Browser-check van happy path én één edge case |
-   | Deploy is live | `curl` naar prod URL of zichtbare statuscode |
+   | Deploy is live | HTTP-respons van de productie-URL |
    | Database update | `select` die het nieuwe record toont |
+   | Feature is klaar (Zendiq) | Gemeten tegen het succescriterium via `effectmeting` |
 
-3. **Draai het bewijs.** Daadwerkelijk. Niet "dit zou moeten werken".
-4. **Plak of vat het resultaat samen.** In je antwoord aan de gebruiker.
-   Niet alleen "klaar" — toon wat je zag.
-5. **Bij geen toegang:** zeg dat expliciet. "Ik kan dit niet verifiëren
-   vanaf hier — draai jij even `X` en stuur de output?"
+3. **Toon het resultaat** in je antwoord. Niet "klaar", maar wat je zag.
+4. **Geen toegang?** Zeg dat expliciet en vraag om het commando en de output.
 
 ## Rode vlaggen
 
-- Je gebruikt "zou moeten", "waarschijnlijk", "ik denk dat" in een
-  afrondende uitspraak.
-- Je hebt de test-output niet gezien.
-- Je claimt dat iets live is zonder een HTTP-respons gezien te hebben.
-- Je vinkt een taak af omdat de code er logisch uitziet.
-- Type-check slaagt en jij noemt dat "getest" — type-checks testen
-  types, niet gedrag.
+- "Zou moeten", "waarschijnlijk", "ik denk dat" in een afrondende zin.
+- Type-check slaagt en jij noemt dat "getest".
+- "Live" zonder HTTP-respons; "klaar" zonder meting.

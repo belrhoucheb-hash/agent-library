@@ -1,47 +1,29 @@
 ---
 name: systematic-debug
-description: Gebruik bij elke bug, test-failure of onverwacht gedrag, vóór je een fix voorstelt — reproduceer, observeer, één hypothese per keer.
+description: Gebruik bij elke bug of onverwacht gedrag — huisregels bovenop superpowers systematic-debugging: reproductie als falende test, test-lock via .claude/fix-in-progress, oorzaak in de commit-message.
 ---
 
 # Skill: systematic-debug
 
-Gebruik dit bij elke bug, test-failure of onverwacht gedrag — voor je
-een fix voorstelt.
+Het proces staat in superpowers `systematic-debugging` (vier fasen,
+één hypothese per keer). Dit zijn de huisregels die daar bovenop gelden.
 
-## Wanneer
+## Huisregels
 
-- Code doet iets dat je niet verwacht.
-- Een test faalt en je weet niet zeker waarom.
-- Een eerdere fix heeft het probleem niet opgelost.
-
-## Stappen
-
-1. **Reproduceer.** Vind het kleinste commando, invoer of klik-pad dat
-   de bug betrouwbaar oproept. Zonder reproductie geen fix. Leg de
-   reproductie waar mogelijk vast als falende test, en maak daarna
-   `.claude/fix-in-progress` aan in de project-root — zolang die
-   bestaat blokkeert een hook edits aan test-bestanden (fix de code,
-   niet de test).
-2. **Observeer, niet gok.** Kijk naar de echte output: logs, stack
-   trace, response body. Niet naar wat je *denkt* dat er gebeurt.
-3. **Stel één hypothese op.** In één zin: "Ik denk dat X gebeurt omdat Y."
-4. **Test die hypothese.** Verander één ding. Draai opnieuw. Klopt de
-   uitkomst?
-5. **Ja → fix de oorzaak.** Nee → hypothese was fout, terug naar 3 met
-   nieuwe informatie. Niet stapelen.
-6. **Verifieer de fix.** Draai de reproductie opnieuw. Draai ook een
-   brede test om regressies te vangen. Verwijder daarna
+1. **Reproductie eerst, als falende test waar het kan.** Maak daarna
+   `.claude/fix-in-progress` aan in de project-root: zolang die bestaat
+   blokkeert een hook edits aan test-bestanden. Fix de code, niet de test.
+2. **Kijk naar echte output**: logs, stack trace, response body, databaserij.
+   Bij productie: eerst `incident-response` (stabiliseren), dan debuggen.
+3. **Eén verandering per poging.** Drie pogingen zonder reproductie: stop en
+   formuleer de hypothese opnieuw.
+4. **Verifieer met de reproductie én de brede suite.** Verwijder daarna
    `.claude/fix-in-progress`.
-7. **Noteer wat je leerde.** Één zin in de commit-message: *waarom*
-   de bug ontstond, niet alleen *wat* je veranderde.
+5. **De commit-message zegt waaróm de bug ontstond**, niet alleen wat er
+   veranderde. Twee keer dezelfde fout: regel in de project-layer of hook.
 
 ## Rode vlaggen
 
-- Je verandert meerdere dingen tegelijk — je weet niet welke hielp.
-- Je voegt try/catch of `|| true` toe zonder de oorzaak te begrijpen.
-- Je past de test aan in plaats van de code — alleen doen als de test
-  aantoonbaar fout was.
-- Je "fixt" een symptoom dieper in de stack terwijl de oorzaak hoger
-  zit.
-- Je hebt drie pogingen gedaan zonder reproductie — stop, stel
-  hypothese opnieuw.
+- try/catch of `|| true` zonder de oorzaak te kennen.
+- De test aanpassen in plaats van de code.
+- Een symptoom fixen dieper in de stack terwijl de oorzaak hoger zit.
