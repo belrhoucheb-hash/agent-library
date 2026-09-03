@@ -5,7 +5,7 @@ Nieuwste bovenaan. Elke regel: probleem → hypothese → wijziging → resultaa
 ## 3 sep 2026 | Leren:acc | Development:ok
 probleem: De bedrijfsopzet bestond alleen als pagina; afdelingen, rituelen en skills waren nergens werkend.
 hypothese: Afdelingen als markdown-bron, drie Product-skills en een gegenereerde pagina maken de lus uitvoerbaar zonder dubbele bronnen.
-wijziging: `company/afdelingen/*.md`, `experimenten.md`, `nulmeting.md`, `logboek.md`, `besluiten.md`; `build-page.js` genereert de pagina; skills `zondag-triage`, `effectmeting`, `afdeling-update`; hook meldt het ritueel van de dag; dubbele skills teruggebracht tot huisregels; `scripts/metrics.js` in de bot.
+wijziging: `company/afdelingen/*.md`, `experimenten.md`, `nulmeting.md`, `logboek.md`, `besluiten.md`; `build-page.js` genereert de pagina; skills `zondag-triage`, `effectmeting`, `afdeling-update`; hook meldt het ritueel van de dag; dubbele skills teruggebracht tot huisregels; `scripts/metrics.js` in de bot (live via commit d16f202, CI groen).
 resultaat: `test-setup.sh` groen (8 tests, incl. pagina-sync), drie skills zichtbaar in de skill-lijst, hook toont ritueel en verstreken meetdata. Eerste echte `zondag-triage`: zo 7 sep.
 regel: Eén bron per feit. De pagina wordt gegenereerd, nooit met de hand bewerkt.
 
