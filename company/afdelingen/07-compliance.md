@@ -1,5 +1,5 @@
 # Compliance
-strip: info | Wwft in code; regels voor outreach
+strip: warn | verwerkersovereenkomst live, jurist-check open
 meta: Wwft, AVG, bewaarplicht, opt-in
 
 ## Doel
@@ -15,5 +15,6 @@ Dossiers compleet, bevindingen per kwartaal, nul klachten op outreach.
 | Skill | Detail | Bron | Status | Beoordelen |
 |---|---|---|---|---|
 | wwft-flow, period-snapshots, messages-purge | in de bot | Whatsapp-bot | own: eigen code | live |
-| gdpr-dsgvo-expert | DPIA, verwerkingsregister, rechten van betrokkenen | alirezarezvani/claude-skills | info: gepland | vóór verwerkersovereenkomsten |
+| verwerkersovereenkomst | zendiq.nl/verwerkersovereenkomst.html: AVG art. 28, subverwerkers, maatregelen, bewaartermijnen; 13 punten [controleren] | Whatsapp-bot | warn: live 4 sep, jurist-check open | vóór de eerste fleet owner (E7) |
+| gdpr-dsgvo-expert | DPIA, verwerkingsregister, rechten van betrokkenen | alirezarezvani/claude-skills | info: gepland | bij de jurist-check van de verwerkersovereenkomst |
 | Wwft-herbeoordeling | SOP; pas schrijven bij klanten | zelf schrijven | info: later | vóór december |
