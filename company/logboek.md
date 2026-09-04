@@ -2,6 +2,13 @@
 
 Nieuwste bovenaan. Elke regel: probleem → hypothese → wijziging → resultaat → regel. Kop: `## <datum> | <Afdeling>:<kleur> | ...`
 
+## 4 sep 2026 | Klant:ok | Compliance:ok
+probleem: Na een onleesbare foto hing de chauffeur af van een medewerker die de alerts-tab opent, en de verwerkersovereenkomst had dertien onbevestigde feiten over subverwerkers.
+hypothese: Laat de chauffeur de bon zelf typen of inspreken en koppel die binnen twee uur aan de bewaarde foto, dan hoeft niemand op de admin te letten; en de feiten over subverwerkers zijn uit openbare bronnen te halen zonder jurist.
+wijziging: PR #23: attachStoredImageToReceipt, findSelfResolvableAlert (jongste open ocr_failed met foto, hooguit 2 uur), koppeling na tekst- en spraakbon met audit-event actor user, regel "Gekoppeld aan je foto van zojuist" met alleen het bestaande commando *verwijder*. PR #22: twaalf van de dertien [controleren]-punten ingevuld (Supabase in AWS Londen via de IP-reeksen, DPF-certificeringen van Twilio, Meta, Anthropic, OpenAI, Supabase en Sentry, SCC's bij Render, geen training op API-data, Wwft vijf jaar); alleen de Render-regio staat open. Plus scripts/submit-whatsapp-templates.js dat de vier templates via de Content API indient. Bewijs: 1302 tests groen na merge van main; CI-run 33854296527 groen (PR #22); CI-run 33857253168 voor PR #23; verwerkersovereenkomst 200 met de nieuwe feiten.
+resultaat: open: meten 1 okt (E6, criterium aangescherpt: ≥ 50% zelf opgelost binnen 2 uur). Templates nog niet ingediend: de Twilio-token lokaal is ongeldig en de browser-extensie rendert niets.
+regel: Wie wacht op een mens, wacht te lang bij een bedrijf van één mens: geef de gebruiker eerst een weg om het zelf af te maken, en laat de mens het vangnet zijn. En: feiten over leveranciers staan in hun DPF-verklaring, DPA en IP-reeksen; alleen de eigen accountinstellingen (regio) vragen een login.
+
 ## 4 sep 2026 | Platform:ok | Klant:ok | Compliance:warn
 probleem: Drie gaten uit de livegang-analyse: (1) buiten het 24-uursvenster van Meta weigert Twilio vrije tekst (fout 63016) en de code kende geen templates, dus cron-berichten aan stille chauffeurs vielen weg zonder spoor; (2) bij een OCR-fout werd de foto weggegooid en kreeg de chauffeur alleen "kon het bonnetje niet lezen"; (3) er was geen verwerkersovereenkomst voor fleet owners (AVG art. 28).
 hypothese: Template plus parkeren tot het volgende inkomende bericht levert elk cron-bericht af; foto bewaren plus invullen door een medewerker geeft nul verloren bonnen; een pagina met aanvaarding bij het fleet-account volstaat als overeenkomst (E5 t/m E7).

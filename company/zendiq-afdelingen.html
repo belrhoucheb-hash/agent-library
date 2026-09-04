@@ -153,7 +153,7 @@
       <p class="lede">Negen afdelingen, elk met een doel, een meetlat en een ritme. Product is de motor: elke week aantoonbaar makkelijker, betrouwbaarder of waardevoller voor chauffeurs. Onderaan het logboek in de vorm probleem, hypothese, wijziging, resultaat, regel.</p>
     </div>
     <div class="stamp">
-      bijgewerkt <b>4 sep 2026, 10:27</b><br>
+      bijgewerkt <b>4 sep 2026, 11:14</b><br>
       bron <b>agent-library/company/*.md</b><br>
       volgende triage <b>zo 6 sep</b>
     </div>
@@ -166,7 +166,7 @@
     <a href="#klant"><span class="name">Klant</span><span class="meta">actief binnen 48 uur en blijven</span><span><span class="chip ok">customer-support geïnstalleerd</span></span></a>
     <a href="#groei"><span class="name">Groei</span><span class="meta">eerst tien actieve chauffeurs</span><span><span class="chip crit">acquisitielijn bouwen (E0)</span></span></a>
     <a href="#finance"><span class="name">Finance</span><span class="meta">geld komt binnen en klopt</span><span><span class="chip ok">finance-plugin geïnstalleerd</span></span></a>
-    <a href="#compliance"><span class="name">Compliance</span><span class="meta">Wwft, AVG, bewaarplicht, opt-in</span><span><span class="chip warn">verwerkersovereenkomst live, jurist-check open</span></span></a>
+    <a href="#compliance"><span class="name">Compliance</span><span class="meta">Wwft, AVG, bewaarplicht, opt-in</span><span><span class="chip ok">verwerkersovereenkomst live met feiten; alleen Render-regio open</span></span></a>
     <a href="#platform"><span class="name">Platform</span><span class="meta">templates en parkeren live 4 sep</span><span><span class="chip ok">wakker, crons lopen, berichten komen aan</span></span></a>
     <a href="#leren"><span class="name">Leren</span><span class="meta">elke fout een regel</span><span><span class="chip ok">afdeling-update als ritueel</span></span></a>
   </nav>
@@ -231,7 +231,7 @@
       <tr><td class="num">E3</td><td class="skill">Plugins customer-support en finance<small>geïnstalleerd 3 sep</small></td><td>Geen skills voor Klant en Finance. Hypothese: de Anthropic-plugins dekken het meeste.</td><td>In ≥ 3 sessies gebruikt met aantoonbaar resultaat, anders verwijderen</td><td class="date">17 sep</td><td><span class="chip ok">loopt</span></td></tr>
       <tr><td class="num">E4</td><td class="skill">AI-kosten meetbaar en lager<small>branch feature/ai-cost-steps, 4 sep</small></td><td>Kosten per gebruiker onbekend; elk tekstbericht een model-call van 3,3k tokens. Hypothese: woordenlijst, schema-output en één foto-ingang halveren de kosten zonder kwaliteitsverlies.</td><td>≥ 50% van de tekstberichten via keyword (intent_keyword_hit t.o.v. intent_classify) · ai_parse_failed = 0 · ≤ $0,25 AI-kosten per actieve gebruiker per maand</td><td class="date">1 okt</td><td><span class="chip warn">wacht op deploy en gebruik</span></td></tr>
       <tr><td class="num">E5</td><td class="skill">Meta-templates en geparkeerde berichten<small>live 4 sep (PR #21); eigen WhatsApp Business-nummer bevestigd, wacht op template-SID's</small></td><td>Buiten het 24-uursvenster weigert Twilio vrije tekst (fout 63016); cron-berichten kwamen dan niet aan en niemand zag het. Hypothese: template plus parkeren tot het volgende inkomende bericht levert elk cron-bericht af.</td><td>0 geparkeerde rijen ouder dan 7 dagen zonder aflevering, bij ≥ 10 actieve chauffeurs; nulmeting: 0 gearchiveerde berichten, geen data</td><td class="date">1 okt</td><td><span class="chip warn">wacht op templates</span></td></tr>
-      <tr><td class="num">E6</td><td class="skill">Onleesbare bon bewaren en handmatig invullen<small>live 4 sep (PR #21)</small></td><td>Bij een OCR-fout ging de foto verloren en stopte de flow met "kon niet lezen". Hypothese: foto bewaren plus invullen door een medewerker geeft 0 verloren bonnen.</td><td>100% van de ocr_failed-alerts binnen 1 werkdag afgerond of genegeerd; 0 alerts zonder foto; nulmeting: 0 ocr_failed-alerts</td><td class="date">1 okt</td><td><span class="chip warn">wacht op gebruik</span></td></tr>
+      <tr><td class="num">E6</td><td class="skill">Onleesbare bon bewaren, chauffeur lost zelf op<small>live 4 sep (PR #21, zelf oplossen PR #23)</small></td><td>Bij een OCR-fout ging de foto verloren en stopte de flow met "kon niet lezen". Hypothese: foto bewaren plus typen of inspreken door de chauffeur (binnen 2 uur) geeft 0 verloren bonnen zonder dat iemand op de admin hoeft te letten.</td><td>≥ 50% van de onleesbare bonnen door de chauffeur zelf opgelost binnen 2 uur; de rest binnen 1 werkdag via de admin; 0 alerts zonder foto; nulmeting: 0 ocr_failed-alerts</td><td class="date">1 okt</td><td><span class="chip warn">wacht op gebruik</span></td></tr>
       <tr><td class="num">E7</td><td class="skill">Verwerkersovereenkomst voor fleet owners<small>live 4 sep op zendiq.nl/verwerkersovereenkomst.html; [controleren]-punten open</small></td><td>Zonder verwerkersovereenkomst is de verwerking voor wagenparken niet AVG-conform. Hypothese: pagina plus aanvaarding bij het fleet-account volstaat.</td><td>Jurist-check gedaan en de eerste fleet owner heeft aanvaard vóór zijn chauffeurs zijn uitgenodigd</td><td class="date">eerste fleet-onboarding</td><td><span class="chip crit">jurist-check</span></td></tr>
       <tr><td class="num">E8</td><td class="skill">Intake pas na betaling<small>branch feat/intake-na-betaling, 4 sep</small></td><td>Zeven vragen vóór de eerste bon, terwijl de site "foto, vijf seconden" belooft. Hypothese: eerste bon binnen twee vragen en de fiscale intake pas na betaling plus aangifte-wens geeft meer activatie.</td><td>≥ 60% van de nieuwe nummers stuurt binnen 48 uur een bon, bij ≥ 10 nieuwe nummers; nulmeting 4 sep: 0 nieuwe nummers in 8 weken</td><td class="date">1 okt</td><td><span class="chip warn">wacht op deploy en gebruik</span></td></tr>
       <tr><td class="num">E9</td><td class="skill">Tiende bon als beloning<small>branch feat/ux-tiende-bon, 4 sep</small></td><td>De tiende bon kwam met een waarschuwing en vier plannen. Hypothese: bedanken plus twee keuzes op maat van de rol geeft meer upgrades op het moment van de tiende bon.</td><td>≥ 30% van de chauffeurs die de tiende bon halen upgradet binnen 7 dagen; nulmeting: 0 chauffeurs bij de tiende bon</td><td class="date">1 okt</td><td><span class="chip warn">wacht op deploy en gebruik</span></td></tr>
@@ -294,7 +294,7 @@
         <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
         <tr><td class="skill">customer-support<small>triage, antwoorden, escalatie, KB-artikelen</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip ok">geïnstalleerd 3 sep</span></td><td class="date">17 sep (E3)</td></tr>
         <tr><td class="skill">weekbericht, helpdesk-AI, onboarding-drip<small>in de bot</small></td><td>Whatsapp-bot</td><td><span class="chip own">eigen code</span></td><td class="date">live</td></tr>
-        <tr><td class="skill">onleesbare bon<small>foto blijft aan de alert hangen, medewerker vult hem in vanuit de admin, chauffeur krijgt bericht; alerts-tab dagelijks openen</small></td><td>Whatsapp-bot</td><td><span class="chip own">live 4 sep (PR #21)</span></td><td class="date">1 okt (E6)</td></tr>
+        <tr><td class="skill">onleesbare bon<small>foto blijft aan de alert hangen; typt of spreekt de chauffeur de bon binnen 2 uur in, dan koppelt de bot de foto en sluit de alert zelf; anders vult een medewerker hem in vanuit de admin</small></td><td>Whatsapp-bot</td><td><span class="chip own">live 4 sep (PR #21, #23)</span></td><td class="date">1 okt (E6)</td></tr>
       </table>
     </div>
   </section>
@@ -351,7 +351,7 @@
       <table>
         <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
         <tr><td class="skill">wwft-flow, period-snapshots, messages-purge<small>in de bot</small></td><td>Whatsapp-bot</td><td><span class="chip own">eigen code</span></td><td class="date">live</td></tr>
-        <tr><td class="skill">verwerkersovereenkomst<small>zendiq.nl/verwerkersovereenkomst.html: AVG art. 28, subverwerkers, maatregelen, bewaartermijnen; 13 punten [controleren]</small></td><td>Whatsapp-bot</td><td><span class="chip warn">live 4 sep, jurist-check open</span></td><td class="date">vóór de eerste fleet owner (E7)</td></tr>
+        <tr><td class="skill">verwerkersovereenkomst<small>zendiq.nl/verwerkersovereenkomst.html: AVG art. 28, subverwerkers met DPF/SCC-grondslag, maatregelen, bewaartermijnen; open: Render-regio</small></td><td>Whatsapp-bot</td><td><span class="chip ok">live 4 sep, feiten 4 sep</span></td><td class="date">vóór de eerste fleet owner (E7)</td></tr>
         <tr><td class="skill">gdpr-dsgvo-expert<small>DPIA, verwerkingsregister, rechten van betrokkenen</small></td><td>alirezarezvani/claude-skills</td><td><span class="chip info">gepland</span></td><td class="date">bij de jurist-check van de verwerkersovereenkomst</td></tr>
         <tr><td class="skill">Wwft-herbeoordeling<small>SOP; pas schrijven bij klanten</small></td><td>zelf schrijven</td><td><span class="chip info">later</span></td><td class="date">vóór december</td></tr>
       </table>
@@ -400,6 +400,17 @@
   </section>
 
   <h2>Logboek <small>probleem · hypothese · wijziging · resultaat · regel · nieuwste bovenaan</small></h2>
+
+  <div class="entry">
+    <div class="d">4 sep 2026<span><span class="chip ok">Klant</span> <span class="chip ok">Compliance</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd class="">Na een onleesbare foto hing de chauffeur af van een medewerker die de alerts-tab opent, en de verwerkersovereenkomst had dertien onbevestigde feiten over subverwerkers.</dd>
+      <dt>hypothese</dt><dd class="">Laat de chauffeur de bon zelf typen of inspreken en koppel die binnen twee uur aan de bewaarde foto, dan hoeft niemand op de admin te letten; en de feiten over subverwerkers zijn uit openbare bronnen te halen zonder jurist.</dd>
+      <dt>wijziging</dt><dd class="">PR #23: attachStoredImageToReceipt, findSelfResolvableAlert (jongste open ocr_failed met foto, hooguit 2 uur), koppeling na tekst- en spraakbon met audit-event actor user, regel "Gekoppeld aan je foto van zojuist" met alleen het bestaande commando *verwijder*. PR #22: twaalf van de dertien [controleren]-punten ingevuld (Supabase in AWS Londen via de IP-reeksen, DPF-certificeringen van Twilio, Meta, Anthropic, OpenAI, Supabase en Sentry, SCC's bij Render, geen training op API-data, Wwft vijf jaar); alleen de Render-regio staat open. Plus scripts/submit-whatsapp-templates.js dat de vier templates via de Content API indient. Bewijs: 1302 tests groen na merge van main; CI-run 33854296527 groen (PR #22); CI-run 33857253168 voor PR #23; verwerkersovereenkomst 200 met de nieuwe feiten.</dd>
+      <dt>resultaat</dt><dd class="open">open: meten 1 okt (E6, criterium aangescherpt: ≥ 50% zelf opgelost binnen 2 uur). Templates nog niet ingediend: de Twilio-token lokaal is ongeldig en de browser-extensie rendert niets.</dd>
+      <dt>regel</dt><dd class="regel">Wie wacht op een mens, wacht te lang bij een bedrijf van één mens: geef de gebruiker eerst een weg om het zelf af te maken, en laat de mens het vangnet zijn. En: feiten over leveranciers staan in hun DPF-verklaring, DPA en IP-reeksen; alleen de eigen accountinstellingen (regio) vragen een login.</dd>
+    </dl>
+  </div>
 
   <div class="entry">
     <div class="d">4 sep 2026<span><span class="chip ok">Platform</span> <span class="chip ok">Klant</span> <span class="chip warn">Compliance</span></span></div>
@@ -529,7 +540,8 @@
     <li><span class="q">3</span><span>Tweede reviewer in de boekhouder-rol vóór de Q3-sprint van 1 oktober, zodra er aangiftes zijn.</span></li>
     <li><span class="q">4</span><span>Nog te bewijzen door jou: echte foto-bon (btw-regel) en parkeerticket (tariefvraag) in productie.</span></li>
     <li><span class="q">5</span><span>Afgesloten 4 sep: feature/ai-cost-steps gemerged via PR #20 en live. Nog open: één bericht en één bonfoto sturen en <code>ai_call</code> in audit_log controleren.</span></li>
-    <li><span class="q">6</span><span>Jurist-check van de verwerkersovereenkomst: 13 punten staan als [controleren] (regio's van Supabase en Render, doorgiftegrondslagen per subverwerker, Wwft-bewaartermijn, trainingsvoorwaarden van de AI-API's). Vóór de eerste fleet owner tekent.</span></li>
-    <li><span class="q">7</span><span>Wie opent dagelijks de alerts-tab in de admin voor onleesbare bonnen? Voorstel: een regel in het dagelijkse statusrapport plus een escalatie na 24 uur; nog te bouwen.</span></li>
+    <li><span class="q">6</span><span>Verwerkersovereenkomst: twaalf van de dertien punten zijn op 4 sep ingevuld uit openbare bronnen. Open: de Render-regio (Render-dashboard, Settings, Region), en Supabase staat in AWS Londen (VK, adequaatheidsbesluit); wil je alles binnen de EU, dan is dat een migratie naar Frankfurt. Jurist-check blijft aan te raden vóór de eerste fleet owner tekent.</span></li>
+    <li><span class="q">7</span><span>Afgesloten 4 sep: de chauffeur lost een onleesbare bon zelf op door hem binnen twee uur te typen of in te spreken (PR #23); de admin blijft het vangnet.</span></li>
+    <li><span class="q">8</span><span>Twilio-templates indienen: de lokale Twilio-token is ongeldig (401). Zet een geldige TWILIO_AUTH_TOKEN in .env en draai <code>node -r dotenv/config scripts/submit-whatsapp-templates.js</code>, of laat Claude dat doen zodra de token staat.</span></li>
   </ul>
 </div>

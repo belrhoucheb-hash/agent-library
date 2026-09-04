@@ -5,5 +5,6 @@
 3. Tweede reviewer in de boekhouder-rol vóór de Q3-sprint van 1 oktober, zodra er aangiftes zijn.
 4. Nog te bewijzen door jou: echte foto-bon (btw-regel) en parkeerticket (tariefvraag) in productie.
 5. Afgesloten 4 sep: feature/ai-cost-steps gemerged via PR #20 en live. Nog open: één bericht en één bonfoto sturen en `ai_call` in audit_log controleren.
-6. Jurist-check van de verwerkersovereenkomst: 13 punten staan als [controleren] (regio's van Supabase en Render, doorgiftegrondslagen per subverwerker, Wwft-bewaartermijn, trainingsvoorwaarden van de AI-API's). Vóór de eerste fleet owner tekent.
-7. Wie opent dagelijks de alerts-tab in de admin voor onleesbare bonnen? Voorstel: een regel in het dagelijkse statusrapport plus een escalatie na 24 uur; nog te bouwen.
+6. Verwerkersovereenkomst: twaalf van de dertien punten zijn op 4 sep ingevuld uit openbare bronnen. Open: de Render-regio (Render-dashboard, Settings, Region), en Supabase staat in AWS Londen (VK, adequaatheidsbesluit); wil je alles binnen de EU, dan is dat een migratie naar Frankfurt. Jurist-check blijft aan te raden vóór de eerste fleet owner tekent.
+7. Afgesloten 4 sep: de chauffeur lost een onleesbare bon zelf op door hem binnen twee uur te typen of in te spreken (PR #23); de admin blijft het vangnet.
+8. Twilio-templates indienen: de lokale Twilio-token is ongeldig (401). Zet een geldige TWILIO_AUTH_TOKEN in .env en draai `node -r dotenv/config scripts/submit-whatsapp-templates.js`, of laat Claude dat doen zodra de token staat.
