@@ -1,6 +1,6 @@
 # Development
 strip: ok | superpowers + huisregels
-meta: ideeën worden geteste features
+meta: 4 sep: E4, E8 t/m E12 live via CI, elk met review en verifier
 
 ## Doel
 Ideeën worden werkende, geteste features met een succescriterium.
