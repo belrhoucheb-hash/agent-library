@@ -2,6 +2,13 @@
 
 Nieuwste bovenaan. Elke regel: probleem → hypothese → wijziging → resultaat → regel. Kop: `## <datum> | <Afdeling>:<kleur> | ...`
 
+## 4 sep 2026 | Product:info | Development:ok | Groei:warn | Leren:ok
+probleem: Eerste dagrun langs de negen afdelingen. Vier experimenten (E4, E8, E9, E10) stonden sinds 06:31 en 08:27 UTC live op main terwijl experimenten.md nog "wacht op deploy" zei, zonder logboek-regel; de pagina liep achter op de markdown.
+hypothese: Eén dagelijkse ronde langs de ritmes (signalen, wachtrijen, crons, kosten, CI) vangt wat tussen sessies wegvalt, en de wachtrijen zeggen pas iets zodra er gebruik is.
+wijziging: Dagcheck met alleen totalen (scratchpad-script op de bot-client) plus scripts/metrics.js --weeks 1, health en CI; E4 en E8 t/m E10 op live gezet; pagina gebouwd en gepubliceerd. Bewijs: metrics 4 sep: 0 bonnen, 0 nieuwe nummers, 0 berichten in 24 uur; 65 cron-runs vandaag over 21 jobs, 0 gefaald in 7 dagen, laatste 5 minuten geleden; alerts 0, exceptions 0, geparkeerde berichten 0, grace 0, facturen 0, ai_call 0 sinds PR #20 (geen verkeer), leads 0, ads 0 in 14 dagen; health 200 met uptime 5 minuten na de deploy van PR #23; CI-run 33853549535 groen (test en deploy) voor de UX-commits 72cf6f3 t/m 6994ca2; git cherry: de branches ux-tiende-bon, ux-kernmenu, ux-btw-teller en intake-na-betaling zitten volledig in main. Twilio-token lokaal nog 401, dus templates niet ingediend.
+resultaat: Niets te doen voor Klant, Operatie en Finance: alle wachtrijen leeg omdat er geen gebruik is. Open: meten 1 okt (E4, E8, E9, E10); E11 wacht op review (feat/dashboard-chauffeurs, 6 commits voor, 4 achter op main). Check ma 7 sep na 09:00 of marketing-ads-pain een cron_run schrijft: de do-run van 3 sep leverde geen ad en was niet te verifiëren omdat de audit toen nog blind was.
+regel: Een deploy is pas zichtbaar voor het bedrijf als experimenten.md en het logboek in dezelfde sessie meebewegen als de push. En: lege wachtrijen zonder gebruik bewijzen niets; E0 blijft de enige prioriteit die de andere meetbaar maakt.
+
 ## 4 sep 2026 | Klant:ok | Compliance:ok
 probleem: Na een onleesbare foto hing de chauffeur af van een medewerker die de alerts-tab opent, en de verwerkersovereenkomst had dertien onbevestigde feiten over subverwerkers.
 hypothese: Laat de chauffeur de bon zelf typen of inspreken en koppel die binnen twee uur aan de bewaarde foto, dan hoeft niemand op de admin te letten; en de feiten over subverwerkers zijn uit openbare bronnen te halen zonder jurist.

@@ -10,6 +10,13 @@ centraal overzicht — niet verspreid over project-layers of comments.
 
 ## Ideeën / later
 
+- [ ] **Product — dagcheck per afdeling als script** (4 sep 2026). De dagrun van
+  4 sep gebruikte een los script naast `scripts/metrics.js`: cron-runs vandaag,
+  open alerts en exceptions, geparkeerde berichten, grace, ai_call-tokens, leads
+  en ads, alleen totalen. Als `scripts/dagcheck.js` in de bot, zodat elke sessie
+  dezelfde ronde draait. Meetlat: één commando geeft de stand van alle negen
+  afdelingen.
+
 - [ ] **Product — wekelijkse signalen-digest "Top 5 productproblemen"** (3 sep 2026).
   Uitbreiding van `weekly-observability-digest.js` (zo 09:00): signalen uit
   drivers (activatie binnen 48u), receipts (Overig-aandeel, btw null,
