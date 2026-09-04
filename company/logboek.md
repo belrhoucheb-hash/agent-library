@@ -13,7 +13,7 @@ regel: Prompt-caching op Haiku 4.5 loont pas boven 4096 tokens én ±12 calls pe
 probleem: Aanname "de instantie slaapt" verklaarde het uitblijven van het statusrapport, maar om 20:00 vuurden drie crons zestien minuten na het laatste bezoek: de zelf-ping houdt hem wakker.
 hypothese: Het statusrapport wordt wel verstuurd maar geweigerd: vrije tekst buiten het WhatsApp-venster van 24 uur vereist een goedgekeurde template (Twilio 63016), en de code gebruikt nergens templates. Dat zou ook elk proactief bericht aan chauffeurs raken, dus E1.
 wijziging: Geen; Twilio-API vanuit de repo-omgeving weigert (creds lokaal ongeldig). Test vastgezet: audit_log `daily-status` 4 sep 06:00Z (completed of failed met foutcode) en de Twilio-berichtenlog.
-resultaat: open: 4 sep 08:00
+resultaat: 4 sep: 56 cron-runs in de nacht, geen gefaald; `daily-status` completed om 06:00Z en Badr ontving het rapport om 08:00. Beide hypotheses (slapen, templates) vervallen. Waarom het eerder uitbleef blijft onbekend, want vóór de fix schreef geen cron iets.
 regel: Eén verklaring is geen bewijs. Twee symptomen met één oorzaak verklaren, pas na de eerste meting de tweede oorzaak schrappen.
 
 ## 3 sep 2026 | Leren:acc | Development:ok

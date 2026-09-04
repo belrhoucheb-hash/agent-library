@@ -153,7 +153,7 @@
       <p class="lede">Negen afdelingen, elk met een doel, een meetlat en een ritme. Product is de motor: elke week aantoonbaar makkelijker, betrouwbaarder of waardevoller voor chauffeurs. Onderaan het logboek in de vorm probleem, hypothese, wijziging, resultaat, regel.</p>
     </div>
     <div class="stamp">
-      bijgewerkt <b>4 sep 2026, 08:16</b><br>
+      bijgewerkt <b>4 sep 2026, 08:21</b><br>
       bron <b>agent-library/company/*.md</b><br>
       volgende triage <b>zo 6 sep</b>
     </div>
@@ -167,7 +167,7 @@
     <a href="#groei"><span class="name">Groei</span><span class="meta">eerst tien actieve chauffeurs</span><span><span class="chip crit">acquisitielijn bouwen (E0)</span></span></a>
     <a href="#finance"><span class="name">Finance</span><span class="meta">geld komt binnen en klopt</span><span><span class="chip ok">finance-plugin geïnstalleerd</span></span></a>
     <a href="#compliance"><span class="name">Compliance</span><span class="meta">Wwft, AVG, bewaarplicht, opt-in</span><span><span class="chip info">Wwft in code; regels voor outreach</span></span></a>
-    <a href="#platform"><span class="name">Platform</span><span class="meta">cron-monitoring hersteld 3 sep</span><span><span class="chip warn">slaapt niet; verzending onder verdenking</span></span></a>
+    <a href="#platform"><span class="name">Platform</span><span class="meta">cron-monitoring hersteld 3 sep</span><span><span class="chip ok">wakker, crons lopen, berichten komen aan</span></span></a>
     <a href="#leren"><span class="name">Leren</span><span class="meta">elke fout een regel</span><span><span class="chip ok">afdeling-update als ritueel</span></span></a>
   </nav>
 
@@ -363,8 +363,8 @@
       <table>
         <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
         <tr><td class="skill">cron-audit hersteld<small>phone_number NOT NULL brak elke cron-insert sinds 11 april; fix live 3 sep 19:13, eerste cron_run_completed 19:15</small></td><td>Whatsapp-bot</td><td><span class="chip ok">bewezen</span></td><td class="date">17 sep</td></tr>
-        <tr><td class="skill">blijft de instantie wakker?<small>Bewezen 3 sep 20:00: crons vuurden 16 min na het laatste bezoek; de zelf-ping van elke 10 min houdt hem wakker. Wekker waarschijnlijk onnodig</small></td><td>Whatsapp-bot</td><td><span class="chip ok">wakker</span></td><td class="date">4 sep 08:00</td></tr>
-        <tr><td class="skill">komen cron-berichten aan?<small>Statusrapport bereikt Badr niet. Verdenking: vrije tekst buiten het WhatsApp-venster van 24 uur (Twilio-fout 63016), geen templates in de code. Test: audit_log <code>daily-status</code> op 4 sep 06:00Z en de Twilio-log</small></td><td>taak</td><td><span class="chip crit">hypothese</span></td><td class="date">4 sep 08:00</td></tr>
+        <tr><td class="skill">blijft de instantie wakker?<small>Bewezen: 56 cron-runs in de nacht van 3 op 4 sep, geen gefaald; de zelf-ping van elke 10 min houdt hem wakker. Geen wekker nodig</small></td><td>Whatsapp-bot</td><td><span class="chip ok">bewezen 4 sep</span></td><td class="date">17 sep</td></tr>
+        <tr><td class="skill">komen cron-berichten aan?<small>Statusrapport van 4 sep 08:00 is bij Badr aangekomen; <code>daily-status</code> completed in audit_log. Template-verdenking vervalt. Waarom het eerder uitbleef is niet meer te achterhalen (geen audit vóór de fix); vanaf nu ziet de health-check het</small></td><td>Whatsapp-bot</td><td><span class="chip ok">bewezen 4 sep</span></td><td class="date">17 sep</td></tr>
         <tr><td class="skill">incident-response, deploy-checklist<small>eigen</small></td><td>agent-library</td><td><span class="chip own">eigen</span></td><td class="date">houden</td></tr>
       </table>
     </div>
@@ -408,7 +408,7 @@
       <dt>probleem</dt><dd class="">Aanname "de instantie slaapt" verklaarde het uitblijven van het statusrapport, maar om 20:00 vuurden drie crons zestien minuten na het laatste bezoek: de zelf-ping houdt hem wakker.</dd>
       <dt>hypothese</dt><dd class="">Het statusrapport wordt wel verstuurd maar geweigerd: vrije tekst buiten het WhatsApp-venster van 24 uur vereist een goedgekeurde template (Twilio 63016), en de code gebruikt nergens templates. Dat zou ook elk proactief bericht aan chauffeurs raken, dus E1.</dd>
       <dt>wijziging</dt><dd class="">Geen; Twilio-API vanuit de repo-omgeving weigert (creds lokaal ongeldig). Test vastgezet: audit_log <code>daily-status</code> 4 sep 06:00Z (completed of failed met foutcode) en de Twilio-berichtenlog.</dd>
-      <dt>resultaat</dt><dd class="open">open: 4 sep 08:00</dd>
+      <dt>resultaat</dt><dd class="">4 sep: 56 cron-runs in de nacht, geen gefaald; <code>daily-status</code> completed om 06:00Z en Badr ontving het rapport om 08:00. Beide hypotheses (slapen, templates) vervallen. Waarom het eerder uitbleef blijft onbekend, want vóór de fix schreef geen cron iets.</dd>
       <dt>regel</dt><dd class="regel">Eén verklaring is geen bewijs. Twee symptomen met één oorzaak verklaren, pas na de eerste meting de tweede oorzaak schrappen.</dd>
     </dl>
   </div>
@@ -503,7 +503,7 @@
 
   <h2>Open besluiten <small>aan Badr</small></h2>
   <ul class="decisions">
-    <li><span class="q">1</span><span>Wekker: waarschijnlijk niet nodig, de instantie bleef wakker (bewijs 3 sep 20:00). Wél nodig als de verdenking klopt: WhatsApp-templates voor cron-berichten (statusrapport, weekbericht, maandagbericht), anders bereikt geen enkel proactief bericht een chauffeur die langer dan 24 uur stil is. Check Twilio-log na 4 sep 08:00.</span></li>
+    <li><span class="q">1</span><span>Afgesloten 4 sep: geen wekker en geen templates nodig. Instantie blijft wakker (56 cron-runs in één nacht) en het statusrapport van 08:00 kwam aan.</span></li>
     <li><span class="q">2</span><span>Auto-aftrek-whitelist verruimen? Nu 13 categorieën; Software, Boekhouding en Bankkosten staan op review. Eén woord in de tabel.</span></li>
     <li><span class="q">3</span><span>Tweede reviewer in de boekhouder-rol vóór de Q3-sprint van 1 oktober, zodra er aangiftes zijn.</span></li>
     <li><span class="q">4</span><span>Nog te bewijzen door jou: echte foto-bon (btw-regel) en parkeerticket (tariefvraag) in productie.</span></li>
