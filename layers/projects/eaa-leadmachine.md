@@ -28,7 +28,9 @@ versturen, respons tellen.
 | `src/mail.js` | Mailconcept per shop naar `mails/` |
 | `src/leads.js` | KvK-verrijking seeds → `data/leads.json` |
 | `src/seeds.json` | Shoplijst (handgecureerd + Thuiswinkel-scrape) |
-| `src/inbox.js` | Classificeert inbox: echt antwoord / auto / bounce |
+| `src/inbox.js` | Classificeert inbox: echt antwoord / auto / bounce, plus contactpersoon uit handtekening |
+| `src/contact.js` | Telefoon- en functie-extractie; nummers als +31 + 9 cijfers |
+| `contacten.js` | Scrapet algemene telefoonnummers → `data/contacten.json` |
 | `outreach.js` | Dagelijkse batch mails (limiet + pauze + blokkade uit `data/`) |
 | `followup.js` | Rapport-PDF na echt antwoord, eenmalig per shop |
 | `boekingscan.js` | Agenda-boeking → verse scan van die shop |
