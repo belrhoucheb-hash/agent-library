@@ -153,7 +153,7 @@
       <p class="lede">Negen afdelingen, elk met een doel, een meetlat en een ritme. Product is de motor: elke week aantoonbaar makkelijker, betrouwbaarder of waardevoller voor chauffeurs. Onderaan het logboek in de vorm probleem, hypothese, wijziging, resultaat, regel.</p>
     </div>
     <div class="stamp">
-      bijgewerkt <b>3 sep 2026, 20:02</b><br>
+      bijgewerkt <b>4 sep 2026, 08:16</b><br>
       bron <b>agent-library/company/*.md</b><br>
       volgende triage <b>zo 6 sep</b>
     </div>
@@ -229,6 +229,7 @@
       <tr><td class="num">E1</td><td class="skill">Waarde zichtbaar per bon en per week<small>live 3 sep</small></td><td>Chauffeur voelt waarde twee keer per jaar. Hypothese: geld per bon en per week zichtbaar geeft meer bonnen per actieve chauffeur en minder afhaken.</td><td>≥ 3 bonnen per actieve chauffeur per week, bij ≥ 10 actieve chauffeurs; nulmeting 0</td><td class="date">17 sep · 1 okt</td><td><span class="chip warn">wacht op gebruik</span></td></tr>
       <tr><td class="num">E2</td><td class="skill">Eerlijke btw en gerichte twijfelvraag<small>live 3 sep</small></td><td>Blanket 21% verborg onleesbare btw. Hypothese: gerichte vraag geeft meer correcte bonnen met minder correcties achteraf.</td><td>≥ 60% van de twijfelvragen binnen 30 min beantwoord · correcties &lt; 5% · aandeel Overig &lt; 10%</td><td class="date">17 sep · 1 okt</td><td><span class="chip warn">wacht op gebruik</span></td></tr>
       <tr><td class="num">E3</td><td class="skill">Plugins customer-support en finance<small>geïnstalleerd 3 sep</small></td><td>Geen skills voor Klant en Finance. Hypothese: de Anthropic-plugins dekken het meeste.</td><td>In ≥ 3 sessies gebruikt met aantoonbaar resultaat, anders verwijderen</td><td class="date">17 sep</td><td><span class="chip ok">loopt</span></td></tr>
+      <tr><td class="num">E4</td><td class="skill">AI-kosten meetbaar en lager<small>branch feature/ai-cost-steps, 4 sep</small></td><td>Kosten per gebruiker onbekend; elk tekstbericht een model-call van 3,3k tokens. Hypothese: woordenlijst, schema-output en één foto-ingang halveren de kosten zonder kwaliteitsverlies.</td><td>≥ 50% van de tekstberichten via keyword (intent_keyword_hit t.o.v. intent_classify) · ai_parse_failed = 0 · ≤ $0,25 AI-kosten per actieve gebruiker per maand</td><td class="date">1 okt</td><td><span class="chip warn">wacht op deploy en gebruik</span></td></tr>
     </table>
   </div>
 
@@ -317,7 +318,7 @@
       <h3>Finance</h3>
       <dl class="facts">
         <dt>doel</dt><dd>Geld komt binnen en klopt.</dd>
-        <dt>meetlat</dt><dd>MRR, mislukte betalingen, openstaand na grace. Nulmeting: 0 betalend.</dd>
+        <dt>meetlat</dt><dd>MRR, mislukte betalingen, openstaand na grace, AI-kosten per actieve gebruiker (zondagdigest). Nulmeting: 0 betalend; AI-kosten nog ongemeten.</dd>
         <dt>ritme</dt><dd><span class="t">1e van de maand 06:00</span> fleet-facturen · <span class="t">dagelijks 09:00 en 10:00</span> grace-herinnering en -verloop</dd>
       </dl>
     </div>
@@ -389,6 +390,17 @@
   </section>
 
   <h2>Logboek <small>probleem · hypothese · wijziging · resultaat · regel · nieuwste bovenaan</small></h2>
+
+  <div class="entry">
+    <div class="d">4 sep 2026<span><span class="chip warn">Development</span> <span class="chip info">Finance</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd class="">AI-kosten waren onmeetbaar (usage werd weggegooid); elk los tekstbericht ging met 3,3k tokens systeemprompt naar Haiku; een losse Sonnet-4-call dubbelde met de classifier; een foto kostte bij twijfel twee calls; JSON werd met een regex uit de tekst gevist; alle cache_control-markers stonden onder het Haiku-minimum van 4096 tokens en deden stil niets.</dd>
+      <dt>hypothese</dt><dd class="">Meten plus een woordenlijst vóór de classifier, schema-gegarandeerde JSON en één foto-ingang maken de bot goedkoper én betrouwbaarder: van ~$0,40 naar ~$0,20 per actieve gebruiker per maand bij 100 gebruikers (E4).</dd>
+      <dt>wijziging</dt><dd class="">Branch feature/ai-cost-steps in de bot-repo, 14 commits door drie agents plus review: ai_call- en ai_parse_failed-events met tokens en telefoonnummer, AI-verbruik in het zondagdigest, keyword-laag (services/intent-keywords.js), Sonnet-4-call weg, structured outputs op alle extractie-calls, analyzeDocumentImage (bon, opbrengst, boete, anders), gesaneerde handelaar-voorbeelden uit de leer-lus. Code-review vond 15 punten (6 regressies), verwerkt in 6 fix-commits. Bewijs: npm test 1210 groen, 1 al-falende test (alerts, ontbrekende test-key). Niet bewezen: een echte API-call, er is lokaal geen key; smoke-script staat klaar (tmp/smoke-2a.js).</dd>
+      <dt>resultaat</dt><dd class="open">open: nog niet gedeployed; meten 1 okt (E4)</dd>
+      <dt>regel</dt><dd class="regel">Prompt-caching op Haiku 4.5 loont pas boven 4096 tokens én ±12 calls per 5 minuten per schema, want output_config.format geeft elk schema een eigen cache; eerst meten via ai_call-events, dan markers. En: agent-werk altijd door een review vóór de merge, zes van de vijftien punten waren regressies.</dd>
+    </dl>
+  </div>
 
   <div class="entry">
     <div class="d">3 sep 2026<span><span class="chip warn">Platform</span> <span class="chip crit">Klant</span></span></div>
@@ -495,5 +507,6 @@
     <li><span class="q">2</span><span>Auto-aftrek-whitelist verruimen? Nu 13 categorieën; Software, Boekhouding en Bankkosten staan op review. Eén woord in de tabel.</span></li>
     <li><span class="q">3</span><span>Tweede reviewer in de boekhouder-rol vóór de Q3-sprint van 1 oktober, zodra er aangiftes zijn.</span></li>
     <li><span class="q">4</span><span>Nog te bewijzen door jou: echte foto-bon (btw-regel) en parkeerticket (tariefvraag) in productie.</span></li>
+    <li><span class="q">5</span><span>Branch feature/ai-cost-steps (14 commits, 1210 tests groen) deployen? Vooraf in een externe terminal met ANTHROPIC_API_KEY: <code>node tmp/smoke-2a.js</code> in de bot-repo (bewijst structured outputs op Haiku 4.5, kost minder dan $0,05). Daarna push naar main is deploy via CI.</span></li>
   </ul>
 </div>

@@ -2,6 +2,13 @@
 
 Nieuwste bovenaan. Elke regel: probleem → hypothese → wijziging → resultaat → regel. Kop: `## <datum> | <Afdeling>:<kleur> | ...`
 
+## 4 sep 2026 | Development:warn | Finance:info
+probleem: AI-kosten waren onmeetbaar (usage werd weggegooid); elk los tekstbericht ging met 3,3k tokens systeemprompt naar Haiku; een losse Sonnet-4-call dubbelde met de classifier; een foto kostte bij twijfel twee calls; JSON werd met een regex uit de tekst gevist; alle cache_control-markers stonden onder het Haiku-minimum van 4096 tokens en deden stil niets.
+hypothese: Meten plus een woordenlijst vóór de classifier, schema-gegarandeerde JSON en één foto-ingang maken de bot goedkoper én betrouwbaarder: van ~$0,40 naar ~$0,20 per actieve gebruiker per maand bij 100 gebruikers (E4).
+wijziging: Branch feature/ai-cost-steps in de bot-repo, 14 commits door drie agents plus review: ai_call- en ai_parse_failed-events met tokens en telefoonnummer, AI-verbruik in het zondagdigest, keyword-laag (services/intent-keywords.js), Sonnet-4-call weg, structured outputs op alle extractie-calls, analyzeDocumentImage (bon, opbrengst, boete, anders), gesaneerde handelaar-voorbeelden uit de leer-lus. Code-review vond 15 punten (6 regressies), verwerkt in 6 fix-commits. Bewijs: npm test 1210 groen, 1 al-falende test (alerts, ontbrekende test-key). Niet bewezen: een echte API-call, er is lokaal geen key; smoke-script staat klaar (tmp/smoke-2a.js).
+resultaat: open: nog niet gedeployed; meten 1 okt (E4)
+regel: Prompt-caching op Haiku 4.5 loont pas boven 4096 tokens én ±12 calls per 5 minuten per schema, want output_config.format geeft elk schema een eigen cache; eerst meten via ai_call-events, dan markers. En: agent-werk altijd door een review vóór de merge, zes van de vijftien punten waren regressies.
+
 ## 3 sep 2026 | Platform:warn | Klant:crit
 probleem: Aanname "de instantie slaapt" verklaarde het uitblijven van het statusrapport, maar om 20:00 vuurden drie crons zestien minuten na het laatste bezoek: de zelf-ping houdt hem wakker.
 hypothese: Het statusrapport wordt wel verstuurd maar geweigerd: vrije tekst buiten het WhatsApp-venster van 24 uur vereist een goedgekeurde template (Twilio 63016), en de code gebruikt nergens templates. Dat zou ook elk proactief bericht aan chauffeurs raken, dus E1.
