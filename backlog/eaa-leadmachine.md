@@ -13,7 +13,9 @@ Merknaam gekozen: GeenDrempels; landingspagina staat in `site/index.html`
 - [x] Landingspagina live op https://www.geendrempels.nl (SFTP-deploy via
       SSH-key geendrempels_deploy, `node deploy.js`) — 4 sept, live axe 0
 - [x] Mailbox info@geendrempels.nl actief; versturen via send.js/outreach.js werkt — 4 sept
-- [ ] Geplande taak "GeenDrempels outreach" aanmaken (Badr, schtasks-regel in chat van 4 sept)
+- [x] Geplande taak "GeenDrempels outreach" dagelijks 09:30 — 4 sept
+- [x] Admin-dashboard live op /admin met basic auth (user badr, wachtwoord in .env) — 4 sept
+- [x] SEO on-page: OG + JSON-LD + sitemap + robots live — 4 sept
 - [ ] Seeds aanvullen: wachtrij is na ~3 dagen leeg (56 concepten, 20/dag) — nieuwe shops cureren + scannen
 - [ ] Replies op info@ dagelijks checken (webmail) + geen-interesse-reacties op een blokkadelijst
 - [ ] Google-account voor info@ + profielfoto (logo-avatar.png) + agenda-afsprakenpagina (Badr)
