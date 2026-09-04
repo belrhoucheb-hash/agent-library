@@ -2,6 +2,13 @@
 
 Nieuwste bovenaan. Elke regel: probleem → hypothese → wijziging → resultaat → regel. Kop: `## <datum> | <Afdeling>:<kleur> | ...`
 
+## 4 sep 2026 | Platform:ok | Klant:warn | Groei:info
+probleem: De vier WhatsApp-templates bestonden alleen als tekst; zonder templates bereikt de bot geen enkel nummer dat langer dan 24 uur stil is, en dat zijn ze allemaal. Badr wilde zeker weten dat het zetten van de token geen berichten zou veroorzaken.
+hypothese: Token in .env raakt alleen de laptop, het indienscript praat alleen met de Content API, en de crons slaan de stille chauffeurs sowieso over; het risico zit alleen in de bot lokaal starten met een geldige token.
+wijziging: Badr zette een geldige TWILIO_AUTH_TOKEN (account-check 200) en draaide scripts/submit-whatsapp-templates.js zelf, omdat de classifier de indiening door Claude blokkeerde. Bewijs: dry-run toonde de vier templates; de echte run maakte zendiq_update, zendiq_admin_alert, zendiq_fleet_invite en zendiq_receipt_reviewed aan en diende ze in (received); GET ApprovalRequests geeft voor alle vier status pending. Onderweg bevestigd: de 57 nummers uit mei zijn echte chauffeurs van één test-fleet-owner, 54 op stap new met onboarding_msg_sent 0 en 0 geparkeerde berichten ooit, dus geen enkele cron heeft ze sinds vanochtend geprobeerd te bereiken (onboarding-drip filtert op complete, weekoverzicht slaat stille chauffeurs over, nudges vereisen bonnen). Er is geen her-uitnodiging; de fleet-invite gaat alleen bij toevoegen (fleet-api.js).
+resultaat: open: SID's op Render zodra Meta approved zegt (besluit 1); her-uitnodiging voor de 54 als besluit 9. Meten 1 okt (E5).
+regel: Een gebruiker die vraagt "krijgt niemand nu een bericht?" verdient een antwoord uit de code, niet uit vertrouwen: eerst de doelgroep van elke cron opzoeken, dan pas "nee" zeggen. En: het eerste bericht aan een lijst die maanden stil was, is een bewuste actie met een knop, nooit een bijwerking van een env-variabele.
+
 ## 4 sep 2026 | Product:info | Development:ok | Groei:warn | Leren:ok
 probleem: Eerste dagrun langs de negen afdelingen. Vier experimenten (E4, E8, E9, E10) stonden sinds 06:31 en 08:27 UTC live op main terwijl experimenten.md nog "wacht op deploy" zei, zonder logboek-regel; de pagina liep achter op de markdown.
 hypothese: Eén dagelijkse ronde langs de ritmes (signalen, wachtrijen, crons, kosten, CI) vangt wat tussen sessies wegvalt, en de wachtrijen zeggen pas iets zodra er gebruik is.

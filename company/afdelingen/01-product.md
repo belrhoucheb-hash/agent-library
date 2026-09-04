@@ -28,7 +28,7 @@ Geen feature is klaar na deploy. Hij is klaar nadat gemeten is of hij het gewens
 - Leren | leren | regel in memory, skill of test
 
 ## Bevinding
-**Eerste bevinding van de lus, 3 sep.** Badr bevestigde dat dit de productiedatabase is. Dus: geen bon sinds 2 mei, geen betalende chauffeur, niemand die het product gebruikt. Zonder gebruik zijn er geen signalen, en zonder signalen draait de lus leeg. Besluit: E0 via een acquisitielijn. Tweede bevinding: de cron-monitoring was sinds 11 april blind, zie Platform.
+**Eerste bevinding van de lus, 3 sep.** Badr bevestigde dat dit de productiedatabase is. Dus: geen bon sinds 2 mei, geen betalende chauffeur, niemand die het product gebruikt. Zonder gebruik zijn er geen signalen, en zonder signalen draait de lus leeg. Besluit: E0 via een acquisitielijn. Tweede bevinding: de cron-monitoring was sinds 11 april blind, zie Platform. **Derde bevinding, 4 sep.** De 57 nummers uit mei zijn echt: één fleet owner waarmee Badr test, met 54 chauffeurs onder zich. Alle 54 staan op onboarding-stap new, zonder bon en zonder ooit een bericht ontvangen te hebben; de uitnodiging van mei kwam nooit aan (24-uursvenster) en er bestaat geen her-uitnodiging. Dat is de warmste lijst die er is, en tegelijk het bewijs dat de crons ze overslaan: onboarding-drip, weekoverzicht en nudges kijken alleen naar chauffeurs met een afgeronde onboarding of bonnen.
 
 ## Skills
 | Skill | Detail | Bron | Status | Beoordelen |

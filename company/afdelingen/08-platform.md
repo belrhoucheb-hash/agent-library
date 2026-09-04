@@ -1,6 +1,6 @@
 # Platform
 strip: ok | wakker, crons lopen, berichten komen aan
-meta: templates en parkeren live 4 sep
+meta: templates ingediend, parkeren live
 
 ## Doel
 Het draait en herstelt zichzelf.
@@ -17,6 +17,6 @@ Uptime, hersteltijd, rode CI-runs, cron-runs per dag in audit_log.
 | cron-audit hersteld | phone_number NOT NULL brak elke cron-insert sinds 11 april; fix live 3 sep 19:13, eerste cron_run_completed 19:15 | Whatsapp-bot | ok: bewezen | 17 sep |
 | blijft de instantie wakker? | Bewezen: 56 cron-runs in de nacht van 3 op 4 sep, geen gefaald; de zelf-ping van elke 10 min houdt hem wakker. Geen wekker nodig | Whatsapp-bot | ok: bewezen 4 sep | 17 sep |
 | komen cron-berichten aan? | Statusrapport van 4 sep 08:00 is bij Badr aangekomen; `daily-status` completed in audit_log. Template-verdenking vervalt. Waarom het eerder uitbleef is niet meer te achterhalen (geen audit vóór de fix); vanaf nu ziet de health-check het | Whatsapp-bot | ok: bewezen 4 sep | 17 sep |
-| WhatsApp-templates en parkeren | buiten het 24-uursvenster een template plus de tekst in deferred_messages; afgeleverd bij het volgende inkomende bericht; zonder SID alleen parkeren (docs/whatsapp-templates.md) | Whatsapp-bot | own: live 4 sep, SID's nog indienen | 1 okt (E5) |
+| WhatsApp-templates en parkeren | buiten het 24-uursvenster een template plus de tekst in deferred_messages; afgeleverd bij het volgende inkomende bericht; zonder SID alleen parkeren (docs/whatsapp-templates.md) | Whatsapp-bot | own: live 4 sep; vier templates ingediend 4 sep, pending bij Meta; SID's daarna op Render | bij goedkeuring, dan 1 okt (E5) |
 | CI audit-gate | leest het JSON-rapport, drie pogingen bij een registry-storing, blokkeert alleen op high of critical | Whatsapp-bot | ok: live 4 sep (82778ba) | bij de volgende rode run |
 | incident-response, deploy-checklist | eigen | agent-library | own: eigen | houden |
