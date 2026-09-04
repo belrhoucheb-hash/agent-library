@@ -153,7 +153,7 @@
       <p class="lede">Negen afdelingen, elk met een doel, een meetlat en een ritme. Product is de motor: elke week aantoonbaar makkelijker, betrouwbaarder of waardevoller voor chauffeurs. Onderaan het logboek in de vorm probleem, hypothese, wijziging, resultaat, regel.</p>
     </div>
     <div class="stamp">
-      bijgewerkt <b>4 sep 2026, 11:51</b><br>
+      bijgewerkt <b>4 sep 2026, 17:35</b><br>
       bron <b>agent-library/company/*.md</b><br>
       volgende triage <b>zo 6 sep</b>
     </div>
@@ -237,6 +237,7 @@
       <tr><td class="num">E9</td><td class="skill">Tiende bon als beloning<small>live 4 sep (CI 33853549535)</small></td><td>De tiende bon kwam met een waarschuwing en vier plannen. Hypothese: bedanken plus twee keuzes op maat van de rol geeft meer upgrades op het moment van de tiende bon.</td><td>≥ 30% van de chauffeurs die de tiende bon halen upgradet binnen 7 dagen; nulmeting: 0 chauffeurs bij de tiende bon</td><td class="date">1 okt</td><td><span class="chip warn">wacht op gebruik</span></td></tr>
       <tr><td class="num">E10</td><td class="skill">Kernmenu van vijf<small>live 4 sep (CI 33853549535)</small></td><td>43 verschillende "Typ x"-aanbiedingen; onbekende input kreeg elf opties. Hypothese: vijf vaste ingangen en één volgende stap per bericht geven minder berichten die in "onbekend" eindigen.</td><td>≤ 10% van de tekstberichten eindigt in intent onbekend (intent-metingen van E4), bij ≥ 10 actieve chauffeurs; nulmeting: geen data</td><td class="date">1 okt</td><td><span class="chip warn">wacht op gebruik</span></td></tr>
       <tr><td class="num">E11</td><td class="skill">Dashboard: geld en actie per chauffeur<small>branch feat/dashboard-chauffeurs, 4 sep</small></td><td>Chauffeurs-tab toonde stippen, een lege statuspil en een rode verwijderknop per rij; geld per chauffeur ontbrak en wat op de fleet owner wachtte stond verspreid over tabs. Hypothese: netto per chauffeur, status in woorden en een "Nu nodig"-blok maken het dashboard een wekelijks werkscherm in plaats van een beheerscherm.</td><td>Elke actieve fleet owner logt wekelijks in en ≥ 80% van de uitbetalingsvoorstellen is binnen 2 dagen goedgekeurd, bij ≥ 3 actieve fleet owners; nulmeting 4 sep: 2 fleet owners, 0 actief</td><td class="date">1 okt</td><td><span class="chip warn">wacht op deploy en gebruik</span></td></tr>
+      <tr><td class="num">E12</td><td class="skill">Her-uitnodiging wagenpark<small>gebouwd 4 sep op feat/dashboard-chauffeurs (commits ec9a76c t/m 7be8392), wacht op deploy en op goedkeuring van zendiq_fleet_invite</small></td><td>54 chauffeurs van de test-fleet-owner staan sinds mei op stap new zonder ooit een bericht; het dashboard toonde ze als Actief en er was geen knop om opnieuw uit te nodigen. Hypothese: uitnodigen per chauffeur en per wagenpark via de fleet_invite-template, met de stap op invited, geeft de eerste echte activatie.</td><td>≥ 30% van de opnieuw uitgenodigde chauffeurs antwoordt binnen 7 dagen (stap verlaat invited) · ≥ 10% stuurt binnen 7 dagen een eerste bon; nulmeting 4 sep: 54 nooit gestart, 0 antwoorden</td><td class="date">7 dagen na de eerste bulk-uitnodiging ·  uiterlijk 2026-10-01</td><td><span class="chip warn">wacht op deploy en template-goedkeuring</span></td></tr>
     </table>
   </div>
 
@@ -295,6 +296,7 @@
         <tr><th>Skill</th><th>Bron</th><th>Status</th><th>Beoordelen</th></tr>
         <tr><td class="skill">customer-support<small>triage, antwoorden, escalatie, KB-artikelen</small></td><td>anthropics/knowledge-work-plugins</td><td><span class="chip ok">geïnstalleerd 3 sep</span></td><td class="date">17 sep (E3)</td></tr>
         <tr><td class="skill">weekbericht, helpdesk-AI, onboarding-drip<small>in de bot</small></td><td>Whatsapp-bot</td><td><span class="chip own">eigen code</span></td><td class="date">live</td></tr>
+        <tr><td class="skill">her-uitnodiging wagenpark<small>chauffeurs op stap new of invited tonen als Uitgenodigd; knop per rij en per wagenpark stuurt de fleet_invite-template (24 uur cooldown, slot per fleet, 409 zolang de template geen SID heeft); stap new gaat in de webhook naar de wagenpark-welkom</small></td><td>Whatsapp-bot</td><td><span class="chip own">gebouwd 4 sep, wacht op deploy en Meta</span></td><td class="date">7 dagen na de eerste ronde (E12)</td></tr>
         <tr><td class="skill">onleesbare bon<small>foto blijft aan de alert hangen; typt of spreekt de chauffeur de bon binnen 2 uur in, dan koppelt de bot de foto en sluit de alert zelf; anders vult een medewerker hem in vanuit de admin</small></td><td>Whatsapp-bot</td><td><span class="chip own">live 4 sep (PR #21, #23)</span></td><td class="date">1 okt (E6)</td></tr>
       </table>
     </div>
@@ -401,6 +403,17 @@
   </section>
 
   <h2>Logboek <small>probleem · hypothese · wijziging · resultaat · regel · nieuwste bovenaan</small></h2>
+
+  <div class="entry">
+    <div class="d">4 sep 2026<span><span class="chip ok">Klant</span> <span class="chip ok">Development</span> <span class="chip acc">Leren</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd class="">54 chauffeurs van de test-fleet-owner staan sinds mei op stap new zonder ooit een bericht; het dashboard toonde ze als Actief (alleen stap invited telde als Uitgenodigd), er was geen knop om opnieuw uit te nodigen, en wie "ok" typte kwam in de rolvraag voor losse nummers. Nulmeting: 54 nooit gestart, 0 antwoorden.</dd>
+      <dt>hypothese</dt><dd class="">Uitnodigen per chauffeur en per wagenpark via de fleet_invite-template, met de stap op invited, geeft de eerste echte activatie (E12: ≥ 30% antwoordt binnen 7 dagen, ≥ 10% stuurt een eerste bon).</dd>
+      <dt>wijziging</dt><dd class="">Negen commits op feat/dashboard-chauffeurs (ec9a76c t/m 7be8392): services/fleet-invite.js plus regels-module, status Uitgenodigd voor stap new én invited, last_invited_at uit audit_log, POST /fleet/chauffeurs/:phone/invite en /invite-all met cooldown van 24 uur en slot per fleet, dashboard-knoppen per rij en in de kop, Nu-nodig-item, mock-modus met uitnodigingsstaat. Review (15 punten) en verifier verwerkt: de template wordt afgedwongen voor wie nooit schreef (Twilio meldt 63016 op vrije tekst pas achteraf, dus vrije tekst had als "verstuurd" geteld zonder aan te komen), 409 zolang de template geen SID heeft, parked telt niet voor de cooldown, audit-fout gooit, webhook stuurt stap new mét fleet_id naar de wagenpark-welkom. Bewijs: npm test twee keer 1320 groen (1 skip); mock-modus in Chrome: rij wordt na uitnodigen "Nodig opnieuw uit" met "uitgenodigd zojuist", kopknop "Bezig met uitnodigen…" tijdens het verzoek en "Vandaag al uitgenodigd" daarna, geen console-fouten. Onderweg: een review-agent zette de werkboom op main; teruggezet, commits intact.</dd>
+      <dt>resultaat</dt><dd class="open">open: wacht op deploy (sessie whatsapp-bot-43 rebaset en pusht) en op goedkeuring van zendiq_fleet_invite; meten 7 dagen na de eerste ronde, uiterlijk 1 okt (E12).</dd>
+      <dt>regel</dt><dd class="regel">Wie nooit schreef heeft geen venster: elk eerste bericht aan zo'n nummer moet een template zijn, anders zegt de code "verstuurd" terwijl Twilio het later stil laat vallen. En: bouw een knop met een slot en een eerlijke telling, want de eerste echte ronde gaat naar 54 mensen tegelijk.</dd>
+    </dl>
+  </div>
 
   <div class="entry">
     <div class="d">4 sep 2026<span><span class="chip ok">Platform</span> <span class="chip warn">Klant</span> <span class="chip info">Groei</span></span></div>
@@ -566,6 +579,6 @@
     <li><span class="q">6</span><span>Verwerkersovereenkomst: twaalf van de dertien punten zijn op 4 sep ingevuld uit openbare bronnen. Open: de Render-regio (Render-dashboard, Settings, Region), en Supabase staat in AWS Londen (VK, adequaatheidsbesluit); wil je alles binnen de EU, dan is dat een migratie naar Frankfurt. Jurist-check blijft aan te raden vóór de eerste fleet owner tekent.</span></li>
     <li><span class="q">7</span><span>Afgesloten 4 sep: de chauffeur lost een onleesbare bon zelf op door hem binnen twee uur te typen of in te spreken (PR #23); de admin blijft het vangnet.</span></li>
     <li><span class="q">8</span><span>Afgesloten 4 sep: token gezet, templates ingediend (zie 1).</span></li>
-    <li><span class="q">9</span><span>Her-uitnodiging voor de 54 chauffeurs van de test-fleet-owner: ze staan sinds mei op onboarding-stap new en hebben nooit een bericht ontvangen; de wagenpark-uitnodiging gaat alleen op het moment van toevoegen en er is geen knop om opnieuw uit te nodigen. Bouwen als onderdeel van het dashboard-werk (E11), zodat het eerste bericht pas gaat als jij erop drukt? Voorwaarde: template zendiq_fleet_invite approved.</span></li>
+    <li><span class="q">9</span><span>Afgesloten 4 sep ("ga"): her-uitnodiging gebouwd op feat/dashboard-chauffeurs, zie E12. Open voor jou: zodra Meta zendiq_fleet_invite goedkeurt de SID op Render zetten, dan eerst één chauffeur uitnodigen en het audit-event fleet_invite_sent plus de rij in deferred_messages controleren, daarna pas "Nodig iedereen uit".</span></li>
   </ul>
 </div>
