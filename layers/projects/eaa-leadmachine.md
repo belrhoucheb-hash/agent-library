@@ -31,8 +31,11 @@ versturen, respons tellen.
 
 ## Harde regels
 
-1. Mails worden NOOIT automatisch verstuurd — concepten in `mails/` zijn
-   voor handmatige keuring door Badr (spam-/AVG-risico).
+1. Outreach loopt via `outreach.js` (expliciete instructie Badr, 4 sept
+   2026): maximaal 20 shops per dag, zwaarste eerst, gespreid 90-180s,
+   nooit dezelfde shop twee keer (`data/outreach-log.json` is de
+   waarheid). Buiten dit script om nooit mailen zonder keuring, nooit de
+   daglimiet verhogen zonder expliciete opdracht.
 2. Rapporten en mails claimen nooit "compliant" of "volledige audit" —
    de scan vindt ~de helft; het woord "ondergrens" blijft staan.
 3. Shops met `werkzamePersonen < 10` (micro, vrijgesteld van EAA) niet

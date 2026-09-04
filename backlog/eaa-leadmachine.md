@@ -12,7 +12,12 @@ Merknaam gekozen: GeenDrempels; landingspagina staat in `site/index.html`
 - [x] geendrempels.nl geregistreerd + webhosting (pakket "geends") — 4 sept
 - [x] Landingspagina live op https://www.geendrempels.nl (SFTP-deploy via
       SSH-key geendrempels_deploy, `node deploy.js`) — 4 sept, live axe 0
-- [ ] Mailbox info@geendrempels.nl aanmaken in TransIP e-mailbeheer (Badr)
+- [x] Mailbox info@geendrempels.nl actief; versturen via send.js/outreach.js werkt — 4 sept
+- [ ] Geplande taak "GeenDrempels outreach" aanmaken (Badr, schtasks-regel in chat van 4 sept)
+- [ ] Seeds aanvullen: wachtrij is na ~3 dagen leeg (56 concepten, 20/dag) — nieuwe shops cureren + scannen
+- [ ] Replies op info@ dagelijks checken (webmail) + geen-interesse-reacties op een blokkadelijst
+- [ ] Google-account voor info@ + profielfoto (logo-avatar.png) + agenda-afsprakenpagina (Badr)
+- [ ] ACM-informatiegesprek aanvragen (concept-mail door Claude, verzenden Badr)
 
 - [ ] KVK_API_KEY in `.env` zetten (Badr, niet via chat) en `node src/leads.js` draaien — code is nog ongetest tegen de echte API
 - [ ] Micro-shops (<10 werkzame personen) uit de maillijst halen na KvK-run
