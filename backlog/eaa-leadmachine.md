@@ -9,8 +9,10 @@ Merknaam gekozen: GeenDrempels; landingspagina staat in `site/index.html`
 
 ## Fase 1: testronde (meten of het aanbod gesprekken oplevert)
 
-- [ ] geendrempels.nl registreren bij TransIP + mailbox info@ aanmaken (Badr)
-- [ ] Landingspagina deployen (TransIP webhosting, zelfde route als zendiq-site)
+- [x] geendrempels.nl geregistreerd + webhosting (pakket "geends") — 4 sept
+- [x] Landingspagina live op https://www.geendrempels.nl (SFTP-deploy via
+      SSH-key geendrempels_deploy, `node deploy.js`) — 4 sept, live axe 0
+- [ ] Mailbox info@geendrempels.nl aanmaken in TransIP e-mailbeheer (Badr)
 
 - [ ] KVK_API_KEY in `.env` zetten (Badr, niet via chat) en `node src/leads.js` draaien — code is nog ongetest tegen de echte API
 - [ ] Micro-shops (<10 werkzame personen) uit de maillijst halen na KvK-run
