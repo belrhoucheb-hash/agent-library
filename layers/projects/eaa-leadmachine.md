@@ -27,7 +27,15 @@ versturen, respons tellen.
 | `src/report.js` | HTML-rapport per shop naar `reports/` |
 | `src/mail.js` | Mailconcept per shop naar `mails/` |
 | `src/leads.js` | KvK-verrijking seeds → `data/leads.json` |
-| `src/seeds.json` | Handmatig gecureerde lijst middelgrote NL-webshops |
+| `src/seeds.json` | Shoplijst (handgecureerd + Thuiswinkel-scrape) |
+| `src/inbox.js` | Classificeert inbox: echt antwoord / auto / bounce |
+| `outreach.js` | Dagelijkse batch mails (limiet + pauze + blokkade uit `data/`) |
+| `followup.js` | Rapport-PDF na echt antwoord, eenmalig per shop |
+| `boekingscan.js` | Agenda-boeking → verse scan van die shop |
+| `acties.js` | Haalt dashboard-acties op en past ze lokaal toe |
+| `stats.js` | Bouwt `site/admin/data.js` (funnel, KPI's, shops, wachtrij) |
+| `check.js` | Tweeuurlijkse runner: acties → followup → boeking → stats |
+| `deploy.js` | SFTP-deploy van `site/` incl. `/admin` |
 
 ## Harde regels
 
@@ -45,10 +53,26 @@ versturen, respons tellen.
 
 ## Commando's
 
-- Alles: `node src/run.js`
+- Scan-pipeline (scan → rapport → mail): `node src/run.js`
 - Alleen scannen (evt. met domeinen als filter): `node src/scan.js [domein ...]`
-- KvK-verrijking: `node src/leads.js`
+- Seeds aanvullen: `node seeds-scraper.js [aantal]` (Thuiswinkel-leden)
+- Dagbatch handmatig: `node outreach.js` (`--dry` toont alleen)
+- Losse mail: `node send.js <domein> <ontvanger>` / `--test <eigen adres>`
+- Controle-run: `node check.js`; publiceren: `node stats.js --publiceer`
 - Rescan van één shop: verwijder `data/scans/<domein>.json` en draai scan
+
+## Geplande taken (Windows)
+
+- `GeenDrempels outreach` — dagelijks 09:30, `outreach.js`
+- `GeenDrempels followup` — elke 2 uur, `check.js`
+
+## Dashboard
+
+`https://www.geendrempels.nl/admin/` achter basic auth (user + wachtwoord
+in `.env`: GD_ADMIN_USER/GD_ADMIN_PASS). Stuurknoppen schrijven via
+`actie.php` naar `admin/acties.json`; `acties.js` haalt die op en schrijft
+`data/funnel-handmatig.json`, `data/blokkade.json`, `data/instellingen.json`.
+Wijzigingen zijn dus pas actief na de eerstvolgende check-run.
 
 ## Openstaande punten
 
