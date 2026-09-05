@@ -38,6 +38,9 @@ versturen, respons tellen.
 | `stats.js` | Bouwt `site/admin/data.js` (funnel, KPI's, shops, wachtrij) |
 | `check.js` | Tweeuurlijkse runner: acties → followup → boeking → stats |
 | `deploy.js` | SFTP-deploy van `site/` incl. `/admin` |
+| `antwoord.js` | Handgeschreven reply in bestaand draadje |
+| `personen.js` | Zakelijke ingang zoeken in eigen publicaties (robots.txt-proof) |
+| `BEZWAREN.md` | Geverifieerde antwoorden op klantbezwaren |
 
 ## Harde regels
 
@@ -48,6 +51,12 @@ versturen, respons tellen.
    daglimiet verhogen zonder expliciete opdracht.
 2. Rapporten en mails claimen nooit "compliant" of "volledige audit" —
    de scan vindt ~de helft; het woord "ondergrens" blijft staan.
+2b. Nooit een technische bewering doen die de klant kan weerleggen: eerst
+   nameten, dan schrijven. Antwoorden op bekende bezwaren (PageSpeed-score,
+   webbouwer, "te klein", "nog nooit beboet") staan in `BEZWAREN.md`.
+   Elke pagina wordt op desktop én mobiel gemeten; bij de mobiele meting
+   moet de user-agent mee wisselen, anders meet je een hybride die niet
+   bestaat.
 3. Shops met `werkzamePersonen < 10` (micro, vrijgesteld van EAA) niet
    mailen zonder handmatige beoordeling.
 4. Alleen publieke pagina's laden, nooit bestellen/inloggen/formulieren
