@@ -16,13 +16,23 @@ Merknaam gekozen: GeenDrempels; landingspagina staat in `site/index.html`
 - [x] Geplande taak "GeenDrempels outreach" dagelijks 09:30 — 4 sept
 - [x] Admin-dashboard live op /admin met basic auth (user badr, wachtwoord in .env) — 4 sept
 - [x] SEO on-page: OG + JSON-LD + sitemap + robots live — 4 sept
-- [ ] Seeds aanvullen: wachtrij is na ~3 dagen leeg (56 concepten, 20/dag) — nieuwe shops cureren + scannen
+- [x] Seeds aanvullen kan nu doorlopend: `node kanalen.js` zoekt via Hermes
+      per kanaal (keurmerk, reviews, ranglijst, niche, marktplaats) en
+      verifieert elk domein voor het een seed wordt — 5 sept
+- [ ] Na elke kanalen-run: `node src/run.js` draaien zodat de nieuwe shops
+      gescand worden en de wachtrij weer vult
+- [ ] Besluiten wat te doen met de niet-webshops (bank, telecom, vervoer,
+      reizen, media) in `data/kanalen/kandidaten.json`: eigen mailtekst
+      schrijven of laten liggen. Ze vallen wel onder de EAA, maar de
+      huidige mail gaat over productpagina en winkelwagen.
 - [ ] Replies op info@ dagelijks checken (webmail) + geen-interesse-reacties op een blokkadelijst
 - [ ] Google-account voor info@ + profielfoto (logo-avatar.png) + agenda-afsprakenpagina (Badr)
 - [ ] ACM-informatiegesprek aanvragen (concept-mail door Claude, verzenden Badr)
 
-- [ ] KVK_API_KEY in `.env` zetten (Badr, niet via chat) en `node src/leads.js` draaien — code is nog ongetest tegen de echte API
-- [ ] Micro-shops (<10 werkzame personen) uit de maillijst halen na KvK-run
+- [x] KvK-verrijking werkt (`node kvk.js`), 138 van 167 bedrijven gevonden — 5 sept
+- [x] Micro-filter op KvK-personeel losgelaten: veld is onbetrouwbaar (60%
+      staat op 1-9, 15% op nul, ook grote webshops). Telt nu alleen
+      positief mee in de doelgroepscore.
 - [ ] Mailconcepten in `mails/` handmatig keuren en versturen (klein beginnen: 10-15, respons meten)
 - [ ] Contactadressen per shop opzoeken (nu nog geen e-mailadressen in de pipeline)
 - [ ] Respons bijhouden: verstuurd / geopend gesprek / rapport gestuurd / afspraak
