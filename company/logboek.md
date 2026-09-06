@@ -2,6 +2,13 @@
 
 Nieuwste bovenaan. Elke regel: probleem → hypothese → wijziging → resultaat → regel. Kop: `## <datum> | <Afdeling>:<kleur> | ...`
 
+## 6 sep 2026 | Groei:ok
+probleem: Search Console over 28 dagen: 3 klikken op 279 vertoningen, alle drie op de merknaam. 28% van de vertoningen kwam van generieke wagenparkqueries op /fleet (positie 74 tot 98); /blog/<onbekend> gaf status 200 (zachte 404); /dashboard was indexeerbaar; het gids-artikel was nooit gecrawld; de "kant-en-klare" posts uit SEO-ronde 1 bestonden nergens.
+hypothese: Een echte 404, noindex op het dashboard, de fleet-hero op "taxibedrijf", titels op de zoekvraag en links van de home naar de artikelen brengen de juiste queries naar de juiste pagina en leveren de eerste klikken buiten de merknaam (E16). Twee gegronde concepten die de stijltoets halen zijn de start van het btw- en platformcluster.
+wijziging: PR #37 (9 commits) gemerged en live via CI-run 34027882900 (test en deploy groen). Bewijs: npm test 1526 tests, 1525 groen, 1 overgeslagen; tien curl-checks op zendiq.nl groen (404 op /blog/bestaat-niet, noindex op /dashboard, robots zonder dashboard-blokkade, fleet-h1, nieuwe titels, twee artikellinks op de home); stijltoets op beide concepten geslaagd; indexering van het gids-artikel aangevraagd in Search Console. Vastgelegd in Whatsapp-bot/docs/seo/ (SEO-AUDIT, SEO-KEYWORD-MAP, SEO-CONTENT-ROADMAP, SEO-CHANGES).
+resultaat: open: meten 20 sep en 4 okt (E16)
+regel: Geen roadmap-item zonder bronbestand (de "kant-en-klare" posts bestonden niet); publiceren is pas klaar na de deploy; elk artikel door de stijltoets v��r Supabase; in de gedeelde map van Whatsapp-bot alleen werken in een eigen worktree, de commits kwamen eerst op de branch van een andere sessie terecht.
+
 ## 4 sep 2026 | Klant:ok | Development:ok | Leren:acc
 probleem: 54 chauffeurs van de test-fleet-owner staan sinds mei op stap new zonder ooit een bericht; het dashboard toonde ze als Actief (alleen stap invited telde als Uitgenodigd), er was geen knop om opnieuw uit te nodigen, en wie "ok" typte kwam in de rolvraag voor losse nummers. Nulmeting: 54 nooit gestart, 0 antwoorden.
 hypothese: Uitnodigen per chauffeur en per wagenpark via de fleet_invite-template, met de stap op invited, geeft de eerste echte activatie (E12: ≥ 30% antwoordt binnen 7 dagen, ≥ 10% stuurt een eerste bon).
