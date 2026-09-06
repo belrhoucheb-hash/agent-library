@@ -17,6 +17,8 @@
 | **project-bootstrap** | Gebruik bij het starten van een nieuw project | [skills/project-bootstrap/SKILL.md](skills/project-bootstrap/SKILL.md) |
 | **project-status** | Gebruik om de voortgang van een project te bekijken | [skills/project-status/SKILL.md](skills/project-status/SKILL.md) |
 | **research-spike** | Gebruik bij het evalueren van een technologie, library, of aanpak voordat je commit aan een implementatie | [skills/research-spike/SKILL.md](skills/research-spike/SKILL.md) |
+| **scrapling** | Gebruik bij het ophalen van data uit websites | [skills/scrapling/SKILL.md](skills/scrapling/SKILL.md) |
 | **systematic-debug** | Gebruik bij elke bug of onverwacht gedrag | [skills/systematic-debug/SKILL.md](skills/systematic-debug/SKILL.md) |
 | **verify-before-done** | Gebruik vóór je "klaar", "werkt", "fixed" of "live" zegt | [skills/verify-before-done/SKILL.md](skills/verify-before-done/SKILL.md) |
+| **webdesign-best-in-class** | Ontwerp en verbeter websites op basis van best practices, concurrentieanalyse, UX, conversie en merkidentiteit. Gebruik bij "verbeter de website", "redesign", "nieuwe landingspagina", "pas de pricing-sectie aan" of elke wijziging aan een publieke pagina. Eerst context en benchmark, dan hiërarchie, mobile first en conversie, altijd met keep/improve/remove/add/differentiate en een eindcontrole. | [skills/webdesign-best-in-class/SKILL.md](skills/webdesign-best-in-class/SKILL.md) |
 | **zondag-triage** | Gebruik elke zondag of als de sessie-start-hook het meldt | [skills/zondag-triage/SKILL.md](skills/zondag-triage/SKILL.md) |

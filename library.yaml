@@ -187,6 +187,13 @@ skills:
   - name: project-status
     description: "Voortgang bekijken: backlog, git activiteit, milestones, volgende stap."
     source: skills/project-status/SKILL.md
+  - name: webdesign-best-in-class
+    description: "Websites ontwerpen en verbeteren: context, benchmark, hiërarchie, mobile first, conversie, eindcontrole."
+    source: skills/webdesign-best-in-class/SKILL.md
+
+  - name: scrapling
+    description: "Data uit websites halen: juiste fetcher kiezen, anti-bot, adaptive selectors."
+    source: skills/scrapling/SKILL.md
 
 # Hooks = shell-scripts die Claude Code automatisch triggert.
 # settings-template.json bevat de Claude Code configuratie.
