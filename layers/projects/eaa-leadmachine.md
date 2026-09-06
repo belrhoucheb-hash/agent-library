@@ -30,6 +30,7 @@ versturen, respons tellen.
 | `src/seeds.json` | Shoplijst (handgecureerd + Thuiswinkel-scrape + kanalen) |
 | `kanalen.js` | Nieuwe leads via de Hermes-agent, kanaal voor kanaal; verifieert elk domein voor het een seed wordt |
 | `src/inbox.js` | Classificeert inbox: echt antwoord / auto / bounce, plus contactpersoon uit handtekening |
+| `src/verzonden-check.js` | Leest de Verzonden-map (IMAP) en beslist of een shop de eerste mail al kreeg |
 | `src/contact.js` | Telefoon- en functie-extractie; nummers als +31 + 9 cijfers |
 | `contacten.js` | Scrapet algemene telefoonnummers → `data/contacten.json` |
 | `outreach.js` | Dagelijkse batch mails (limiet + pauze + blokkade uit `data/`) |
@@ -79,7 +80,8 @@ versturen, respons tellen.
 - Seeds aanvullen: `node seeds-scraper.js [aantal]` (Thuiswinkel-leden)
 - Leads uit meer kanalen: `node kanalen.js` (`--lijst`, `--kanaal <id>`,
   `--rondes n`, `--dry`, `--alles`)
-- Dagbatch handmatig: `node outreach.js` (`--dry` toont alleen)
+- Dagbatch handmatig: `node outreach.js` (`--dry` toont alleen en raakt niets aan)
+- Dubbelcheck toetsen: `node test/delta.js`
 - Losse mail: `node send.js <domein> <ontvanger>` / `--test <eigen adres>`
 - Controle-run: `node check.js`; publiceren: `node stats.js --publiceer`
 - Rescan van één shop: verwijder `data/scans/<domein>.json` en draai scan
@@ -99,6 +101,11 @@ Let op twee valkuilen die we hier tegenkwamen:
   en schrijven logs regel voor regel opnieuw ingelezen weg. Kijken-en-
   dan-schrijven en een in-geheugen logkopie waren precies de twee fouten
   achter de dubbele verzending van 6 sept.
+- Bovenop het logboek controleert `outreach.js` de Verzonden-map zelf.
+  Die twee bronnen dekken elkaars gat: het logboek kan overschreven
+  raken, en de map begint pas op 6 sept (daarvoor werden geen kopieën
+  bewaard). Is de mailbox onleesbaar, dan breekt de ronde af in plaats
+  van door te gaan op halve informatie. Toets: `node test/delta.js`.
 
 ## Dashboard
 
