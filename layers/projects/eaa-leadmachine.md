@@ -86,8 +86,19 @@ versturen, respons tellen.
 
 ## Geplande taken (Windows)
 
-- `GeenDrempels outreach` — dagelijks 09:30, `outreach.js`
-- `GeenDrempels followup` — elke 2 uur, `check.js`
+Eén taak: `GeenDrempels followup` draait `check.js` elke 2 uur (start
+11:34). Die runner doet outreach → acties → followup → boekingscan →
+stats. De losse dagelijkse outreach-taak is op 6 sept verwijderd: twee
+taken die dezelfde batch startten leverden dubbele mails op.
+
+Let op twee valkuilen die we hier tegenkwamen:
+- Windows zet standaard `DisallowStartIfOnBatteries`; de taak sloeg
+  daardoor uren over. Staat nu uit, net als `StopIfGoingOnBatteries`,
+  met `StartWhenAvailable` aan zodat gemiste runs worden ingehaald.
+- Alle scripts nemen een slot via `src/slot.js` (atomair, `flag: 'wx'`)
+  en schrijven logs regel voor regel opnieuw ingelezen weg. Kijken-en-
+  dan-schrijven en een in-geheugen logkopie waren precies de twee fouten
+  achter de dubbele verzending van 6 sept.
 
 ## Dashboard
 
