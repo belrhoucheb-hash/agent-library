@@ -27,7 +27,8 @@ versturen, respons tellen.
 | `src/report.js` | HTML-rapport per shop naar `reports/` |
 | `src/mail.js` | Mailconcept per shop naar `mails/` |
 | `src/leads.js` | KvK-verrijking seeds → `data/leads.json` |
-| `src/seeds.json` | Shoplijst (handgecureerd + Thuiswinkel-scrape) |
+| `src/seeds.json` | Shoplijst (handgecureerd + Thuiswinkel-scrape + kanalen) |
+| `kanalen.js` | Nieuwe leads via de Hermes-agent, kanaal voor kanaal; verifieert elk domein voor het een seed wordt |
 | `src/inbox.js` | Classificeert inbox: echt antwoord / auto / bounce, plus contactpersoon uit handtekening |
 | `src/contact.js` | Telefoon- en functie-extractie; nummers als +31 + 9 cijfers |
 | `contacten.js` | Scrapet algemene telefoonnummers → `data/contacten.json` |
@@ -61,12 +62,23 @@ versturen, respons tellen.
    mailen zonder handmatige beoordeling.
 4. Alleen publieke pagina's laden, nooit bestellen/inloggen/formulieren
    versturen bij gescande shops.
+5. Hermes-opdrachten blijven klein: één kanaal, één variant, maximaal ~12
+   bedrijven per aanroep. Het gratis model (`upstage/solar-pro4:free`) kapt
+   bij een brede opdracht zijn tool-call af en blijft in retries hangen.
+   Wat Hermes noemt is een vermoeden, geen lead: `kanalen.js` verifieert
+   elk domein zelf voordat het in `seeds.json` komt.
+6. Leads met `sector: 'dienst'` (bank, telecom, vervoer, reizen, media)
+   krijgen niet de webshop-mail — die tekst gaat over productpagina en
+   winkelwagen. Ze wachten in `data/kanalen/kandidaten.json` tot er eigen
+   tekst is; `--alles` zet ze pas in de wachtrij als dat besloten is.
 
 ## Commando's
 
 - Scan-pipeline (scan → rapport → mail): `node src/run.js`
 - Alleen scannen (evt. met domeinen als filter): `node src/scan.js [domein ...]`
 - Seeds aanvullen: `node seeds-scraper.js [aantal]` (Thuiswinkel-leden)
+- Leads uit meer kanalen: `node kanalen.js` (`--lijst`, `--kanaal <id>`,
+  `--rondes n`, `--dry`, `--alles`)
 - Dagbatch handmatig: `node outreach.js` (`--dry` toont alleen)
 - Losse mail: `node send.js <domein> <ontvanger>` / `--test <eigen adres>`
 - Controle-run: `node check.js`; publiceren: `node stats.js --publiceer`
