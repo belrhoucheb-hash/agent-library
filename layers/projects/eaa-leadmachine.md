@@ -47,7 +47,8 @@ versturen, respons tellen.
 ## Harde regels
 
 1. Outreach loopt via `outreach.js` (expliciete instructie Badr, 4 sept
-   2026): maximaal 20 shops per dag, zwaarste eerst, gespreid 90-180s,
+   2026): maximaal 45 shops per dag (op zijn verzoek verhoogd van 20 op
+   7 sept 2026), zwaarste eerst, gespreid 90-180s,
    nooit dezelfde shop twee keer (`data/outreach-log.json` is de
    waarheid). Buiten dit script om nooit mailen zonder keuring, nooit de
    daglimiet verhogen zonder expliciete opdracht.
