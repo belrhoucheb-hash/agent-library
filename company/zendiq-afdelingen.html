@@ -153,7 +153,7 @@
       <p class="lede">Negen afdelingen, elk met een doel, een meetlat en een ritme. Product is de motor: elke week aantoonbaar makkelijker, betrouwbaarder of waardevoller voor chauffeurs. Onderaan het logboek in de vorm probleem, hypothese, wijziging, resultaat, regel.</p>
     </div>
     <div class="stamp">
-      bijgewerkt <b>6 sep 2026, 12:43</b><br>
+      bijgewerkt <b>7 sep 2026, 16:35</b><br>
       bron <b>agent-library/company/*.md</b><br>
       volgende triage <b>zo 13 sep</b>
     </div>
@@ -166,8 +166,8 @@
     <a href="#klant"><span class="name">Klant</span><span class="meta">actief binnen 48 uur en blijven</span><span><span class="chip ok">customer-support geïnstalleerd</span></span></a>
     <a href="#groei"><span class="name">Groei</span><span class="meta">eerst tien actieve chauffeurs</span><span><span class="chip crit">acquisitielijn bouwen (E0)</span></span></a>
     <a href="#finance"><span class="name">Finance</span><span class="meta">geld komt binnen en klopt</span><span><span class="chip ok">finance-plugin geïnstalleerd</span></span></a>
-    <a href="#compliance"><span class="name">Compliance</span><span class="meta">Wwft, AVG, bewaarplicht, opt-in</span><span><span class="chip ok">verwerkersovereenkomst live met feiten; alleen Render-regio open</span></span></a>
-    <a href="#platform"><span class="name">Platform</span><span class="meta">templates ingediend, parkeren live</span><span><span class="chip ok">wakker, crons lopen, berichten komen aan</span></span></a>
+    <a href="#compliance"><span class="name">Compliance</span><span class="meta">Wwft, AVG, bewaarplicht, opt-in</span><span><span class="chip ok">verwerkersovereenkomst en privacyverklaring live met feiten; Render-regio open</span></span></a>
+    <a href="#platform"><span class="name">Platform</span><span class="meta">7 sep: headers op zendiq.nl, server opgeruimd, DMARC fase 1; templates pending</span><span><span class="chip ok">wakker, crons lopen, site met headers</span></span></a>
     <a href="#leren"><span class="name">Leren</span><span class="meta">elke fout een regel</span><span><span class="chip ok">afdeling-update als ritueel</span></span></a>
   </nav>
 
@@ -361,6 +361,7 @@
         <tr><td class="skill">verwerkersovereenkomst<small>zendiq.nl/verwerkersovereenkomst.html: AVG art. 28, subverwerkers met DPF/SCC-grondslag, maatregelen, bewaartermijnen; open: Render-regio</small></td><td>Whatsapp-bot</td><td><span class="chip ok">live 4 sep, feiten 4 sep</span></td><td class="date">vóór de eerste fleet owner (E7)</td></tr>
         <tr><td class="skill">gdpr-dsgvo-expert<small>DPIA, verwerkingsregister, rechten van betrokkenen</small></td><td>alirezarezvani/claude-skills</td><td><span class="chip info">gepland</span></td><td class="date">bij de jurist-check van de verwerkersovereenkomst</td></tr>
         <tr><td class="skill">Wwft-herbeoordeling<small>SOP; pas schrijven bij klanten</small></td><td>zelf schrijven</td><td><span class="chip info">later</span></td><td class="date">vóór december</td></tr>
+        <tr><td class="skill">privacyverklaring<small>zendiq.nl/privacy: verwerkers met land, doorgifte buiten de EER (DPF/SCC), grondslagen, alle AVG-rechten, klachtrecht AP; open: IBAN, kenteken en identiteitsbewijs in sectie 2</small></td><td>Whatsapp-bot</td><td><span class="chip ok">live 7 sep (PR #41)</span></td><td class="date">bij de jurist-check</td></tr>
       </table>
     </div>
   </section>
@@ -383,6 +384,10 @@
         <tr><td class="skill">WhatsApp-templates en parkeren<small>buiten het 24-uursvenster een template plus de tekst in deferred_messages; afgeleverd bij het volgende inkomende bericht; zonder SID alleen parkeren (docs/whatsapp-templates.md)</small></td><td>Whatsapp-bot</td><td><span class="chip own">live 4 sep; vier templates ingediend 4 sep, pending bij Meta; SID's daarna op Render</span></td><td class="date">bij goedkeuring, dan 1 okt (E5)</td></tr>
         <tr><td class="skill">CI audit-gate<small>leest het JSON-rapport, drie pogingen bij een registry-storing, blokkeert alleen op high of critical</small></td><td>Whatsapp-bot</td><td><span class="chip ok">live 4 sep (82778ba)</span></td><td class="date">bij de volgende rode run</td></tr>
         <tr><td class="skill">incident-response, deploy-checklist<small>eigen</small></td><td>agent-library</td><td><span class="chip own">eigen</span></td><td class="date">houden</td></tr>
+        <tr><td class="skill">security-headers zendiq.nl<small>HSTS, CSP uit een inventaris van alle pagina's, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy via public/.htaccess in IfModule; TransIP heeft mod_headers; 0 CSP-overtredingen in headless Chrome. Een nieuwe externe bron op een pagina vraagt een CSP-aanvulling</small></td><td>Whatsapp-bot</td><td><span class="chip ok">live 7 sep (PR #41)</span></td><td class="date">bij elke nieuwe externe bron</td></tr>
+        <tr><td class="skill">deploy ruimt de server op<small>deploy.js slaat _-bestanden en .vercel/ over en verwijdert _preview.html, _mobile-test.html en test-api.html op de server; serverlisting 7 sep schoon</small></td><td>Whatsapp-bot</td><td><span class="chip ok">live 7 sep (PR #41)</span></td><td class="date">17 sep</td></tr>
+        <tr><td class="skill">DMARC<small>fase 1 (p=none, rua naar info@) gezet 7 sep in het TransIP-paneel; DKIM via transip-a/b/c; fase 2 p=quarantine na een week rapporten, send.zendiq.nl (SES) meenemen</small></td><td>TransIP DNS</td><td><span class="chip warn">fase 2 open</span></td><td class="date">14 sep</td></tr>
+        <tr><td class="skill">Dependabot-alerts<small>aan sinds 7 sep; secret scanning en branch protection niet beschikbaar op het gratis plan, gitleaks in de gate dekt de secrets</small></td><td>GitHub</td><td><span class="chip ok">aan</span></td><td class="date">bij de eerste alert</td></tr>
       </table>
     </div>
   </section>
@@ -407,6 +412,17 @@
   </section>
 
   <h2>Logboek <small>probleem · hypothese · wijziging · resultaat · regel · nieuwste bovenaan</small></h2>
+
+  <div class="entry">
+    <div class="d">7 sep 2026<span><span class="chip ok">Platform</span> <span class="chip ok">Compliance</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd class="">Badr wilde live. De audit van 6 sep zei PASS voor de backend, maar de statische host zendiq.nl stuurde geen enkele security-header terwijl /dashboard en /admin daar staan; op de server stonden drie vergeten bestanden (_preview.html, _mobile-test.html en test-api.html, een debugpagina die met één klik een login-code aanvroeg voor een vast nummer); de privacyverklaring noemde geen verwerkers en geen doorgifte naar de VS; DMARC stond op p=none zonder rapportage; Dependabot-alerts stonden uit; PR #11 hing sinds mei; vercel.json was een restant; npm audit had qs op moderate.</dd>
+      <dt>hypothese</dt><dd class="">Headers via .htaccess in een IfModule-wrapper zijn veilig te zetten als de CSP uit een inventaris van alle pagina's komt en per pagina op nul overtredingen getest wordt; de rest is hygiëne die in één PR past; DMARC kan in twee fasen zonder mail te raken.</dd>
+      <dt>wijziging</dt><dd class="">Onderzoek van GitHub (privé, één beheerder, geen secrets in de volledige history, workflow-permissies read-only, anon-probe 37 tabellen 401) en van de site (headers, blootgestelde paden, DNS, TLS, webhook zonder handtekening 403). PR #41 (5 commits, rebase-merge): headers in public/.htaccess (HSTS, CSP, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy), deploy.js slaat _-bestanden over en ruimt de drie stale bestanden op de server op (tests/deploy-upload-filter.test.js), privacy.html met verwerkers per land, doorgifte buiten de EER, grondslagen, alle AVG-rechten en klachtrecht, qs 6.16.0, vercel.json weg. Buiten git: drie bestanden per SFTP verwijderd, Dependabot-alerts aan (204), PR #11 gesloten, DMARC fase 1 via het TransIP-paneel. Bewijs: npm test 1701 tests, 1700 groen, 1 overgeslagen; CI-run 34132931236 groen (test, security-gate, deploy); curl toont alle zes headers op /, /dashboard, /blog/&lt;slug&gt; en /privacy; achttien pagina's 200 en de drie stale paden 404; headless Chrome op productie 0 CSP-overtredingen op zeven pagina's, blog toont 3 artikelen, dashboard rendert; health 200 na herstart; nslookup op ns0.transip.net geeft v=DMARC1; p=none; rua=mailto:info@zendiq.nl; fo=1 en alle overige records intact.</dd>
+      <dt>resultaat</dt><dd class="">Live 7 sep. Open: DMARC fase 2 (p=quarantine) rond 14 sep na een week rapporten; Badr mailt via TransIP, dus veilig; send.zendiq.nl (SPF amazonses) meenemen. Privacy sectie 2 noemt IBAN, kenteken en identiteitsbewijs nog niet; Render-regio in de VO nog open.</dd>
+      <dt>regel</dt><dd class="regel">Een audit van de backend is geen audit van de site: de statische host, de serverlisting en de DNS horen erbij. Wat gitignored is kan toch op de server staan zolang de deploy nooit opruimt: filteren én opruimen. Vier subagents in één worktree werkt als elk alleen zijn eigen bestand raakt en niemand commit.</dd>
+    </dl>
+  </div>
 
   <div class="entry">
     <div class="d">6 sep 2026<span><span class="chip ok">Groei</span></span></div>
