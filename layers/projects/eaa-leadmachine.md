@@ -29,6 +29,9 @@ versturen, respons tellen.
 | `src/leads.js` | KvK-verrijking seeds → `data/leads.json` |
 | `src/seeds.json` | Shoplijst (handgecureerd + Thuiswinkel-scrape + kanalen) |
 | `kanalen.js` | Nieuwe leads via de Hermes-agent, kanaal voor kanaal; verifieert elk domein voor het een seed wordt |
+| `linkedin.js` | Importeert Apify-dumps van LinkedIn Company Search; alleen hoofdkantoor NL, verifieert domein en winkelsignaal; `--keur` na de scan (bron linkedin en ads) |
+| `advertenties.js` | Importeert Google-adverteerders (Apify google-search-scraper op `src/zoekwoorden.json`); `data/adverteerders.json` telt 12 punten in de doelgroepscore |
+| `lusha.js` | Contactpersoon per shop via de Lusha-API naar `data/adressen.json` (proef contactpersoon); vereist `LUSHA_API_KEY` |
 | `src/inbox.js` | Classificeert inbox: echt antwoord / auto / bounce, plus contactpersoon uit handtekening |
 | `src/verzonden-check.js` | Leest de Verzonden-map (IMAP) en beslist of een shop de eerste mail al kreeg |
 | `src/contact.js` | Telefoon- en functie-extractie; nummers als +31 + 9 cijfers |
@@ -37,8 +40,9 @@ versturen, respons tellen.
 | `followup.js` | Rapport-PDF na echt antwoord, eenmalig per shop |
 | `boekingscan.js` | Agenda-boeking → verse scan van die shop |
 | `acties.js` | Haalt dashboard-acties op en past ze lokaal toe |
-| `stats.js` | Bouwt `site/admin/data.js` (funnel, KPI's, shops, wachtrij) |
-| `check.js` | Tweeuurlijkse runner: acties → followup → boeking → stats |
+| `notities.js` | Mailadres in een dashboardnotitie → rapport naar die persoon, na een nacht, binnen kantooruren, één keer per adres (`data/notitie-log.json`) |
+| `stats.js` | Bouwt `site/admin/data.js` (vandaag-lijsten, KPI's, shops, wachtrij) |
+| `check.js` | Tweeuurlijkse runner: outreach → opvolg → acties → notities → followup → boeking → stats |
 | `deploy.js` | SFTP-deploy van `site/` incl. `/admin` |
 | `antwoord.js` | Handgeschreven reply in bestaand draadje |
 | `personen.js` | Zakelijke ingang zoeken in eigen publicaties (robots.txt-proof) |
@@ -47,8 +51,8 @@ versturen, respons tellen.
 ## Harde regels
 
 1. Outreach loopt via `outreach.js` (expliciete instructie Badr, 4 sept
-   2026): maximaal 45 shops per dag (op zijn verzoek verhoogd van 20 op
-   7 sept 2026), zwaarste eerst, gespreid 90-180s,
+   2026): maximaal 100 shops per dag (op zijn verzoek verhoogd: 20 -> 45 op
+   7 sept, 45 -> 100 op 8 sept 2026), zwaarste eerst, gespreid 90-180s,
    nooit dezelfde shop twee keer (`data/outreach-log.json` is de
    waarheid). Buiten dit script om nooit mailen zonder keuring, nooit de
    daglimiet verhogen zonder expliciete opdracht.
@@ -81,8 +85,19 @@ versturen, respons tellen.
 - Seeds aanvullen: `node seeds-scraper.js [aantal]` (Thuiswinkel-leden)
 - Leads uit meer kanalen: `node kanalen.js` (`--lijst`, `--kanaal <id>`,
   `--rondes n`, `--dry`, `--alles`)
+- Leads uit LinkedIn: `node linkedin.js <apify-dump.json> [...]` (`--dry`,
+  `--alles`); dumps komen uit de Apify-actor `harvestapi/linkedin-company-search`.
+  Na de scan `node linkedin.js --keur`: zonder productpagina of winkelwagen
+  terug naar de wachtlijst, KvK-micro's in de blokkade tot beoordeling
+- Adverteerders: Apify-actor `apify/google-search-scraper` (NL, alleen advertenties)
+  op `src/zoekwoorden.json`, dan `node advertenties.js <dump.json>` (`--dry`, `--alles`)
+- Contactpersoon (proef, `data/experimenten/contactpersoon.json`): `node lusha.js --groep lusha`
+  (`--dry` zoekt zonder credits); `data/adressen.json` met `naam` geeft "Beste {voornaam}" in `src/mail.js`
 - Dagbatch handmatig: `node outreach.js` (`--dry` toont alleen en raakt niets aan)
-- Dubbelcheck toetsen: `node test/delta.js`
+- Notitie-opvolging: `node notities.js --dry` toont welke notities een adres
+  bevatten en wanneer de mail gaat
+- Dubbelcheck toetsen: `node test/delta.js`; overige toetsen: `node test/linkedin.js`,
+  `node test/notities.js`, `node test/advertenties.js`
 - Losse mail: `node send.js <domein> <ontvanger>` / `--test <eigen adres>`
 - Controle-run: `node check.js`; publiceren: `node stats.js --publiceer`
 - Rescan van één shop: verwijder `data/scans/<domein>.json` en draai scan
@@ -90,8 +105,8 @@ versturen, respons tellen.
 ## Geplande taken (Windows)
 
 Eén taak: `GeenDrempels followup` draait `check.js` elke 2 uur (start
-11:34). Die runner doet outreach → acties → followup → boekingscan →
-stats. De losse dagelijkse outreach-taak is op 6 sept verwijderd: twee
+11:34). Die runner doet outreach → opvolg → acties → notities → followup →
+boekingscan → stats. De losse dagelijkse outreach-taak is op 6 sept verwijderd: twee
 taken die dezelfde batch startten leverden dubbele mails op.
 
 Let op twee valkuilen die we hier tegenkwamen:
