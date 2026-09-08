@@ -2,6 +2,13 @@
 
 Nieuwste bovenaan. Elke regel: probleem → hypothese → wijziging → resultaat → regel. Kop: `## <datum> | <Afdeling>:<kleur> | ...`
 
+## 8 sep 2026 | Groei:warn
+probleem: De homepage oogde als een AI-template (crème, serif, alles gecentreerd, twaalf kaartjes met hover-lift); het enige eigen element, het WhatsApp-gesprek, zat in een telefoontje van 310px met tekst van 11,7px. Technische audit 11/20, critique-heuristieken 21/32, 4 van 8 cognitieve-belastingchecks faalden. Conversie-effect niet meetbaar (E0: 3 klikken op 279 vertoningen).
+hypothese: Een pass met de geïnstalleerde design-skills (impeccable, taste, Emil Kowalski, ui-ux-pro-max) geeft een onderscheidende, snellere en toegankelijker pagina zonder de SEO-elementen van E16 te raken (E18).
+wijziging: Branch feat/design-pass-home, 5 commits (38fe51f t/m 0ebd67d): DM Sans 800 als kopletter, sage-grond met berekende contrasten, de chat als open thread in de hero (werkende paperclip, bedragen uit de getypte tekst), grootboek-layout en één donkere band, één groene knop per scherm, één motion-moment, dode CSS/JS weg, consentbanner boven de sticky knop. Bewijs: audit 16/20 (agent, eindmeting c84d138), seo-guard identiek aan main, npm test 1803 groen, geen overflow op 360/390/1280, geen console-fouten, before/after-screenshots. Richting voor de andere pagina's in docs/design/richting.md.
+resultaat: open: audit-criterium gehaald (16/20); critique 21/32 blijft onder de 24 omdat de restpunten copy en prijsblok zijn; whatsapp_click meten 4 okt na deploy. Deploy wacht op akkoord van Badr.
+regel: open: volgt na meting. Technisch: file:// laadt geen self-hosted fonts in puppeteer, meet via een lokale http-server; `hidden` op een label geeft een lege accessible name, gebruik .sr-only.
+
 ## 8 sep 2026 | Groei:ok
 probleem: Badr hoorde pas van een nieuwe aanmelding als hij zelf in de admin keek. Voor E0 (tien actieve chauffeurs) wil hij elke aanmelding direct zien op zijn telefoon.
 hypothese: Eén melding bij het allereerste bericht van een onbekend nummer, met de herkomstpagina erbij, is genoeg; via het bestaande CEO-kanaal met de admin_alert-template als vangnet, zodat er geen tweede alertpad ontstaat.
