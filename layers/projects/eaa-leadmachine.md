@@ -56,6 +56,12 @@ versturen, respons tellen.
    nooit dezelfde shop twee keer (`data/outreach-log.json` is de
    waarheid). Buiten dit script om nooit mailen zonder keuring, nooit de
    daglimiet verhogen zonder expliciete opdracht.
+1b. Nooit een e-mailadres gokken. Het adres komt van de eigen site van het
+   bedrijf (`vindContact` volgt ook de contactlink die de site zelf aanwijst)
+   of uit `data/adressen.json`. Wordt er niets gevonden, dan slaan we de shop
+   over en loggen dat; `info@<domein>` raden bouncede 14% tegen 3,4% voor
+   gevonden adressen. Sollicitatie-, pers- en boekhoudadressen zijn geen
+   contactadres.
 2. Rapporten en mails claimen nooit "compliant" of "volledige audit" —
    de scan vindt ~de helft; het woord "ondergrens" blijft staan.
 2b. Nooit een technische bewering doen die de klant kan weerleggen: eerst
