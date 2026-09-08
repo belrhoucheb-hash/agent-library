@@ -21,3 +21,4 @@ Zzp-chauffeurs zijn eenmanszaken: ongevraagde e-mail, WhatsApp, sms en koud bell
 | claude-seo 2.2.0 | audit, schema, GEO, local | agricidaniel | ok: geïnstalleerd | in gebruik |
 | concurrentie-analyse, launch-checklist | eigen | agent-library | own: eigen | houden |
 | marketingskills | 60 skills; alleen wat de pijplijn nodig heeft, project-scope | coreyhaines31 | info: gepland | bij start pijplijn |
+| melding nieuwe chauffeur | eerste bericht van een onbekend nummer geeft Badr direct een WhatsApp met nummer en herkomstpagina, via CEO_WHATSAPP_NUMBER met admin_alert als vangnet; open: nummer op Render bevestigen | Whatsapp-bot | ok: live 8 sep (PR #42) | bij de eerste echte aanmelding |

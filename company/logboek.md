@@ -2,6 +2,13 @@
 
 Nieuwste bovenaan. Elke regel: probleem → hypothese → wijziging → resultaat → regel. Kop: `## <datum> | <Afdeling>:<kleur> | ...`
 
+## 8 sep 2026 | Groei:ok
+probleem: Badr hoorde pas van een nieuwe aanmelding als hij zelf in de admin keek. Voor E0 (tien actieve chauffeurs) wil hij elke aanmelding direct zien op zijn telefoon.
+hypothese: Eén melding bij het allereerste bericht van een onbekend nummer, met de herkomstpagina erbij, is genoeg; via het bestaande CEO-kanaal met de admin_alert-template als vangnet, zodat er geen tweede alertpad ontstaat.
+wijziging: PR #42 (rebase-merge): services/new-driver-alert.js stuurt "🆕 Nieuwe chauffeur: +316… (via <bron>)" naar CEO_WHATSAPP_NUMBER; getOrCreateDriver doet select-then-insert en markeert alleen een net aangemaakt record met een niet-enumerable isNew, zodat de webhook precies één keer vuurt (niet voor fleet-uitgenodigde chauffeurs of de 54 oude new-records). Bewijs: tests/new-driver-alert.test.js en tests/acceptatie-nieuwe-chauffeur.test.js (eerste bericht → één melding met nummer en bron; tweede bericht → geen; foto als eerste bericht → melding zonder bron; bestaande chauffeur → geen); npm test 1712 tests, 1711 groen, 1 overgeslagen; CI-run 34198455476 groen (test, security-gate, deploy); health 200 met uptime 132 s na de herstart.
+resultaat: Live 8 sep 07:18. Open: bevestigen dat CEO_WHATSAPP_NUMBER op Render 0657814333 is (de lokale .env heeft een ander nummer); tot Meta zendiq_admin_alert goedkeurt wordt de melding buiten het 24-uursvenster geparkeerd tot Badr zelf iets stuurt. Eerste echte melding afwachten bij de eerste echte aanmelding.
+regel: Een "nieuw"-signaal hoort uit de database te komen (insert versus select), niet uit de onboarding-stap: die stap is voor 54 oude records ook "new" en had een burst aan meldingen gegeven. En: één admin-kanaal, geen tweede env-var per alerttype.
+
 ## 7 sep 2026 | Platform:ok | Compliance:ok
 probleem: Badr wilde live. De audit van 6 sep zei PASS voor de backend, maar de statische host zendiq.nl stuurde geen enkele security-header terwijl /dashboard en /admin daar staan; op de server stonden drie vergeten bestanden (_preview.html, _mobile-test.html en test-api.html, een debugpagina die met één klik een login-code aanvroeg voor een vast nummer); de privacyverklaring noemde geen verwerkers en geen doorgifte naar de VS; DMARC stond op p=none zonder rapportage; Dependabot-alerts stonden uit; PR #11 hing sinds mei; vercel.json was een restant; npm audit had qs op moderate.
 hypothese: Headers via .htaccess in een IfModule-wrapper zijn veilig te zetten als de CSP uit een inventaris van alle pagina's komt en per pagina op nul overtredingen getest wordt; de rest is hygiëne die in één PR past; DMARC kan in twee fasen zonder mail te raken.

@@ -153,7 +153,7 @@
       <p class="lede">Negen afdelingen, elk met een doel, een meetlat en een ritme. Product is de motor: elke week aantoonbaar makkelijker, betrouwbaarder of waardevoller voor chauffeurs. Onderaan het logboek in de vorm probleem, hypothese, wijziging, resultaat, regel.</p>
     </div>
     <div class="stamp">
-      bijgewerkt <b>7 sep 2026, 16:36</b><br>
+      bijgewerkt <b>8 sep 2026, 09:19</b><br>
       bron <b>agent-library/company/*.md</b><br>
       volgende triage <b>zo 13 sep</b>
     </div>
@@ -323,6 +323,7 @@
         <tr><td class="skill">claude-seo 2.2.0<small>audit, schema, GEO, local</small></td><td>agricidaniel</td><td><span class="chip ok">geïnstalleerd</span></td><td class="date">in gebruik</td></tr>
         <tr><td class="skill">concurrentie-analyse, launch-checklist<small>eigen</small></td><td>agent-library</td><td><span class="chip own">eigen</span></td><td class="date">houden</td></tr>
         <tr><td class="skill">marketingskills<small>60 skills; alleen wat de pijplijn nodig heeft, project-scope</small></td><td>coreyhaines31</td><td><span class="chip info">gepland</span></td><td class="date">bij start pijplijn</td></tr>
+        <tr><td class="skill">melding nieuwe chauffeur<small>eerste bericht van een onbekend nummer geeft Badr direct een WhatsApp met nummer en herkomstpagina, via CEO_WHATSAPP_NUMBER met admin_alert als vangnet; open: nummer op Render bevestigen</small></td><td>Whatsapp-bot</td><td><span class="chip ok">live 8 sep (PR #42)</span></td><td class="date">bij de eerste echte aanmelding</td></tr>
       </table>
     </div>
   </section>
@@ -412,6 +413,17 @@
   </section>
 
   <h2>Logboek <small>probleem · hypothese · wijziging · resultaat · regel · nieuwste bovenaan</small></h2>
+
+  <div class="entry">
+    <div class="d">8 sep 2026<span><span class="chip ok">Groei</span></span></div>
+    <dl class="loopgrid">
+      <dt>probleem</dt><dd class="">Badr hoorde pas van een nieuwe aanmelding als hij zelf in de admin keek. Voor E0 (tien actieve chauffeurs) wil hij elke aanmelding direct zien op zijn telefoon.</dd>
+      <dt>hypothese</dt><dd class="">Eén melding bij het allereerste bericht van een onbekend nummer, met de herkomstpagina erbij, is genoeg; via het bestaande CEO-kanaal met de admin_alert-template als vangnet, zodat er geen tweede alertpad ontstaat.</dd>
+      <dt>wijziging</dt><dd class="">PR #42 (rebase-merge): services/new-driver-alert.js stuurt "🆕 Nieuwe chauffeur: +316… (via &lt;bron&gt;)" naar CEO_WHATSAPP_NUMBER; getOrCreateDriver doet select-then-insert en markeert alleen een net aangemaakt record met een niet-enumerable isNew, zodat de webhook precies één keer vuurt (niet voor fleet-uitgenodigde chauffeurs of de 54 oude new-records). Bewijs: tests/new-driver-alert.test.js en tests/acceptatie-nieuwe-chauffeur.test.js (eerste bericht → één melding met nummer en bron; tweede bericht → geen; foto als eerste bericht → melding zonder bron; bestaande chauffeur → geen); npm test 1712 tests, 1711 groen, 1 overgeslagen; CI-run 34198455476 groen (test, security-gate, deploy); health 200 met uptime 132 s na de herstart.</dd>
+      <dt>resultaat</dt><dd class="">Live 8 sep 07:18. Open: bevestigen dat CEO_WHATSAPP_NUMBER op Render 0657814333 is (de lokale .env heeft een ander nummer); tot Meta zendiq_admin_alert goedkeurt wordt de melding buiten het 24-uursvenster geparkeerd tot Badr zelf iets stuurt. Eerste echte melding afwachten bij de eerste echte aanmelding.</dd>
+      <dt>regel</dt><dd class="regel">Een "nieuw"-signaal hoort uit de database te komen (insert versus select), niet uit de onboarding-stap: die stap is voor 54 oude records ook "new" en had een burst aan meldingen gegeven. En: één admin-kanaal, geen tweede env-var per alerttype.</dd>
+    </dl>
+  </div>
 
   <div class="entry">
     <div class="d">7 sep 2026<span><span class="chip ok">Platform</span> <span class="chip ok">Compliance</span></span></div>
