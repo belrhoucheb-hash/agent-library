@@ -38,6 +38,7 @@ versturen, respons tellen.
 | `contacten.js` | Scrapet algemene telefoonnummers → `data/contacten.json` |
 | `outreach.js` | Dagelijkse batch mails (limiet + pauze + blokkade uit `data/`) |
 | `followup.js` | Rapport-PDF na echt antwoord, eenmalig per shop |
+| `antwoorden.js` | Concept-antwoord per echte reactie in Drafts; verstuurt nooit zelf |
 | `boekingscan.js` | Agenda-boeking → verse scan van die shop |
 | `acties.js` | Haalt dashboard-acties op en past ze lokaal toe |
 | `notities.js` | Mailadres in een dashboardnotitie → rapport naar die persoon, na een nacht, binnen kantooruren, één keer per adres (`data/notitie-log.json`) |
@@ -62,6 +63,13 @@ versturen, respons tellen.
    over en loggen dat; `info@<domein>` raden bouncede 14% tegen 3,4% voor
    gevonden adressen. Sollicitatie-, pers- en boekhoudadressen zijn geen
    contactadres.
+1c. Antwoorden op klanten gaan nooit automatisch de deur uit. `antwoorden.js`
+   schrijft een concept in Drafts en een mens verstuurt het. Op 8 sept negeerde
+   een automatisch antwoord het bezwaar van 123impregneer en verspeelde het
+   laatste vertrouwen.
+1d. Het microfilter staat aan: een betrouwbaar KvK-aantal onder de 10 betekent
+   vrijgesteld en dus niet mailen. Stond per ongeluk uit tot 8 sept, waardoor
+   81 vrijgestelde bedrijven een mail kregen.
 2. Rapporten en mails claimen nooit "compliant" of "volledige audit" —
    de scan vindt ~de helft; het woord "ondergrens" blijft staan.
 2b. Nooit een technische bewering doen die de klant kan weerleggen: eerst
@@ -100,6 +108,9 @@ versturen, respons tellen.
 - Contactpersoon (proef, `data/experimenten/contactpersoon.json`): `node lusha.js --groep lusha`
   (`--dry` zoekt zonder credits); `data/adressen.json` met `naam` geeft "Beste {voornaam}" in `src/mail.js`
 - Dagbatch handmatig: `node outreach.js` (`--dry` toont alleen en raakt niets aan)
+- Adres van een shop nakijken: `node outreach.js --zoek <domein ...>`
+- Concepten voor reacties: `node antwoorden.js` (`--dry`)
+- Telefoonherkomst aanvullen: `node contacten.js --hercontroleer`
 - Notitie-opvolging: `node notities.js --dry` toont welke notities een adres
   bevatten en wanneer de mail gaat
 - Dubbelcheck toetsen: `node test/delta.js`; overige toetsen: `node test/linkedin.js`,
@@ -110,7 +121,9 @@ versturen, respons tellen.
 
 ## Geplande taken (Windows)
 
-Eén taak: `GeenDrempels followup` draait `check.js` elke 2 uur (start
+Twee taken. `GeenDrempels antwoorden` draait `antwoorden.js` elke 5 uur
+(start 08:15) en zet concept-antwoorden in Drafts. `GeenDrempels followup`
+draait `check.js` elke 2 uur (start
 11:34). Die runner doet outreach → opvolg → acties → notities → followup →
 boekingscan → stats. De losse dagelijkse outreach-taak is op 6 sept verwijderd: twee
 taken die dezelfde batch startten leverden dubbele mails op.
