@@ -61,3 +61,19 @@ horen in andere layers.
   variaties op dezelfde fout.
 - "Het zou moeten werken" is geen verificatie. Draai het.
 - Als documentatie en code conflicteren, vertrouw de code en update de doc.
+
+## Context en tokens
+
+- Start een sessie in de projectmap (`p <naam>` in PowerShell), niet in
+  de home-map. Dan laadt alleen die project-layer. Prioriteiten staan in
+  `~/repos/agent-library/portfolio.md`.
+- Eén project per sessie. Wisselen van project = `/clear`. Statusbalk
+  toont `ctx:` — vanaf 25% eerst `/compact` of een nieuwe sessie.
+- Lees gericht: `grep`, `head`, `sed -n`. Geen hele bestanden dumpen,
+  geen bestand twee keer lezen.
+- Brede zoektochten over meerdere mappen delegeren aan een
+  Explore-subagent; alleen de conclusie komt terug in de hoofdsessie.
+- Tool-output niet herhalen in het antwoord. Kort antwoorden.
+- API-keys en tokens: `~/.claude/reference/keys-index.md` (paden en
+  namen, nooit waarden). Bijwerken met
+  `bash ~/repos/agent-library/scripts/keys-index.sh`.
