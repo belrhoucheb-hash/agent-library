@@ -41,6 +41,20 @@ if [ -f "$EXPERIMENTEN" ]; then
   fi
 fi
 
+# Obsidian-vault van dit project (.claude/vault bevat het pad)
+if [ -f ".claude/vault" ]; then
+  VAULT=$(cat .claude/vault)
+  if [ -d "$VAULT" ]; then
+    echo ""
+    echo "Vault: $VAULT — lees eerst '00 Start.md', niet de hele vault."
+    LAATSTE=$(ls "$VAULT/Sessies"/*.md 2>/dev/null | sort | tail -1)
+    if [ -n "$LAATSTE" ]; then
+      echo "Laatste sessie ($(basename "$LAATSTE" .md)):"
+      head -20 "$LAATSTE" | sed 's/^/  /'
+    fi
+  fi
+fi
+
 # Top-3 uit portfolio.md — waar de tijd heen hoort
 PORTFOLIO="$SCRIPT_DIR/../portfolio.md"
 if [ -f "$PORTFOLIO" ]; then
