@@ -21,7 +21,8 @@ service_for() {
     *GOOGLE_MAPS*) echo "Google Cloud — console.cloud.google.com" ;;
     TELEGRAM*) echo "Telegram — @BotFather" ;;
     SENTRY*) echo "Sentry — sentry.io" ;;
-    GD_*) echo "GoDaddy hosting/mail — dcc.godaddy.com" ;;
+    GD_MAIL_PASS) echo "TransIP mail (info@smeulwerk.nl) — smtp/imap.transip.email" ;;
+    GD_*) echo "hosting/SFTP — zie CLAUDE.md van het project voor de provider" ;;
     JWT_SECRET|SESSION_SECRET|ADMIN_PASSWORD|INTERNAL_API_KEY) echo "eigen secret — roteren in .env + deploy-env" ;;
     *) echo "" ;;
   esac
@@ -57,7 +58,7 @@ service_for() {
   echo "- Zendiq CI-secrets: GitHub → repo-settings → Secrets (o.a. TransIP SFTP-key \`transip_key_2026\`)"
   echo "- Render env-vars (Zendiq app, DLX): dashboard.render.com → service → Environment"
   echo "- Vercel env-vars (QD Chauffeur, OrderFlow): vercel.com → project → Settings → Environment Variables"
-  echo "- Shopify: \`shopify\` CLI-login per store (by-aminas-honing.myshopify.com, smeulwerk)"
+  echo "- Shopify: \`shopify\` CLI-login per store (by-aminas-honing.myshopify.com, 73bw71-ys.myshopify.com = SMEULWERK)"
   echo "- Hermes Agent: \`~/AppData/Local/hermes/.env\`"
 } > "$OUT"
 echo "Geschreven: $OUT ($(wc -l < "$OUT") regels)"
