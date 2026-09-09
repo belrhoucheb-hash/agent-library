@@ -63,6 +63,9 @@ leer-lus voor bonnetjes).
 - Aanbiedingen zonder handler: alles wat de bot aanbiedt (menu's,
   "typ x") moet een handler hebben, per rol én state — check dit bij
   elke flow-wijziging.
+- Pushen naar een PR-branch: eerst `gh pr view <nr> --json state`. Is de PR
+  al gemerged, dan een nieuwe branch vanaf `origin/HEAD`; anders belandt de
+  commit nooit op main (gebeurde bij PR #48 en #57).
 
 ## Commando's
 
