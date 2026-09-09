@@ -41,6 +41,14 @@ if [ -f "$EXPERIMENTEN" ]; then
   fi
 fi
 
+# Top-3 uit portfolio.md — waar de tijd heen hoort
+PORTFOLIO="$SCRIPT_DIR/../portfolio.md"
+if [ -f "$PORTFOLIO" ]; then
+  echo ""
+  echo "Focus (portfolio.md):"
+  grep -E '^\| [123] \|' "$PORTFOLIO" | awk -F'|' '{gsub(/^ +| +$/,"",$3); gsub(/^ +| +$/,"",$4); print "  " $2 " " $3 " — " $4}'
+fi
+
 # Toon openstaande backlog items — resolve relatief aan dit script
 BACKLOG_DIR="$SCRIPT_DIR/../backlog"
 if [ -d "$BACKLOG_DIR" ]; then
