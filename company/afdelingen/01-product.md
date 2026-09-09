@@ -35,4 +35,4 @@ Geen feature is klaar na deploy. Hij is klaar nadat gemeten is of hij het gewens
 |---|---|---|---|---|
 | zondag-triage | signalen, ranglijst, max twee experimenten met succescriterium | agent-library | own: eigen | zondag |
 | effectmeting | na de meetdatum: behouden, terugdraaien of langer meten | agent-library | own: eigen | per experiment |
-| scripts/metrics.js | kerncijfers als totalen, basis voor nulmeting en effectmeting | Whatsapp-bot | own: eigen code | per meting |
+| scripts/metrics.js | kerncijfers als totalen, basis voor nulmeting en effectmeting | Whatsapp-bot | warn: lokaal blind sinds RLS, de .env heeft een publishable key (besluit 10) | per meting |
