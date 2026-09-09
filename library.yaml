@@ -63,7 +63,7 @@ layers:
     source: layers/projects/whatsapp-bot.md
     target: ~/Whatsapp-bot/CLAUDE.md
     scope: "~/Whatsapp-bot/*"
-    depends_on: [repos-shared, node-express, supabase]
+    depends_on: [node-express, supabase]  # repos-shared zit al in de globale CLAUDE.md
 
   - name: honey-shop
     description: "By Amina's Honing: statisch prototype naast de Shopify-store."
@@ -104,11 +104,11 @@ layers:
     scope: "~/repos/eaa-leadmachine/*"
 
   - name: orderflow-suite
-    description: "TypeScript orderflow/trading analyse suite."
+    description: "OrderFlow Suite: multi-tenant TMS voor B2B cargo (React/Vite, Supabase, Vercel). Geparkeerd sinds mei 2026."
     source: layers/projects/orderflow-suite.md
-    target: ~/orderflow-suite/CLAUDE.md
-    scope: "~/orderflow-suite/*"
-    depends_on: [repos-shared, node-express]
+    target: ~/Desktop/DevBadr/orderflow-suite/CLAUDE.md
+    scope: "~/Desktop/DevBadr/orderflow-suite/*"
+    depends_on: [supabase, vercel-deploy]
 
   - name: driver-acquisition
     description: "ZendIQ driver acquisition: KvK/Maps scraping, email/voice outreach."

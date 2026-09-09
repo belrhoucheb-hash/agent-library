@@ -27,7 +27,7 @@ leer-lus voor bonnetjes).
 | `services/publishers.js` | Centrale registry van publicatiekanalen — enige plek waar kanalen gedefinieerd worden |
 | `services/vat-classifier.js` | Single source of truth voor BTW-classificatie |
 | `services/cron.js` | Alle scheduled jobs, met locking via `withLock()` |
-| `index.js` | WhatsApp webhook + state machine voor approval flows |
+| `routes/webhook.js` | WhatsApp webhook-dispatch (`handleIncomingMessage`) + state machine voor approval flows; `index.js` is alleen entrypoint |
 
 ## Harde regels
 
@@ -78,3 +78,12 @@ overzicht. Belangrijkste blocker:
 
 - `subscription_tier` kolom in Supabase — nodig zodra subscription-code
   geraakt wordt.
+
+## Vault (Obsidian)
+
+Kennisbank: `~/Obsidian/zendiq`. Bij sessiestart: lees `00 Start.md` en de
+nieuwste notitie in `Sessies/` — niet de hele vault. Bij sessie-einde:
+schrijf `Sessies/<datum>.md` volgens `Templates/Sessie.md` (max 15
+regels: gedaan, stand, volgende stap, open vragen). Besluiten in
+`Besluiten.md`, key-locaties in `Keys.md`, open punten in
+`Backlog/whatsapp-bot.md` (dat is `agent-library/backlog`, live gekoppeld).
