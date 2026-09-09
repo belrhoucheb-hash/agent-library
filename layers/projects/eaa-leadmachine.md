@@ -72,6 +72,13 @@ versturen, respons tellen.
    81 vrijgestelde bedrijven een mail kregen.
 2. Rapporten en mails claimen nooit "compliant" of "volledige audit" —
    de scan vindt ~de helft; het woord "ondergrens" blijft staan.
+2a. De mail dreigt niet. Hij begint bij wat er op hun shop misgaat en noemt de
+   wet als context. Een axe-bevinding is een afwijking van WCAG 2.1 AA, geen
+   door de ACM vastgestelde overtreding, en de mail zegt dat ook met zoveel
+   woorden. Weg sinds 9 sept: de boete van 900.000, de Carrefour-dwangsom en
+   "elk punt is een overtreding". Reden: 221 mails met de wetsopening leverden
+   nul offerteaanvragen en drie klachten over de mail zelf, waarvan een
+   formele van Dakenmarkt.
 2b. Nooit een technische bewering doen die de klant kan weerleggen: eerst
    nameten, dan schrijven. Antwoorden op bekende bezwaren (PageSpeed-score,
    webbouwer, "te klein", "nog nooit beboet") staan in `BEZWAREN.md`.
