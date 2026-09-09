@@ -73,6 +73,11 @@ leer-lus voor bonnetjes).
   zonder `SUPABASE_TEST_URL`/`SUPABASE_TEST_KEY`)
 - Site deploy: `npm run deploy:website`
 - Lokaal draaien: `npm run dev` (nodemon) of `npm start`
+- UI-controle: `node scripts/screenshot.js <url> <png> [--mobile] [--full]`
+  (Playwright); desktop én mobiel schieten en de PNG bekijken vóór "klaar".
+- Pre-push: `.husky/pre-push` draait npm audit en de testsuite vóór elke
+  push. In een nieuwe worktree eerst `npx husky` (of `npm install`), anders
+  slaat git de hook stil over. Nooit `SKIP_PREPUSH=1` zonder reden.
 
 ## Openstaande punten
 
