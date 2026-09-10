@@ -1,0 +1,22 @@
+# Secrets en lokale config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+settings.local.json
+
+# Gegenereerd of tijdelijk
+*.log
+*.bak
+*.orig
+node_modules/
+.playwright-mcp/
+__pycache__/
+.venv/
+
+# OS en editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
