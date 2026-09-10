@@ -62,6 +62,17 @@ horen in andere layers.
 - "Het zou moeten werken" is geen verificatie. Draai het.
 - Als documentatie en code conflicteren, vertrouw de code en update de doc.
 
+## Modelkeuze
+
+- Hoofdsessie: het ingestelde model (nu Fable 5.1). Daar gebeurt ontwerp,
+  architectuur, lastige bugs en alles wat een oordeel vraagt.
+- Subagents voor verifiëren, zoeken, samenvatten en mechanisch werk:
+  `model: sonnet`. Geef dat mee bij `Agent`-aanroepen (Explore, verifier).
+  Alleen bij een plan of een review op het hoofdmodel.
+- Snelle, kleine reeksen (rename, lint, één-regel-fixes): `/fast`.
+- Bij een verkeerde keuze wordt de correctie een regel hier, niet een
+  losse afspraak in een sessie.
+
 ## Context en tokens
 
 - Start een sessie in de projectmap (`p <naam>` in PowerShell), niet in

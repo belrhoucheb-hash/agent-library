@@ -36,6 +36,8 @@ agent-library/
 ├── library.yaml                  # manifest (v2.0)
 ├── setup.sh                      # installer + index-generator
 ├── workflow.md                   # skill-volgorde per scenario
+├── tools.md                      # MCP-servers, connectors, scripts: wat en wanneer
+├── now.md                        # waar sta ik vandaag, alle projecten op één scherm
 ├── SKILLS-INDEX.md               # auto-generated door setup.sh
 ├── layers/
 │   ├── global.md                 # werkstijl, kwaliteit, verificatie, taal
