@@ -24,12 +24,15 @@ klantgedrag, niet uit wat toevallig opvalt. Eén keer per week, een kwartier.
    `company/logboek.md`, en wat Badr aandraagt.
 3. **Problemen benoemen met een cijfer.** "18% van de nieuwe chauffeurs
    stuurt binnen 48 uur geen bon." Geen cijfer, geen probleem; dan eerst
-   meten.
+   meten. Bij een funnelcijfer: check of de query filtert op een veld dat pas
+   ná de gemeten stap gevuld wordt, anders zie je de uitvallers niet.
 4. **Rangschikken.** Per probleem: impact (1 t/m 5) × geraakte gebruikers ×
    zekerheid (0,3 / 0,6 / 0,9) / inspanning in dagen. Toon de tabel.
 5. **Kies maximaal twee.** Per gekozen experiment: probleem, hypothese,
    succescriterium als getal (van → naar), meetdatum (7, 14 of 30 dagen),
-   eigenaar-afdeling. Schrijf ze als E-rij in `company/experimenten.md`.
+   eigenaar-afdeling. Een ranking-meetlat noemt altijd zoekterm én pagina,
+   en de nulmeting gebruikt datzelfde paginafilter. Schrijf ze als E-rij in
+   `company/experimenten.md`.
 6. **Afgewezen ideeën** blijven in de ideeënbus met één regel waarom nu niet.
 7. **Afsluiten met `afdeling-update`**: logboek-regel, pagina bouwen,
    publiceren, committen.
@@ -46,3 +49,4 @@ vast.
 - Meer dan twee experimenten, of een experiment zonder meetdatum.
 - Triage zonder `metrics.js` gedraaid: "ik denk dat" is geen signaal.
 - Een oud experiment dat onbeoordeeld blijft staan terwijl er nieuwe komen.
+- Een nulmeting uit een site-breed rapport voor een hypothese over één pagina.

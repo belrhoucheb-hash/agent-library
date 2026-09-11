@@ -21,6 +21,15 @@ gewenste resultaat opleverde. Deze skill is dat moment.
 2. **Meet.** Draai `node -r dotenv/config scripts/metrics.js` in
    `~/Whatsapp-bot`, of de specifieke query die het criterium vraagt. Alleen
    totalen, geen persoonsgegevens. Zet het cijfer naast het criterium.
+   Controleer eerst of het instrument meet waar de hypothese over gaat:
+   - **Ranking of CTR:** meet het paar zoekterm plus pagina, met het
+     paginafilter aan (Search Console: Prestaties, filter Pagina). Landt de
+     zoekterm op een andere pagina, leg dat vast als kannibalisatie in plaats
+     van de positie over te nemen.
+   - **Funnel of activatie:** lees de filters van de meetquery. De noemer is
+     iedereen die de eerste stap raakte, bijvoorbeeld elk record met een
+     `created_at`. Een filter op een veld dat pas later in het proces wordt
+     gevuld, haalt precies de uitvallers eruit die je wilt tellen.
 3. **Oordeel, één van drie.**
    - **Behouden**: criterium gehaald. Status `info: behouden <datum>`.
    - **Terugdraaien of aanpassen**: niet gehaald en geen zicht op halen.
@@ -41,3 +50,5 @@ Per experiment één regel: criterium, gemeten waarde, oordeel, regel.
 - Verlengen zonder reden of meer dan één keer.
 - Een experiment dat eeuwig op "loopt" blijft staan.
 - Resultaat invullen op basis van tests of CI in plaats van gebruik.
+- Een site-brede positie als meting voor één pagina.
+- Een funnelcijfer uit een query die filtert op een veld van halverwege de funnel.
