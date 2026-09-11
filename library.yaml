@@ -199,6 +199,10 @@ skills:
     description: "SEO-audit: crawl zonder scriptinhoud, snelheid via PageSpeed of lokale Lighthouse, Search Console via de browser, vondsten tegen de bron."
     source: skills/seo-audit/SKILL.md
 
+  - name: meta-ads-inrichten
+    description: "Meta Ads inrichten: accounts en portfolios, juridische naam, advertentieaccount, pixel achter consent, domein- en bedrijfsverificatie."
+    source: skills/meta-ads-inrichten/SKILL.md
+
 # Hooks = shell-scripts die Claude Code automatisch triggert.
 # settings-template.json bevat de Claude Code configuratie.
 hooks:
