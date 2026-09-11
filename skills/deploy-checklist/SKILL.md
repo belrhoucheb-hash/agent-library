@@ -25,26 +25,37 @@ Gebruik dit bij elke deploy. Een deploy zonder checklist is een gok.
    deploy-omgeving? Check `.env.example` tegen de werkelijke config.
 4. **Migrations.** Zijn er database-wijzigingen? Zo ja: migration
    eerst draaien of bevestigen dat de deploy dat automatisch doet.
-5. **Breaking changes.** Zijn er API-wijzigingen die bestaande clients
+5. **Handmatige SQL voor productie.** Schrijf hem als één blok dat afbreekt
+   bij een onverwachte rijtelling (`get diagnostics` met `row_count`, dan
+   `raise exception`). Draai hem eerst tegen een wegwerp-Postgres, zoals
+   PGlite in een scratchmap of de test-DB: een normale run, een herhaalde run
+   en een run met afwijkende data. Leg de uitkomst naast de SQL. Match bij
+   tekstvervanging op platte tekst, niet op opgemaakte HTML.
+6. **Breaking changes.** Zijn er API-wijzigingen die bestaande clients
    breken? Zo ja: communiceer of versie.
-6. **Rollback-plan.** Weet je hoe je terugdraait als het misgaat?
+7. **Rollback-plan.** Weet je hoe je terugdraait als het misgaat?
    (vorige deploy, feature flag, database rollback)
 
 ### Deploy
 
-7. **Voer de deploy uit.** Gebruik het project-specifieke commando
+8. **Voer de deploy uit.** Gebruik het project-specifieke commando
    (zie project-layer → Commando's).
-8. **Wacht op bevestiging.** Deploy-log, status check, of dashboard
+9. **Wacht op bevestiging.** Deploy-log, status check, of dashboard
    dat "live" toont.
 
 ### Post-deploy
 
-9. **Smoke test.** Draai de kritieke paden handmatig:
+10. **Smoke test.** Draai de kritieke paden handmatig:
    - Kan een gebruiker inloggen / het hoofdproces doorlopen?
    - Retourneert de API correcte responses?
-10. **Logs checken.** Geen nieuwe errors of warnings in de eerste
+   - Test in een echte browser met de cache omzeild, via een harde
+     herlaadactie of een vers profiel. Een warme cache toont de vorige versie.
+   - Controleer met één HEAD-request (`curl -sI <url>`) de cache-headers van
+     gewijzigde HTML, JS en CSS. Ontbreekt revalidatie, meld dat als risico:
+     terugkerende bezoekers draaien dan nog de oude code.
+11. **Logs checken.** Geen nieuwe errors of warnings in de eerste
     minuten na deploy?
-11. **Meld het.** Kort bericht: wat is gedeployed, wanneer, en of de
+12. **Meld het.** Kort bericht: wat is gedeployed, wanneer, en of de
     smoke test slaagde.
 
 ## Output
@@ -58,5 +69,7 @@ Bevestiging met bewijs: deploy-log of status URL, smoke test resultaat.
 - Je deployt op vrijdagmiddag zonder rollback-plan.
 - Je zegt "het is live" zonder een HTTP-request naar productie gedaan
   te hebben.
+- Handmatige productie-SQL die niet eerst op een wegwerp-database draaide.
+- Smoke test in een browser met warme cache.
 - Migration faalt maar je pusht de code toch — data en code lopen uit
   sync.
