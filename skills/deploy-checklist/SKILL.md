@@ -30,7 +30,12 @@ Gebruik dit bij elke deploy. Een deploy zonder checklist is een gok.
    `raise exception`). Draai hem eerst tegen een wegwerp-Postgres, zoals
    PGlite in een scratchmap of de test-DB: een normale run, een herhaalde run
    en een run met afwijkende data. Leg de uitkomst naast de SQL. Match bij
-   tekstvervanging op platte tekst, niet op opgemaakte HTML.
+   tekstvervanging op platte tekst, niet op opgemaakte HTML. Geef zulke SQL
+   nooit als terminaltekst om te kopiëren: lange regels breken dan af. Zet
+   het bestand op het klembord (`Set-Clipboard` of `pbcopy`) en controleer
+   de overdracht met een hash. Hangt de code af van zo'n stap, toon dan vóór
+   de merge met één live probe aan dat hij gedraaid is, bijvoorbeeld de
+   nieuwe rij via de publieke API. Geen bewijs, geen merge.
 6. **Breaking changes.** Zijn er API-wijzigingen die bestaande clients
    breken? Zo ja: communiceer of versie.
 7. **Rollback-plan.** Weet je hoe je terugdraait als het misgaat?
@@ -70,6 +75,8 @@ Bevestiging met bewijs: deploy-log of status URL, smoke test resultaat.
 - Je zegt "het is live" zonder een HTTP-request naar productie gedaan
   te hebben.
 - Handmatige productie-SQL die niet eerst op een wegwerp-database draaide.
+- Een merge die leunt op een handmatige datastap, zonder live bewijs dat die stap gedraaid is.
+- SQL die iemand uit de terminal moet overtypen of kopiëren.
 - Smoke test in een browser met warme cache.
 - Migration faalt maar je pusht de code toch — data en code lopen uit
   sync.
