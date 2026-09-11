@@ -211,7 +211,7 @@ hooks:
     source: hooks/protect-tests-during-fix.sh
 
   - name: production-push-gate
-    description: "Blokkeert git push naar main/master in repos met .claude/production-repo marker (CI deployt direct)."
+    description: "Bewaakt pushes: naar main/master in repos met .claude/production-repo alleen met DEPLOY_OK=1, en niet naar een branch met gemergde PR (MERGED_PR_OK=1 om bewust te omzeilen). Logica in hooks/push_guard.py, test in hooks/test-push-guard.sh."
     source: hooks/production-push-gate.sh
 
   - name: settings-template
